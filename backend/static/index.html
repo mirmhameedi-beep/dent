@@ -42,12 +42,33 @@
   }
   #remain { color: #8a8a8a; font-size: .85rem; }
   #stone {
-    width: min(52vw, 300px);
-    height: min(52vw, 300px);
+    width: min(46vw, 280px);
+    height: min(46vw, 280px);
     border-radius: 50%;
     background: radial-gradient(circle at 38% 32%, #757575, #333 60%, #171717);
     box-shadow: 0 24px 60px rgba(0,0,0,.9), inset -18px -24px 48px rgba(0,0,0,.6);
+    transition: transform .12s ease;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
   }
+  #stone:active { transform: scale(.975); }
+  #tapBtn {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: .12em;
+    padding: 14px 64px;
+    border: none;
+    border-radius: 999px;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+  }
+  #tapBtn:disabled { opacity: .4; cursor: default; }
+  #msg { color: #8a8a8a; font-size: .78rem; min-height: 1.2em; }
+  #wall { color: #9a9a9a; font-size: .74rem; line-height: 1.7; min-width: 240px; }
+  #wall b { color: #fff; font-weight: 600; }
   footer { color: #575757; font-size: .72rem; max-width: 34rem; line-height: 1.6; }
 </style>
 </head>
@@ -55,15 +76,31 @@
   <div id="count">0</div>
   <div class="bar"><div></div></div>
   <div id="remain">…</div>
-  <div id="stone"></div>
-  <footer>Begun before you arrived. Ending long after you're gone.<br>One stone. One billion taps. Every tap in the app carves one more dent.</footer>
+  <div id="stone" title="The stone"></div>
+  <button id="tapBtn">TAP</button>
+  <div id="msg">from your browser, straight into the stone</div>
+  <div id="wall"></div>
+  <footer>Begun before you arrived. Ending long after you're gone.<br>One stone. One billion taps.</footer>
 <script>
-  const TARGET = 1_000_000_000;
+  const fmt = new Intl.NumberFormat("en-US");
   const countEl = document.getElementById("count");
   const remainEl = document.getElementById("remain");
   const bar = document.querySelector(".bar > div");
-  const fmt = new Intl.NumberFormat("en-US");
+  const stone = document.getElementById("stone");
+  const tapBtn = document.getElementById("tapBtn");
+  const msg = document.getElementById("msg");
+  const wallEl = document.getElementById("wall");
+  let target = 1e9;
   let shown = 0;
+
+  function mac() {
+    let m = localStorage.getItem("dent.mac");
+    if (!m) {
+      m = (crypto.randomUUID ? crypto.randomUUID() : "web-" + Math.random().toString(16).slice(2)) + "";
+      localStorage.setItem("dent.mac", m);
+    }
+    return m;
+  }
 
   function render(total) {
     const step = () => {
@@ -71,18 +108,56 @@
       else if (shown > total) { shown = total; countEl.textContent = fmt.format(shown); }
     };
     requestAnimationFrame(step);
-    bar.style.width = Math.max(0.4, 100 * total / TARGET) + "%";
-    remainEl.textContent = fmt.format(TARGET - total) + " taps remain";
+    bar.style.width = Math.max(0.4, 100 * total / target) + "%";
+    remainEl.textContent = fmt.format(target - total) + " taps remain";
   }
 
-  async function poll() {
+  function flash(text, good) {
+    msg.textContent = text;
+    msg.style.color = good === false ? "#c96" : "#8a8a8a";
+    setTimeout(() => { msg.textContent = "from your browser, straight into the stone"; msg.style.color = "#8a8a8a"; }, 1800);
+  }
+
+  async function tapStone() {
+    tapBtn.disabled = true;
     try {
-      const res = await fetch("/stone");
+      const res = await fetch("/tap", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mac: mac(), x: Math.random(), y: Math.random() })
+      });
+      if (res.status === 429) { flash("slow down — the stone is patient", false); return; }
+      if (!res.ok) { flash("the stone refused that one", false); return; }
       render((await res.json()).total);
+      flash("one more dent, forever");
+    } catch (e) {
+      flash("offline — try again", false);
+    } finally {
+      tapBtn.disabled = false;
+    }
+  }
+
+  async function pollStone() {
+    try {
+      const body = await (await fetch("/stone")).json();
+      if (body.target) target = body.target;
+      render(body.total);
     } catch (e) { /* keep last value */ }
   }
-  poll();
-  setInterval(poll, 2000);
+
+  async function pollWall() {
+    try {
+      const wall = await (await fetch("/wall?limit=10")).json();
+      wallEl.innerHTML = "<b>the wall</b><br>" +
+        wall.map(e => `${e.mac.slice(0, 8)} · ${e.taps} dents`).join("<br>");
+    } catch (e) { /* leave as-is */ }
+  }
+
+  tapBtn.addEventListener("click", tapStone);
+  pollStone();
+  setInterval(pollStone, 2000);
+  pollWall();
+  setInterval(pollWall, 15000);
 </script>
 </body>
 </html>

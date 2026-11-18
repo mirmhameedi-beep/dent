@@ -37,6 +37,7 @@ struct WallView: View {
             }
         }
         .task { await store.loadWall() }
+        .refreshable { await store.loadWall() }
     }
 
     private func short(_ mac: String) -> String {

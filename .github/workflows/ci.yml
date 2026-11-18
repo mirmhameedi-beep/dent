@@ -23,10 +23,10 @@ jobs:
       - run: brew install xcodegen
       - working-directory: app
         run: xcodegen generate
-      - name: Build (iOS Simulator)
+      - name: Unit tests (iOS Simulator)
         working-directory: app
         run: |
           set -o pipefail
-          xcodebuild -project Dent.xcodeproj -scheme Dent \
-            -destination 'generic/platform=iOS Simulator' \
-            -configuration Debug build CODE_SIGNING_ALLOWED=NO | xcbeautify
+          xcodebuild test -project Dent.xcodeproj -scheme Dent \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            CODE_SIGNING_ALLOWED=NO | xcbeautify

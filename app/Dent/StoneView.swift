@@ -1,58 +1,74 @@
 import SwiftUI
-import UIKit
 
 struct StoneView: View {
     @EnvironmentObject private var store: DentStore
-    @State private var dents: [Dent] = []
-    @State private var pressed = false
+    @State private var squash = false
     @State private var pulse = false
 
-    private var stoneDiameter: CGFloat {
-        let side = UIScreen.main.bounds.width
-        return min(side * 0.82, 340)
-    }
-
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
+        GeometryReader { geo in
+            let stoneDiameter = min(geo.size.width * 0.82, 340)
 
-            VStack(spacing: 24) {
-                ProgressHeader()
-                    .padding(.top, 16)
+            ZStack {
+                Color.black.ignoresSafeArea()
 
-                ZStack {
-                    stone
-                    ForEach(dents) { dent in
-                        DentMark(dent: dent, stoneDiameter: stoneDiameter)
+                VStack(spacing: 24) {
+                    ProgressHeader()
+                        .padding(.top, 16)
+                        .accessibilityElement(children: .combine)
+
+                    ZStack {
+                        stone(diameter: stoneDiameter)
+                        ForEach(store.dents) { dent in
+                            DentMark(dent: dent, stoneDiameter: stoneDiameter)
+                        }
                     }
-                }
-                .frame(width: stoneDiameter, height: stoneDiameter)
-                .scaleEffect(pressed ? 0.975 : 1)
-                .animation(.spring(response: 0.22, dampingFraction: 0.55), value: pressed)
-                .opacity(pulse ? 1 : 0)
-                .onAppear {
-                    withAnimation(.easeIn(duration: 0.6)) { pulse = true }
-                }
+                    .frame(width: stoneDiameter, height: stoneDiameter)
+                    .scaleEffect(squash ? 0.975 : 1)
+                    .opacity(pulse ? 1 : 0)
+                    .accessibilityHidden(true)
 
-                TapButton(dents: $dents, pressed: $pressed, stoneDiameter: stoneDiameter)
+                    VStack(spacing: 10) {
+                        TapButton(stoneDiameter: stoneDiameter)
+                            .accessibilityLabel("Add a dent")
+                        if !store.reachable {
+                            Text("Offline — dents queue up and send later")
+                                .font(.caption2)
+                                .foregroundColor(.orange.opacity(0.8))
+                        } else if store.pendingCount > 0 {
+                            Text("\(store.pendingCount) queued dents sending…")
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                        }
+                    }
                     .padding(.bottom, 12)
 
-                Text("Begun before you arrived. Ending long after you're gone.")
-                    .font(.caption2)
-                    .foregroundColor(.gray)
-                    .padding(.bottom, 24)
+                    Text("Begun before you arrived. Ending long after you're gone.")
+                        .font(.caption2)
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 24)
+                }
+            }
+        }
+        .onAppear {
+            withAnimation(.easeIn(duration: 0.6)) { pulse = true }
+        }
+        .onChange(of: store.dents.count) {
+            withAnimation(.spring(response: 0.14, dampingFraction: 0.5)) { squash = true }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { squash = false }
             }
         }
     }
 
-    private var stone: some View {
+    private func stone(diameter: CGFloat) -> some View {
         StoneShape()
             .fill(
                 RadialGradient(
                     colors: [Color(white: 0.46), Color(white: 0.2)],
                     center: UnitPoint(x: 0.38, y: 0.32),
                     startRadius: 4,
-                    endRadius: stoneDiameter * 0.75
+                    endRadius: diameter * 0.75
                 )
             )
             .overlay(
@@ -72,6 +88,7 @@ struct ProgressHeader: View {
                 .font(.system(size: 34, weight: .bold, design: .monospaced))
                 .contentTransition(.numericText())
                 .animation(.easeOut(duration: 0.25), value: store.totalTaps)
+                .accessibilityLabel("Global dent count: \(human(store.totalTaps)) of \(human(DentStore.target))")
 
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
@@ -83,6 +100,7 @@ struct ProgressHeader: View {
             }
             .frame(height: 6)
             .padding(.horizontal, 40)
+            .accessibilityHidden(true)
 
             Text("\(human(DentStore.target - store.totalTaps)) taps remain")
                 .font(.caption)
@@ -99,8 +117,6 @@ struct ProgressHeader: View {
 
 struct TapButton: View {
     @EnvironmentObject private var store: DentStore
-    @Binding var dents: [Dent]
-    @Binding var pressed: Bool
     let stoneDiameter: CGFloat
 
     var body: some View {
@@ -111,40 +127,19 @@ struct TapButton: View {
                 .frame(width: stoneDiameter * 0.72, height: stoneDiameter * 0.19)
                 .background(Capsule().fill(Color.white))
         }
-        .buttonStyle(PressStyle(isPressed: $pressed))
-        .disabled(!store.reachable)
+        .buttonStyle(PressStyle())
     }
 
     private func tap() {
-        guard store.reachable else { return }
-        let position = Dent.randomPosition()
         UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
         store.tap()
-        let local = Dent(position: position, mac: store.mac, at: Date())
-        dents.append(local)
-        if dents.count > 400 { dents.removeFirst(dents.count - 400) }
-
-        Task {
-            let confirmed = await store.sendTap(position: position)
-            if let confirmed {
-                await MainActor.run {
-                    if let index = dents.firstIndex(where: { $0.id == local.id }) {
-                        dents[index] = confirmed
-                    }
-                }
-            }
-        }
     }
 }
 
 struct PressStyle: ButtonStyle {
-    @Binding var isPressed: Bool
-
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.94 : 1)
-            .onChange(of: configuration.isPressed) { newValue in
-                isPressed = newValue
-            }
+            .animation(.spring(response: 0.18, dampingFraction: 0.6), value: configuration.isPressed)
     }
 }

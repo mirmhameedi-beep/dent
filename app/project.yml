@@ -19,4 +19,23 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_CFBundleDisplayName: Dent
         TARGETED_DEVICE_FAMILY: "1"
-        SWIFT_VERSION: "5.9"
+        SWIFT_VERSION: "5.0"
+  DentTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: Dent
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+schemes:
+  Dent:
+    build:
+      targets:
+        Dent: all
+    test:
+      targets:
+        - DentTests
