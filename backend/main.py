@@ -7,6 +7,7 @@ import uuid
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 TARGET = 1_000_000_000
@@ -73,9 +74,16 @@ def tap(payload: Tap) -> dict:
 
 @app.get("/wall")
 def wall(limit: int = 50) -> list[dict]:
+    """Top tappers, most dents first."""
     with db() as conn:
         rows = conn.execute(
-            "SELECT mac, taps FROM tappers ORDER BY taps DESC, last_seen ASC LIMIT ?",
+            "SELECT mac, taps, last_seen FROM tappers ORDER BY taps DESC, last_seen ASC LIMIT ?",
             (min(limit, 500),),
         ).fetchall()
-    return [{"mac": row["mac"], "taps": row["taps"]} for row in rows]
+    return [
+        {"mac": row["mac"], "taps": row["taps"], "at": row["last_seen"]}
+        for row in rows
+    ]
+
+
+app.mount("/", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "static"), html=True), name="web")

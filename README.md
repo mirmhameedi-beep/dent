@@ -45,9 +45,17 @@ SQLite by default (`DENT_DB` env var to relocate). Endpoints:
 
 | Method | Path     | Purpose                                    |
 |--------|----------|--------------------------------------------|
+| GET    | `/`      | live public counter website (viral engine)  |
 | GET    | `/stone` | `{total, target, remaining}`                |
 | POST   | `/tap`   | register a tap, returns new global total    |
 | GET    | `/wall`  | top tappers, `?limit=50`                    |
+
+Tests run with `pytest backend` (CI runs them on every push).
+
+## CI
+
+`.github/workflows/ci.yml` runs the backend test suite on Linux and compiles the iOS app on a
+macOS runner (`xcodegen generate` + `xcodebuild` against the iOS Simulator, unsigned).
 
 ## Deploying
 

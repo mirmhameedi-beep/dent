@@ -17,7 +17,7 @@ struct StoneView: View {
             Color.black.ignoresSafeArea()
 
             VStack(spacing: 24) {
-                ProgressHeader(store: store)
+                ProgressHeader()
                     .padding(.top, 16)
 
                 ZStack {

@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r backend/requirements.txt httpx==0.28.1 pytest==8.3.4
+      - run: pytest backend -v
+
+  app:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - working-directory: app
+        run: xcodegen generate
+      - name: Build (iOS Simulator)
+        working-directory: app
+        run: |
+          set -o pipefail
+          xcodebuild -project Dent.xcodeproj -scheme Dent \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug build CODE_SIGNING_ALLOWED=NO | xcbeautify

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dent — one stone, one billion taps</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 24px;
+    text-align: center;
+  }
+  #count {
+    font-size: clamp(2.6rem, 9vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .bar {
+    width: min(70vw, 560px);
+    height: 6px;
+    border-radius: 999px;
+    background: #1c1c1c;
+    overflow: hidden;
+  }
+  .bar > div {
+    height: 100%;
+    width: 0%;
+    min-width: 6px;
+    background: linear-gradient(90deg, rgba(255,255,255,.9), #777);
+    transition: width .6s ease;
+  }
+  #remain { color: #8a8a8a; font-size: .85rem; }
+  #stone {
+    width: min(52vw, 300px);
+    height: min(52vw, 300px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 32%, #757575, #333 60%, #171717);
+    box-shadow: 0 24px 60px rgba(0,0,0,.9), inset -18px -24px 48px rgba(0,0,0,.6);
+  }
+  footer { color: #575757; font-size: .72rem; max-width: 34rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+  <div id="count">0</div>
+  <div class="bar"><div></div></div>
+  <div id="remain">…</div>
+  <div id="stone"></div>
+  <footer>Begun before you arrived. Ending long after you're gone.<br>One stone. One billion taps. Every tap in the app carves one more dent.</footer>
+<script>
+  const TARGET = 1_000_000_000;
+  const countEl = document.getElementById("count");
+  const remainEl = document.getElementById("remain");
+  const bar = document.querySelector(".bar > div");
+  const fmt = new Intl.NumberFormat("en-US");
+  let shown = 0;
+
+  function render(total) {
+    const step = () => {
+      if (shown < total) { shown = Math.min(total, shown + Math.max(1, Math.ceil((total - shown) / 12))); countEl.textContent = fmt.format(shown); requestAnimationFrame(step); }
+      else if (shown > total) { shown = total; countEl.textContent = fmt.format(shown); }
+    };
+    requestAnimationFrame(step);
+    bar.style.width = Math.max(0.4, 100 * total / TARGET) + "%";
+    remainEl.textContent = fmt.format(TARGET - total) + " taps remain";
+  }
+
+  async function poll() {
+    try {
+      const res = await fetch("/stone");
+      render((await res.json()).total);
+    } catch (e) { /* keep last value */ }
+  }
+  poll();
+  setInterval(poll, 2000);
+</script>
+</body>
+</html>
