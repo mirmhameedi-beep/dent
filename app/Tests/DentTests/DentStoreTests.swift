@@ -162,7 +162,8 @@ final class MockURLProtocol: URLProtocol {
         switch handler(path) {
         case .json(let payload):
             let data = try! JSONSerialization.data(withJSONObject: payload)
-            client?.urlProtocol(self, didReceive: URLResponse(url: request.url!, mimeType: "application/json", expectedContentLength: data.count, textEncodingName: "utf-8"), cacheStoragePolicy: .notAllowed)
+            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             client?.urlProtocol(self, didLoad: data)
             client?.urlProtocolDidFinishLoading(self)
         default:

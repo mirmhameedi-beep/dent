@@ -51,7 +51,7 @@ struct Dent: Identifiable, Codable, Equatable {
 
     static func randomPosition() -> CGPoint {
         let angle = Double.random(in: 0...(2 * .pi))
-        let radius = sqrt(Double.random(in: 0...1)) * 0.86
+        let radius = sqrt(Double.random(in: 0...1)) * 0.48
         return CGPoint(x: 0.5 + cos(angle) * radius, y: 0.5 + sin(angle) * radius)
     }
 }
