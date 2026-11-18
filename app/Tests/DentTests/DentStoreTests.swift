@@ -1,6 +1,7 @@
 import XCTest
 @testable import Dent
 
+@MainActor
 final class DentStoreTests: XCTestCase {
     private var store: DentStore!
 

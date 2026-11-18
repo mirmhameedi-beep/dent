@@ -116,7 +116,7 @@ final class DentStore: ObservableObject {
         }
     }
 
-    private func sendTap(position: CGPoint) async {
+    func sendTap(position: CGPoint) async {
         await submit(TapRequest(mac: mac, x: Double(position.x), y: Double(position.y)))
     }
 
