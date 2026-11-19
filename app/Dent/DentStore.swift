@@ -139,6 +139,7 @@ final class DentStore: ObservableObject {
 
     func tap(position: CGPoint) {
         guard !stoneComplete else { return }
+        pendingCount = pendingStore.count
         let pending = PendingTap(x: Double(position.x), y: Double(position.y))
         guard pendingStore.append(pending) else {
             queueIsFull = true

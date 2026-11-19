@@ -295,7 +295,7 @@ final class DentStoreTests: XCTestCase {
         XCTAssertEqual(queue.count, 0)
         XCTAssertEqual(store.pendingCount, 0)
         XCTAssertEqual(store.confirmedTotal, 77)
-        XCTAssertNotNil(store.rejection)
+        XCTAssertEqual(queue.rejectedCount, 1)
     }
 
     func testQueueCapacityRejectsNewTapWithoutDiscarding() {
