@@ -259,3 +259,177 @@ def test_database_restart_persists_all_rows():
         body = client.get("/stone").json()
         assert body["total"] == 3
         assert len(body["dents"]) == 3
+
+
+def seed_total(conn, total):
+    conn.execute("UPDATE counters SET total = ? WHERE id = 1", (total,))
+
+
+def db_state():
+    with main.db() as conn:
+        return {
+            "total": conn.execute("SELECT total FROM counters WHERE id = 1").fetchone()["total"],
+            "dents": conn.execute("SELECT COUNT(*) FROM dents").fetchone()[0],
+            "taps": conn.execute("SELECT COALESCE(SUM(taps), 0) FROM tappers").fetchone()[0],
+        }
+
+
+def test_final_tap_reaches_exactly_one_billion():
+    main.init_db()
+    with main.db() as conn:
+        seed_total(conn, TARGET - 1)
+    tap_id = str(uuid.UUID(int=7001))
+    client = TestClient(app)
+    with client:
+        body = tap(client, mac="final-tap-mac-001", tap_id=tap_id).json()
+        assert body["total"] == TARGET
+        stone = client.get("/stone").json()
+        assert stone["total"] == TARGET
+        assert stone["remaining"] == 0
+        assert stone["dents"][0]["id"] == tap_id
+
+
+def test_new_tap_after_completion_receives_410():
+    main.init_db()
+    with main.db() as conn:
+        seed_total(conn, TARGET)
+    client = TestClient(app)
+    with client:
+        response = tap(client, mac="post-complete-mac1", tap_id=str(uuid.UUID(int=7002)))
+        assert response.status_code == 410
+        assert response.json()["detail"] == "The stone is complete."
+        assert db_state() == {"total": TARGET, "dents": 0, "taps": 0}
+
+
+def test_accepted_duplicate_still_succeeds_after_completion():
+    main.init_db()
+    original_id = str(uuid.UUID(int=7003))
+    original_mac = "dup-complete-mac1"
+    with main.db() as conn:
+        seed_total(conn, TARGET)
+        conn.execute(
+            "INSERT INTO dents (id, x, y, mac, at) VALUES (?, ?, ?, ?, ?)",
+            (original_id, 0.25, 0.75, original_mac, 1000.0),
+        )
+        conn.execute(
+            "INSERT INTO tappers (mac, taps, first_seen, last_seen) VALUES (?, ?, ?, ?)",
+            (original_mac, TARGET, 1000.0, 1000.0),
+        )
+    client = TestClient(app)
+    with client:
+        body = tap(client, mac=original_mac, x=0.25, y=0.75, tap_id=original_id).json()
+        assert body["total"] == TARGET
+        assert body["dent"]["id"] == original_id
+        assert body["dent"]["x"] == 0.25
+
+
+def test_duplicate_after_completion_does_not_double_count():
+    main.init_db()
+    original_id = str(uuid.UUID(int=7004))
+    original_mac = "dup-nodouble-mac1"
+    with main.db() as conn:
+        seed_total(conn, TARGET)
+        conn.execute(
+            "INSERT INTO dents (id, x, y, mac, at) VALUES (?, ?, ?, ?, ?)",
+            (original_id, 0.5, 0.5, original_mac, 1000.0),
+        )
+        conn.execute(
+            "INSERT INTO tappers (mac, taps, first_seen, last_seen) VALUES (?, ?, ?, ?)",
+            (original_mac, TARGET, 1000.0, 1000.0),
+        )
+    client = TestClient(app)
+    with client:
+        for _ in range(5):
+            response = tap(client, mac=original_mac, tap_id=original_id)
+            assert response.status_code == 200
+            assert response.json()["dent"]["id"] == original_id
+        assert db_state() == {"total": TARGET, "dents": 1, "taps": TARGET}
+
+
+def test_concurrent_taps_at_completion_boundary():
+    main.init_db()
+    with main.db() as conn:
+        seed_total(conn, TARGET - 1)
+    tap_ids = [str(uuid.UUID(int=8000 + i)) for i in range(16)]
+    barrier = threading.Barrier(16)
+
+    def run(index):
+        barrier.wait()
+        response = clients[index % 8].post(
+            "/tap",
+            json={"id": tap_ids[index], "mac": f"boundary-mac-{index % 8:02d}", "x": 0.3, "y": 0.3},
+        )
+        return response.status_code, response.json()
+
+    with contextlib.ExitStack() as stack:
+        clients = [stack.enter_context(TestClient(app)) for _ in range(8)]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=16) as pool:
+            results = list(pool.map(run, range(16)))
+
+    codes = [code for code, _ in results]
+    assert codes.count(200) == 1
+    assert codes.count(410) == 15
+    winner_index = codes.index(200)
+    assert results[winner_index][1]["total"] == TARGET
+    with main.db() as conn:
+        assert conn.execute("SELECT total FROM counters WHERE id = 1").fetchone()["total"] == TARGET
+        assert conn.execute("SELECT COUNT(*) FROM dents").fetchone()[0] == 1
+        assert conn.execute("SELECT COALESCE(SUM(taps), 0) FROM tappers").fetchone()[0] == 1
+        assert conn.execute("SELECT id FROM dents").fetchone()["id"] == tap_ids[winner_index]
+
+
+def test_ceiling_small_scale_full_invariant(monkeypatch):
+    monkeypatch.setattr(main, "TARGET", 3)
+    main.init_db()
+    with main.db() as conn:
+        conn.execute(
+            "INSERT INTO tappers (mac, taps, first_seen, last_seen) VALUES ('seed-mac-001', 2, 0.0, 0.0)"
+        )
+        conn.execute(
+            "INSERT INTO dents (id, x, y, mac, at) VALUES (?, 0.1, 0.1, 'seed-mac-001', 0.0)",
+            (str(uuid.UUID(int=9001)),),
+        )
+        conn.execute(
+            "INSERT INTO dents (id, x, y, mac, at) VALUES (?, 0.2, 0.2, 'seed-mac-001', 0.0)",
+            (str(uuid.UUID(int=9002)),),
+        )
+        seed_total(conn, 2)
+
+    def state():
+        with main.db() as conn:
+            return (
+                conn.execute("SELECT COUNT(*) FROM dents").fetchone()[0],
+                conn.execute("SELECT total FROM counters WHERE id = 1").fetchone()["total"],
+                conn.execute("SELECT COALESCE(SUM(taps), 0) FROM tappers").fetchone()[0],
+            )
+
+    assert state() == (2, 2, 2)
+    client = TestClient(app)
+    with client:
+        first = tap(client, mac="small-scale-mac1", tap_id=str(uuid.UUID(int=9003)))
+        assert first.status_code == 200
+        assert first.json()["total"] == 3
+        assert client.get("/stone").json()["remaining"] == 0
+        assert state() == (3, 3, 3)
+        for i in range(4):
+            response = tap(client, mac=f"small-scale-mac{i % 2}", tap_id=str(uuid.UUID(int=9100 + i)))
+            assert response.status_code == 410
+        assert state() == (3, 3, 3)
+
+
+def test_rejected_request_rolls_back_completely():
+    main.init_db()
+    with main.db() as conn:
+        seed_total(conn, TARGET)
+    state_before = db_state()
+    late_ids = [str(uuid.UUID(int=9200 + i)) for i in range(4)]
+    client = TestClient(app)
+    with client:
+        for tap_id in late_ids:
+            response = tap(client, mac="rollback-mac-0001", tap_id=tap_id)
+            assert response.status_code == 410
+        with main.db() as conn:
+            for tap_id in late_ids:
+                assert conn.execute("SELECT 1 FROM dents WHERE id = ?", (tap_id,)).fetchone() is None
+            assert conn.execute("SELECT COUNT(*) FROM tappers WHERE mac = 'rollback-mac-0001'").fetchone()[0] == 0
+    assert db_state() == state_before
