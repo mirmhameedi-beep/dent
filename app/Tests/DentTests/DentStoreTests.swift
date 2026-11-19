@@ -486,6 +486,39 @@ final class DentStoreTests: XCTestCase {
         XCTAssertEqual(store.pendingCount, 0)
         XCTAssertEqual(store.displayTotal, 60)
     }
+
+    func testDisplayTotalClampsToTargetAfterCompletionWithQueuedTaps() async {
+        MockURLProtocol.handler = { path in
+            path == "/tap" ? .status(410, ["detail": "gone"]) : self.stoneResponse(1_000_000_000)
+        }
+        for i in 0..<3 {
+            _ = queue.append(PendingTap(x: 0.1 * Double(i + 1), y: 0.5))
+        }
+        await store.flushPending()
+        XCTAssertTrue(store.stoneComplete)
+        XCTAssertEqual(queue.count, 2)
+        XCTAssertEqual(store.pendingCount, 2)
+        await store.loadStone()
+        XCTAssertEqual(store.confirmedTotal, 1_000_000_000)
+        XCTAssertEqual(store.displayTotal, 1_000_000_000)
+        XCTAssertLessThanOrEqual(Double(store.displayTotal) / Double(DentStore.target), 1.0)
+    }
+
+    func testDisplayTotalClampInBoundaryWindowKeepsNormalOperationUnchanged() async {
+        MockURLProtocol.handler = { path in
+            path == "/tap" ? .status(429, ["detail": "slow"]) : self.stoneResponse(999_999_998)
+        }
+        for i in 0..<5 {
+            _ = queue.append(PendingTap(x: 0.1 * Double(i + 1), y: 0.5))
+        }
+        await store.flushPending()
+        XCTAssertEqual(store.pendingCount, 5)
+        XCTAssertEqual(store.displayTotal, 1_000_000_000)
+        XCTAssertLessThanOrEqual(Double(store.displayTotal) / Double(DentStore.target), 1.0)
+
+        store.confirmedTotal = 77
+        XCTAssertEqual(store.displayTotal, 82)
+    }
 }
 
 final class PendingTapStoreTests: XCTestCase {

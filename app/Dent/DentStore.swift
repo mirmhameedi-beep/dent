@@ -106,7 +106,7 @@ final class DentStore: ObservableObject {
     @Published private(set) var stoneComplete = false
     @Published private(set) var coolingDown = false
 
-    var displayTotal: Int64 { confirmedTotal + Int64(pendingCount) }
+    var displayTotal: Int64 { min(confirmedTotal + Int64(pendingCount), DentStore.target) }
 
     private(set) var mac: String
 
