@@ -2,6 +2,7 @@ import asyncio
 import concurrent.futures
 import contextlib
 import threading
+import uuid
 
 import httpx
 import pytest
@@ -174,6 +175,31 @@ def test_concurrent_same_id_threaded_counts_once():
         assert conn.execute("SELECT COUNT(*) FROM dents").fetchone()[0] == 1
         assert conn.execute("SELECT total FROM counters WHERE id = 1").fetchone()["total"] == 1
         assert conn.execute("SELECT taps FROM tappers").fetchone()["taps"] == 1
+
+
+def test_concurrent_distinct_ids_full_consistency():
+    tap_ids = [str(uuid.UUID(int=i + 1000)) for i in range(200)]
+
+    def run(index):
+        response = clients[index % 16].post(
+            "/tap", json={"id": tap_ids[index], "mac": f"distinct-mac-{index % 16:02d}", "x": 0.1, "y": 0.2}
+        )
+        return response.status_code, response.json()
+
+    with contextlib.ExitStack() as stack:
+        clients = [stack.enter_context(TestClient(app)) for _ in range(16)]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=16) as pool:
+            results = list(pool.map(run, range(200)))
+
+    codes = [code for code, _ in results]
+    dent_ids = [body["dent"]["id"] for _, body in results]
+    assert codes == [200] * 200
+    assert len(set(dent_ids)) == 200
+    assert set(dent_ids) == set(tap_ids)
+    with main.db() as conn:
+        assert conn.execute("SELECT COUNT(*) FROM dents").fetchone()[0] == 200
+        assert conn.execute("SELECT total FROM counters WHERE id = 1").fetchone()["total"] == 200
+        assert conn.execute("SELECT COALESCE(SUM(taps), 0) FROM tappers").fetchone()[0] == 200
 
 
 def test_duplicate_bypasses_rate_limit():
