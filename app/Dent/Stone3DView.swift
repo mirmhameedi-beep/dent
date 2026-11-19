@@ -69,6 +69,9 @@ struct Stone3DView: UIViewRepresentable {
         private let store: DentStore
         private weak var stoneNode: SCNNode?
         private weak var scnView: SCNView?
+        private var velYaw: CGFloat = 0
+        private var velPitch: CGFloat = 0
+        private var displayLink: CADisplayLink?
 
         init(store: DentStore) {
             self.store = store
@@ -109,10 +112,49 @@ struct Stone3DView: UIViewRepresentable {
 
         @objc func onPan(_ gesture: UIPanGestureRecognizer) {
             guard let stoneNode else { return }
-            let translation = gesture.translation(in: gesture.view)
-            gesture.setTranslation(.zero, in: gesture.view)
-            stoneNode.eulerAngles.y += Float(translation.x) * 0.01
-            stoneNode.eulerAngles.x = max(-1.1, min(1.1, stoneNode.eulerAngles.x + Float(translation.y) * 0.008))
+            stopInertia()
+            switch gesture.state {
+            case .changed:
+                let translation = gesture.translation(in: gesture.view)
+                gesture.setTranslation(.zero, in: gesture.view)
+                stoneNode.eulerAngles.y += Float(translation.x) * 0.01
+                stoneNode.eulerAngles.x = max(-1.1, min(1.1, stoneNode.eulerAngles.x + Float(translation.y) * 0.008))
+            case .ended:
+                let velocity = gesture.velocity(in: gesture.view)
+                let frameVelYaw = CGFloat(velocity.x) / 60 * 0.01
+                let frameVelPitch = CGFloat(velocity.y) / 60 * 0.008
+                if abs(frameVelYaw) > 5e-4 || abs(frameVelPitch) > 3e-4 {
+                    velYaw = frameVelYaw
+                    velPitch = frameVelPitch
+                    startInertia()
+                }
+            default:
+                break
+            }
+        }
+
+        private func startInertia() {
+            let link = CADisplayLink(target: self, selector: #selector(stepInertia))
+            link.add(to: .main, forMode: .common)
+            displayLink = link
+        }
+
+        private func stopInertia() {
+            displayLink?.invalidate()
+            displayLink = nil
+            velYaw = 0
+            velPitch = 0
+        }
+
+        @objc private func stepInertia() {
+            guard let stoneNode else { stopInertia(); return }
+            stoneNode.eulerAngles.y += Float(velYaw)
+            stoneNode.eulerAngles.x = max(-1.1, min(1.1, stoneNode.eulerAngles.x + Float(velPitch)))
+            velYaw *= 0.93
+            velPitch *= 0.93
+            if abs(velYaw) < 5e-5 && abs(velPitch) < 3e-5 {
+                stopInertia()
+            }
         }
 
         @objc func onTap(_ gesture: UITapGestureRecognizer) {

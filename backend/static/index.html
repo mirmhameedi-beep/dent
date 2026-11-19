@@ -79,6 +79,7 @@
   let yaw = 0.9, pitch = 0.32;
   let dents = [];
   let dragging = false, moved = 0, lastX = 0, lastY = 0;
+  let velYaw = 0, velPitch = 0;
 
   function mac() {
     let m = localStorage.getItem("dent.mac");
@@ -160,7 +161,15 @@
     ctx.fillStyle = sphere;
     ctx.fill();
 
-    if (!dragging) yaw += 0.0022;
+    if (!dragging && (Math.abs(velYaw) > 1e-4 || Math.abs(velPitch) > 1e-4)) {
+      yaw += velYaw;
+      pitch = clamp(pitch + velPitch, -1.2, 1.2);
+      velYaw *= 0.93;
+      velPitch *= 0.93;
+    } else if (!dragging) {
+      velYaw = 0;
+      velPitch = 0;
+    }
 
     for (const d of dents) {
       const p = rotate(spherePoint(d.x, d.y), yaw, pitch);
@@ -186,6 +195,7 @@
 
   canvas.addEventListener("pointerdown", (e) => {
     dragging = true; moved = 0;
+    velYaw = 0; velPitch = 0;
     lastX = e.clientX; lastY = e.clientY;
     canvas.setPointerCapture(e.pointerId);
   });
@@ -193,8 +203,10 @@
     if (!dragging) return;
     const dx = e.clientX - lastX, dy = e.clientY - lastY;
     moved += Math.abs(dx) + Math.abs(dy);
-    yaw += dx * 0.012;
-    pitch = clamp(pitch + dy * 0.008, -1.2, 1.2);
+    velYaw = dx * 0.012;
+    velPitch = dy * 0.008;
+    yaw += velYaw;
+    pitch = clamp(pitch + velPitch, -1.2, 1.2);
     lastX = e.clientX; lastY = e.clientY;
   });
   canvas.addEventListener("pointerup", (e) => {
