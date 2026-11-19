@@ -174,6 +174,7 @@ final class DentStore: ObservableObject {
     }
 
     func flushPending() async {
+        pendingCount = pendingStore.count
         guard !flushInFlight, !stoneComplete, pendingCount > 0, Date() >= nextRetryAt else { return }
         flushInFlight = true
         defer { flushInFlight = false }
