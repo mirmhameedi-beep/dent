@@ -511,6 +511,7 @@ final class DentStoreTests: XCTestCase {
         for i in 0..<5 {
             _ = queue.append(PendingTap(x: 0.1 * Double(i + 1), y: 0.5))
         }
+        await store.loadStone()
         await store.flushPending()
         XCTAssertEqual(store.pendingCount, 5)
         XCTAssertEqual(store.displayTotal, 1_000_000_000)
