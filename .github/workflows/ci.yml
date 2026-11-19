@@ -21,6 +21,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: brew install xcodegen
+      - name: Create simulator
+        id: sim
+        run: |
+          UDID=""
+          for device in "iPhone 16" "iPhone 15"; do
+            for rt in "iOS 18.2" "iOS 18.1" "iOS 18.0" "iOS 17.5" "iOS 17.0"; do
+              UDID=$(xcrun simctl create ci-iphone "$device" "$rt" 2>/dev/null) && [ -n "$UDID" ] && break 2
+            done
+          done
+          if [ -z "$UDID" ]; then
+            xcrun simctl list runtimes devicetypes
+            exit 1
+          fi
+          xcrun simctl boot "$UDID" 2>/dev/null || true
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
       - working-directory: app
         run: xcodegen generate
       - name: Unit tests (iOS Simulator)
@@ -28,5 +43,5 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild test -project Dent.xcodeproj -scheme Dent \
-            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -destination 'platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}' \
             CODE_SIGNING_ALLOWED=NO | xcbeautify
