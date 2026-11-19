@@ -26,11 +26,11 @@ final class DentStoreTests: XCTestCase {
         store?.stopBackgroundWork()
     }
 
-    private func stoneResponse(_ total: Int) -> MockResponse {
+    private func stoneResponse(_ total: Int) -> MockURLProtocol.MockResponse {
         .json(["total": total, "target": 1_000_000_000, "remaining": 1_000_000_000 - total, "dents": []])
     }
 
-    private func tapResponse(_ total: Int) -> MockResponse {
+    private func tapResponse(_ total: Int) -> MockURLProtocol.MockResponse {
         .json(["total": total, "at": 2_000.0, "dent": [
             "id": "22222222-2222-2222-2222-222222222222", "x": 0.5, "y": 0.5, "mac": "local", "at": 2_000.0
         ]])
