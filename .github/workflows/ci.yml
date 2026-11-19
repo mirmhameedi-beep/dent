@@ -26,7 +26,7 @@ jobs:
         run: |
           UDID=""
           for device in "iPhone 16" "iPhone 15"; do
-            for rt in "iOS 18.2" "iOS 18.1" "iOS 18.0" "iOS 17.5" "iOS 17.0"; do
+            for rt in "iOS 18.6" "iOS 18.5" "iOS 26.2" "iOS 26.1" "iOS 26.0" "iOS 18.2"; do
               UDID=$(xcrun simctl create ci-iphone "$device" "$rt" 2>/dev/null) && [ -n "$UDID" ] && break 2
             done
           done
