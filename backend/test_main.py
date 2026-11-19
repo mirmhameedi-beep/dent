@@ -217,6 +217,9 @@ def test_invalid_client_tap_ids_rejected():
         assert tap(client, tap_id="short").status_code == 422
         assert tap(client, tap_id="z" * 36).status_code == 422
         assert tap(client, tap_id="a" * 36).status_code == 422
+        assert tap(client, tap_id="-" * 36).status_code == 422
+        assert tap(client, tap_id="1234-12345678-1234-1234-123456789012").status_code == 422
+        assert tap(client, tap_id="12345678-12345-1234-1234-123456789012").status_code == 422
         assert len(client.get("/stone").json()["dents"]) == 0
 
 

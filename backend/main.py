@@ -77,7 +77,10 @@ app = FastAPI(title="Dent", lifespan=lifespan, docs_url=None, redoc_url=None, op
 
 
 class Tap(BaseModel):
-    id: str | None = Field(default=None, min_length=36, max_length=36, pattern=r"^[0-9a-fA-F-]{36}$")
+    id: str | None = Field(
+        default=None,
+        pattern=r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+    )
     mac: str = Field(min_length=8, max_length=64)
     x: float = Field(ge=0.0, le=1.0)
     y: float = Field(ge=0.0, le=1.0)
