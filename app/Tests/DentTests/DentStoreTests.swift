@@ -139,7 +139,7 @@ final class ModelTests: XCTestCase {
         let point = Globe.spherePoint(u: 0.31, v: 0.64)
         let rotated = Globe.rotate(point, yaw: 1.234, pitch: -0.432)
         let back = Globe.unrotate(rotated, yaw: 1.234, pitch: -0.432)
-        XCTAssertLessThan(simd_length(rotated - back), 1e-12)
+        XCTAssertLessThan(simd_length(point - back), 1e-9)
         XCTAssertEqual(simd_length(rotated), 1, accuracy: 1e-12)
     }
 
