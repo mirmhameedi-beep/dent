@@ -1,13 +1,5 @@
 import SwiftUI
 
-struct StoneShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.addEllipse(in: rect)
-        return path
-    }
-}
-
 struct Dent: Identifiable, Codable, Equatable {
     let id: UUID
     let position: CGPoint
@@ -24,6 +16,13 @@ struct Dent: Identifiable, Codable, Equatable {
 
     init(position: CGPoint, mac: String, at: Date) {
         self.id = UUID()
+        self.position = position
+        self.mac = mac
+        self.at = at
+    }
+
+    init(id: UUID, position: CGPoint, mac: String, at: Date) {
+        self.id = id
         self.position = position
         self.mac = mac
         self.at = at
@@ -47,34 +46,5 @@ struct Dent: Identifiable, Codable, Equatable {
         try container.encode(Double(position.y), forKey: .y)
         try container.encode(mac, forKey: .mac)
         try container.encode(at.timeIntervalSince1970, forKey: .at)
-    }
-
-    static func randomPosition() -> CGPoint {
-        let angle = Double.random(in: 0...(2 * .pi))
-        let radius = sqrt(Double.random(in: 0...1)) * 0.48
-        return CGPoint(x: 0.5 + cos(angle) * radius, y: 0.5 + sin(angle) * radius)
-    }
-}
-
-struct DentMark: View {
-    let dent: Dent
-    let stoneDiameter: CGFloat
-
-    var body: some View {
-        Circle()
-            .fill(Color.black.opacity(0.55))
-            .frame(width: 6, height: 6)
-            .blur(radius: 1.2)
-            .overlay(
-                Circle()
-                    .stroke(Color(white: 0.7).opacity(0.25), lineWidth: 0.7)
-                    .blur(radius: 0.5)
-            )
-            .position(
-                x: dent.position.x * stoneDiameter,
-                y: dent.position.y * stoneDiameter
-            )
-            .transition(.scale(scale: 2.2).combined(with: .opacity))
-            .animation(.easeOut(duration: 0.3), value: dent.id)
     }
 }

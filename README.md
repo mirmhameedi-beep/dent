@@ -39,7 +39,10 @@ open Dent.xcodeproj
 ```
 
 Features in this build:
-- Photoreal dark stone with radial lighting, laid out via `GeometryReader`.
+- **Full 3D stone** (SceneKit): drag to spin it, real lighting — dents wrap the sphere and
+  stay put as it rotates. Tap **anywhere on the stone** to dent wherever you touched.
+- The website renders the same 3D stone on `<canvas>` with the identical math — drag to spin,
+  click to dent; app and web see the same object.
 - Every tap carves a dent: **server-persisted**, so the stone you see is the stone *everyone*
   sees — the newest 400 dents worldwide load from `/stone`.
 - Offline-first tapping: taps always work; if the network is down they persist in a local

@@ -1,4 +1,5 @@
 import XCTest
+import simd
 @testable import Dent
 
 @MainActor
@@ -74,15 +75,15 @@ final class DentStoreTests: XCTestCase {
 
     @MainActor
     func testTapAddsLocalDentImmediately() {
-        store.tap()
-        store.tap()
+        store.tap(position: CGPoint(x: 0.2, y: 0.3))
+        store.tap(position: CGPoint(x: 0.7, y: 0.9))
         XCTAssertEqual(store.totalTaps, 2)
         XCTAssertEqual(store.dents.count, 2)
     }
 
     @MainActor
     func testVisibleDentsAreCapped() {
-        for _ in 0..<450 { store.tap() }
+        for _ in 0..<450 { store.tap(position: CGPoint(x: 0.1, y: 0.1)) }
         XCTAssertEqual(store.dents.count, DentStore.maxVisibleDents)
     }
 }
@@ -125,17 +126,29 @@ final class ModelTests: XCTestCase {
         XCTAssertEqual(decoded.at.timeIntervalSince1970, 1_234, accuracy: 0.001)
     }
 
-    func testRandomPositionStaysInStone() {
-        for _ in 0..<200 {
-            let point = Dent.randomPosition()
-            let dx = Double(point.x - 0.5)
-            let dy = Double(point.y - 0.5)
-            XCTAssertLessThanOrEqual(sqrt(dx * dx + dy * dy), 0.86 + 0.0001)
-            XCTAssertGreaterThanOrEqual(point.x, 0)
-            XCTAssertLessThanOrEqual(point.x, 1)
-            XCTAssertGreaterThanOrEqual(point.y, 0)
-            XCTAssertLessThanOrEqual(point.y, 1)
+    func testGlobalRoundTrip() {
+        for (u, v) in [(0.13, 0.77), (0.0, 0.5), (0.999, 0.02), (0.5, 1.0), (0.25, 0.999)] {
+            let point = Globe.spherePoint(u: u, v: v)
+            let back = Globe.globe(from: point)
+            XCTAssertEqual(back.u, u, accuracy: 1e-9, "u failed for (\(u), \(v))")
+            XCTAssertEqual(back.v, v, accuracy: 1e-9, "v failed for (\(u), \(v))")
         }
+    }
+
+    func testRotateInvertsUnrotate() {
+        let point = Globe.spherePoint(u: 0.31, v: 0.64)
+        let rotated = Globe.rotate(point, yaw: 1.234, pitch: -0.432)
+        let back = Globe.unrotate(rotated, yaw: 1.234, pitch: -0.432)
+        XCTAssertLessThan(simd_length(rotated - back), 1e-12)
+        XCTAssertEqual(simd_length(rotated), 1, accuracy: 1e-12)
+    }
+
+    func testGlobeRejectsOffSphereInput() {
+        let scaled = Globe.spherePoint(u: 0.4, v: 0.6) * 17.0
+        let coordinates = Globe.globe(from: scaled)
+        let standard = Globe.spherePoint(u: 0.4, v: 0.6)
+        XCTAssertEqual(coordinates.u, Globe.globe(from: standard).u, accuracy: 1e-12)
+        XCTAssertEqual(coordinates.v, Globe.globe(from: standard).v, accuracy: 1e-12)
     }
 }
 

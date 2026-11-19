@@ -105,9 +105,8 @@ final class DentStore: ObservableObject {
         await flushPending()
     }
 
-    func tap() {
+    func tap(position: CGPoint) {
         totalTaps += 1
-        let position = Dent.randomPosition()
         let local = Dent(position: position, mac: mac, at: Date())
         dents.append(local)
         if dents.count > Self.maxVisibleDents { dents.removeFirst(dents.count - Self.maxVisibleDents) }
