@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dent — one stone, one billion taps</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 24px;
+    text-align: center;
+  }
+  #count {
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .bar {
+    width: min(70vw, 560px);
+    height: 6px;
+    border-radius: 999px;
+    background: #1c1c1c;
+    overflow: hidden;
+  }
+  .bar > div {
+    height: 100%;
+    width: 0%;
+    min-width: 6px;
+    background: linear-gradient(90deg, rgba(255,255,255,.9), #777);
+    transition: width .6s ease;
+  }
+  #remain { color: #8a8a8a; font-size: .85rem; }
+  #stone3d {
+    touch-action: none;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  #stone3d:active { cursor: grabbing; }
+  #hint { color: #6f6f6f; font-size: .78rem; }
+  #msg { color: #8a8a8a; font-size: .78rem; min-height: 1.2em; }
+  #wall { color: #9a9a9a; font-size: .74rem; line-height: 1.7; min-width: 240px; }
+  #wall b { color: #fff; font-weight: 600; }
+  footer { color: #575757; font-size: .72rem; max-width: 34rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+  <div id="count">0</div>
+  <div class="bar"><div></div></div>
+  <div id="remain">…</div>
+  <canvas id="stone3d"></canvas>
+  <div id="hint">drag to spin — tap or click the stone to dent it</div>
+  <div id="msg"></div>
+  <div id="wall"></div>
+  <footer>Begun before you arrived. Ending long after you're gone.<br>One stone. One billion taps.</footer>
+<script>
+  const fmt = new Intl.NumberFormat("en-US");
+  const countEl = document.getElementById("count");
+  const remainEl = document.getElementById("remain");
+  const bar = document.querySelector(".bar > div");
+  const canvas = document.getElementById("stone3d");
+  const msg = document.getElementById("msg");
+  const wallEl = document.getElementById("wall");
+  const ctx = canvas.getContext("2d");
+  const DPR = Math.min(2, window.devicePixelRatio || 1);
+
+  let target = 1e9, shown = 0;
+  let yaw = 0.9, pitch = 0.32;
+  let dents = [];
+  let dragging = false, moved = 0, lastX = 0, lastY = 0;
+
+  function mac() {
+    let m = localStorage.getItem("dent.mac");
+    if (!m) {
+      m = (crypto.randomUUID ? crypto.randomUUID() : "web-" + Math.random().toString(16).slice(2)) + "";
+      localStorage.setItem("dent.mac", m);
+    }
+    return m;
+  }
+
+  function sizeCanvas() {
+    const side = Math.min(window.innerWidth * 0.82, Math.min(window.innerHeight * 0.42, 340));
+    canvas.style.width = side + "px";
+    canvas.style.height = side + "px";
+    canvas.width = Math.round(side * DPR);
+    canvas.height = Math.round(side * DPR);
+  }
+  window.addEventListener("resize", sizeCanvas);
+  sizeCanvas();
+
+  function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+
+  function spherePoint(u, v) {
+    const theta = 2 * Math.PI * u;
+    const lat = (0.5 - v) * Math.PI;
+    return [Math.cos(lat) * Math.cos(theta), Math.sin(lat), Math.cos(lat) * Math.sin(theta)];
+  }
+
+  function rotate(p, yaw, pitch) {
+    const [x1, y1, z1] = p;
+    const x2 = x1 * Math.cos(yaw) + z1 * Math.sin(yaw);
+    const z2 = -x1 * Math.sin(yaw) + z1 * Math.cos(yaw);
+    const y3 = y1 * Math.cos(pitch) - z2 * Math.sin(pitch);
+    const z3 = y1 * Math.sin(pitch) + z2 * Math.cos(pitch);
+    return [x2, y3, z3];
+  }
+
+  function unrotate(p, yaw, pitch) {
+    const [x1, y1, z1] = p;
+    const y2 = y1 * Math.cos(pitch) + z1 * Math.sin(pitch);
+    const z2 = -y1 * Math.sin(pitch) + z1 * Math.cos(pitch);
+    const x3 = x1 * Math.cos(yaw) - z2 * Math.sin(yaw);
+    const z3 = x1 * Math.sin(yaw) + z2 * Math.cos(yaw);
+    return [x3, y2, z3];
+  }
+
+  function pointFromScreen(px, py) {
+    const rect = canvas.getBoundingClientRect();
+    const cx = rect.width / 2, cy = rect.height / 2;
+    const R = rect.width / 2 * 0.82;
+    const nx = (px - cx) / R, ny = (py - cy) / R;
+    if (nx * nx + ny * ny > 1) return null;
+    const nz = Math.sqrt(1 - nx * nx - ny * ny);
+    return unrotate([nx, -ny, nz], yaw, pitch);
+  }
+
+  function globeFromPoint(p) {
+    const len = Math.hypot(p[0], p[1], p[2]) || 1e-12;
+    const n = [p[0] / len, p[1] / len, p[2] / len];
+    const lat = Math.asin(clamp(n[1], -1, 1));
+    let theta = Math.atan2(n[2], n[0]);
+    if (theta < 0) theta += 2 * Math.PI;
+    return { u: theta / (2 * Math.PI), v: 0.5 - lat / Math.PI };
+  }
+
+  function draw() {
+    const w = canvas.width, h = canvas.height;
+    const cx = w / 2, cy = h / 2;
+    const R = w / 2 * 0.82;
+
+    ctx.clearRect(0, 0, w, h);
+
+    const sphere = ctx.createRadialGradient(cx - R * 0.38, cy - R * 0.42, R * 0.08, cx, cy, R * 1.05);
+    sphere.addColorStop(0, "#7d7d80");
+    sphere.addColorStop(0.55, "#3a3a3d");
+    sphere.addColorStop(1, "#131316");
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, 2 * Math.PI);
+    ctx.fillStyle = sphere;
+    ctx.fill();
+
+    if (!dragging) yaw += 0.0022;
+
+    for (const d of dents) {
+      const p = rotate(spherePoint(d.x, d.y), yaw, pitch);
+      if (p[2] < -0.02) continue;
+      const depth = 0.45 + 0.55 * clamp(p[2], 0, 1);
+      const sx = cx + p[0] * R;
+      const sy = cy - p[1] * R;
+      const r = 3.4 * DPR * depth;
+      ctx.beginPath();
+      ctx.arc(sx, sy, r, 0, 2 * Math.PI);
+      ctx.fillStyle = "rgba(5,5,8," + (0.35 + 0.3 * p[2]) + ")";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(sx - r * 0.30, sy - r * 0.30, r * 0.85, 0, 2 * Math.PI);
+      ctx.strokeStyle = "rgba(210,210,225," + (0.10 + 0.12 * p[2]) + ")";
+      ctx.lineWidth = Math.max(1, r * 0.18);
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  canvas.addEventListener("pointerdown", (e) => {
+    dragging = true; moved = 0;
+    lastX = e.clientX; lastY = e.clientY;
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - lastX, dy = e.clientY - lastY;
+    moved += Math.abs(dx) + Math.abs(dy);
+    yaw += dx * 0.012;
+    pitch = clamp(pitch + dy * 0.008, -1.2, 1.2);
+    lastX = e.clientX; lastY = e.clientY;
+  });
+  canvas.addEventListener("pointerup", (e) => {
+    dragging = false;
+    if (moved < 6) dentAt(e.offsetX, e.offsetY);
+  });
+
+  function flash(text, bad) {
+    msg.textContent = text;
+    msg.style.color = bad ? "#c96" : "#9a9a9a";
+    setTimeout(() => { msg.textContent = ""; }, 1800);
+  }
+
+  async function dentAt(px, py) {
+    const point = pointFromScreen(px, py);
+    if (!point) return;
+    const { u, v } = globeFromPoint(point);
+    dents.push({ x: u, y: v });
+    try {
+      const res = await fetch("/tap", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mac: mac(), x: u, y: v })
+      });
+      if (res.status === 429) { flash("slow down — the stone is patient", true); return; }
+      if (!res.ok) { flash("the stone refused that one", true); return; }
+      render((await res.json()).total);
+      flash("one more dent, forever");
+    } catch (err) {
+      flash("offline — that dent waits with you", true);
+    }
+  }
+
+  function render(total) {
+    const step = () => {
+      if (shown < total) { shown = Math.min(total, shown + Math.max(1, Math.ceil((total - shown) / 12))); countEl.textContent = fmt.format(shown); requestAnimationFrame(step); }
+      else if (shown > total) { shown = total; countEl.textContent = fmt.format(shown); }
+    };
+    requestAnimationFrame(step);
+    bar.style.width = Math.max(0.4, 100 * total / target) + "%";
+    remainEl.textContent = fmt.format(target - total) + " taps remain";
+  }
+
+  async function pollStone() {
+    try {
+      const body = await (await fetch("/stone")).json();
+      if (body.target) target = body.target;
+      render(body.total);
+      dents = body.dents || [];
+    } catch (err) { /* keep last value */ }
+  }
+
+  async function pollWall() {
+    try {
+      const wall = await (await fetch("/wall?limit=10")).json();
+      wallEl.innerHTML = "<b>the wall</b><br>" +
+        wall.map(e => `${e.mac.slice(0, 8)} · ${e.taps} dents`).join("<br>");
+    } catch (err) { /* leave as-is */ }
+  }
+
+  pollStone();
+  setInterval(pollStone, 3000);
+  pollWall();
+  setInterval(pollWall, 15000);
+</script>
+</body>
+</html>

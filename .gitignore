@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Xcode
+app/Dent.xcodeproj
+app/Dent.xcworkspace
+xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Backend
+__pycache__/
+*.pyc
+*.db
+.venv/

@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r backend/requirements.txt httpx==0.28.1 pytest==8.3.4
+      - run: pytest backend -v
+
+  app:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - name: Create simulator
+        id: sim
+        run: |
+          set -x
+          UDID=""
+          for device in "com.apple.CoreSimulator.SimDeviceType.iPhone-16" "com.apple.CoreSimulator.SimDeviceType.iPhone-15" "com.apple.CoreSimulator.SimDeviceType.iPhone-17"; do
+            for rt in "com.apple.CoreSimulator.SimRuntime.iOS-18-6" "com.apple.CoreSimulator.SimRuntime.iOS-18-5" "com.apple.CoreSimulator.SimRuntime.iOS-26-2"; do
+              if UDID=$(xcrun simctl create ci-iphone "$device" "$rt"); then
+                break 2
+              fi
+              UDID=""
+            done
+          done
+          if [ -z "$UDID" ]; then
+            xcrun simctl list runtimes devicetypes
+            exit 1
+          fi
+          xcrun simctl boot "$UDID" || true
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+      - working-directory: app
+        run: xcodegen generate
+      - name: Unit tests (iOS Simulator)
+        working-directory: app
+        run: |
+          set -o pipefail
+          xcodebuild test -project Dent.xcodeproj -scheme Dent \
+            -destination 'platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}' \
+            CODE_SIGNING_ALLOWED=NO | xcbeautify
