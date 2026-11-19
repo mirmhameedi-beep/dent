@@ -50,6 +50,7 @@
   #stone3d:active { cursor: grabbing; }
   #hint { color: #6f6f6f; font-size: .78rem; }
   #msg { color: #8a8a8a; font-size: .78rem; min-height: 1.2em; }
+  #pending { color: #6f6f6f; font-size: .74rem; min-height: 1.2em; }
   #wall { color: #9a9a9a; font-size: .74rem; line-height: 1.7; min-width: 240px; }
   #wall b { color: #fff; font-weight: 600; }
   footer { color: #575757; font-size: .72rem; max-width: 34rem; line-height: 1.6; }
@@ -62,24 +63,31 @@
   <canvas id="stone3d"></canvas>
   <div id="hint">drag to spin — tap or click the stone to dent it</div>
   <div id="msg"></div>
+  <div id="pending"></div>
   <div id="wall"></div>
   <footer>Begun before you arrived. Ending long after you're gone.<br>One stone. One billion taps.</footer>
-<script>
+<script type="module">
+  import { TapPipeline, clampTotal, TARGET } from "./dent-core.js";
+
   const fmt = new Intl.NumberFormat("en-US");
   const countEl = document.getElementById("count");
   const remainEl = document.getElementById("remain");
   const bar = document.querySelector(".bar > div");
   const canvas = document.getElementById("stone3d");
   const msg = document.getElementById("msg");
+  const pendingEl = document.getElementById("pending");
   const wallEl = document.getElementById("wall");
   const ctx = canvas.getContext("2d");
   const DPR = Math.min(2, window.devicePixelRatio || 1);
 
-  let target = 1e9, shown = 0;
+  let target = TARGET, shown = 0;
   let yaw = 0.9, pitch = 0.32;
   let dents = [];
   let dragging = false, moved = 0, lastX = 0, lastY = 0;
   let velYaw = 0, velPitch = 0;
+  let completed = false;
+  let stonePollTimer = null;
+  let flashTimer = null;
 
   function mac() {
     let m = localStorage.getItem("dent.mac");
@@ -113,14 +121,14 @@
     const x2 = x1 * Math.cos(yaw) + z1 * Math.sin(yaw);
     const z2 = -x1 * Math.sin(yaw) + z1 * Math.cos(yaw);
     const y3 = y1 * Math.cos(pitch) - z2 * Math.sin(pitch);
-    const z3 = y1 * Math.sin(pitch) + z2 * Math.cos(pitch);
+    const z3 = y1 * Math.sin(pitch) + z2 * Math.sin(pitch);
     return [x2, y3, z3];
   }
 
   function unrotate(p, yaw, pitch) {
     const [x1, y1, z1] = p;
     const y2 = y1 * Math.cos(pitch) + z1 * Math.sin(pitch);
-    const z2 = -y1 * Math.sin(pitch) + z1 * Math.cos(pitch);
+    const z2 = -y1 * Math.sin(pitch) + z2 * Math.sin(pitch);
     const x3 = x1 * Math.cos(yaw) - z2 * Math.sin(yaw);
     const z3 = x1 * Math.sin(yaw) + z2 * Math.cos(yaw);
     return [x3, y2, z3];
@@ -217,44 +225,98 @@
   function flash(text, bad) {
     msg.textContent = text;
     msg.style.color = bad ? "#c96" : "#9a9a9a";
-    setTimeout(() => { msg.textContent = ""; }, 1800);
+    if (flashTimer) clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => { msg.textContent = ""; flashTimer = null; }, 1800);
   }
 
-  async function dentAt(px, py) {
-    const point = pointFromScreen(px, py);
-    if (!point) return;
-    const { u, v } = globeFromPoint(point);
-    dents.push({ x: u, y: v });
-    try {
-      const res = await fetch("/tap", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mac: mac(), x: u, y: v })
-      });
-      if (res.status === 429) { flash("slow down — the stone is patient", true); return; }
-      if (!res.ok) { flash("the stone refused that one", true); return; }
-      render((await res.json()).total);
-      flash("one more dent, forever");
-    } catch (err) {
-      flash("offline — that dent waits with you", true);
-    }
+  function updatePending() {
+    const n = engine.queue().length;
+    pendingEl.textContent = n > 0
+      ? (n === 1 ? "1 dent of yours is waiting to be counted" : n + " dents of yours are waiting to be counted")
+      : "";
+  }
+
+  function markComplete() {
+    if (completed) return;
+    completed = true;
+    if (stonePollTimer !== null) { clearInterval(stonePollTimer); stonePollTimer = null; }
+    render(engine.target);
+    remainEl.textContent = "the stone is complete — " + fmt.format(engine.target) + " dents";
+    updatePending();
   }
 
   function render(total) {
+    total = clampTotal(total, target);
     const step = () => {
       if (shown < total) { shown = Math.min(total, shown + Math.max(1, Math.ceil((total - shown) / 12))); countEl.textContent = fmt.format(shown); requestAnimationFrame(step); }
       else if (shown > total) { shown = total; countEl.textContent = fmt.format(shown); }
     };
     requestAnimationFrame(step);
-    bar.style.width = Math.max(0.4, 100 * total / target) + "%";
-    remainEl.textContent = fmt.format(target - total) + " taps remain";
+    bar.style.width = Math.max(0.4, Math.min(100, 100 * total / target)) + "%";
+    if (!completed) {
+      remainEl.textContent = fmt.format(Math.max(0, target - total)) + " taps remain";
+    }
+  }
+
+  const engine = new TapPipeline({
+    storage: localStorage,
+    sendTap: async (entry) => {
+      const signal = typeof AbortSignal !== "undefined" && AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined;
+      const res = await fetch("/tap", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: entry.id, mac: entry.mac, x: entry.x, y: entry.y }),
+        signal
+      });
+      let body = null;
+      try { body = await res.json(); } catch { body = null; }
+      return { status: res.status, ok: res.ok, body };
+    },
+    onAcked: ({ total }) => {
+      render(total);
+      flash("one more dent, forever");
+      updatePending();
+    },
+    onRejected: (entry, count) => {
+      flash(count === 1 ? "1 dent was refused by the stone" : count + " dents were refused by the stone", true);
+      updatePending();
+    },
+    onThrottled: () => { flash("slow down — the stone is patient", true); },
+    onTransient: () => { flash("offline — that dent waits with you", true); },
+    onUnaccepted: () => { updatePending(); },
+    onCompleted: () => { markComplete(); }
+  });
+
+  async function dentAt(px, py) {
+    const point = pointFromScreen(px, py);
+    if (!point) return;
+    if (completed) { flash("the stone is complete", true); return; }
+    const { u, v } = globeFromPoint(point);
+    const result = engine.tap({ x: u, y: v, mac: mac() });
+    if (!result.queued) {
+      if (result.reason === "capacity") {
+        flash("the tap queue is full — your existing dents are safe", true);
+      } else if (result.reason === "storage") {
+        flash("could not save that tap — it may be lost", true);
+      } else {
+        flash("the stone is complete", true);
+      }
+      return;
+    }
+    dents.push({ x: u, y: v });
+    updatePending();
+    engine.flush();
   }
 
   async function pollStone() {
     try {
       const body = await (await fetch("/stone")).json();
       if (body.target) target = body.target;
-      render(body.total);
+      if (typeof body.total === "number" && body.total >= target) {
+        markComplete();
+      } else {
+        render(body.total);
+      }
       dents = body.dents || [];
     } catch (err) { /* keep last value */ }
   }
@@ -267,10 +329,17 @@
     } catch (err) { /* leave as-is */ }
   }
 
+  window.addEventListener("online", () => { engine.flush(); });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") engine.flush();
+  });
+
   pollStone();
-  setInterval(pollStone, 3000);
+  stonePollTimer = setInterval(pollStone, 3000);
   pollWall();
   setInterval(pollWall, 15000);
+  updatePending();
+  if (engine.queue().length > 0) engine.flush();
 </script>
 </body>
 </html>
