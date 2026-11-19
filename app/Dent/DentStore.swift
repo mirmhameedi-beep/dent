@@ -26,7 +26,7 @@ struct WallEntry: Decodable, Identifiable, Equatable {
 }
 
 enum API {
-    static let baseURL = URL(string: "https://your-backend.example.com")!
+    static let baseURL = URL(string: "https://dent-production-eecd0f14.up.railway.app")!
 }
 
 struct PendingTap: Codable, Identifiable, Equatable {
