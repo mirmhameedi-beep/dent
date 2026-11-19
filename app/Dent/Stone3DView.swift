@@ -64,6 +64,7 @@ struct Stone3DView: UIViewRepresentable {
         context.coordinator.syncDents(store.dents)
     }
 
+    @MainActor
     final class Coordinator: NSObject {
         private let store: DentStore
         private weak var stoneNode: SCNNode?
