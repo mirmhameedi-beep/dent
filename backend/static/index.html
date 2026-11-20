@@ -276,6 +276,7 @@
       render(total);
       flash("one more dent, forever");
       updatePending();
+      pollWall();
     },
     onRejected: (entry, count) => {
       flash(count === 1 ? "1 dent was refused by the stone" : count + " dents were refused by the stone", true);
