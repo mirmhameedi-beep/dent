@@ -5,8 +5,9 @@ import sqlite3
 import threading
 import time
 import uuid
-from collections import defaultdict, deque
+from collections import OrderedDict, deque
 from contextlib import asynccontextmanager
+from itertools import islice
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
@@ -17,20 +18,38 @@ DB_PATH = os.environ.get("DENT_DB", "dent.db")
 MAC_TAPS_PER_SECOND = int(os.environ.get("DENT_MAC_TAPS_PER_SECOND", "12"))
 IP_TAPS_PER_SECOND = int(os.environ.get("DENT_IP_TAPS_PER_SECOND", "120"))
 RECENT_DENTS = 400
+_MAX_RATE_KEYS = 100_000
+_RATE_CLEANUP_BATCH = 64
 
 _rate_lock = threading.Lock()
-_rate: dict[str, deque[float]] = defaultdict(deque)
+_rate: OrderedDict[str, deque[float]] = OrderedDict()
 
 
 def allow(key: str, limit: int) -> bool:
-    now = time.time()
+    """Sliding one-second window; bounded table with expired-first admission."""
+    now = time.monotonic()
     with _rate_lock:
-        window = _rate[key]
+        window = _rate.get(key)
+        if window is None:
+            if len(_rate) >= _MAX_RATE_KEYS:
+                expired = [
+                    stale
+                    for stale, old in islice(_rate.items(), _RATE_CLEANUP_BATCH)
+                    if not old or now - old[-1] > 1.0
+                ]
+                for stale in expired:
+                    del _rate[stale]
+                if not expired:
+                    return False
+            _rate[key] = deque([now])
+            return True
         while window and now - window[0] > 1.0:
             window.popleft()
         if len(window) >= limit:
+            _rate.move_to_end(key)
             return False
         window.append(now)
+        _rate.move_to_end(key)
         return True
 
 

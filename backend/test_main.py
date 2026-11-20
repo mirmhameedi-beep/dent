@@ -30,6 +30,14 @@ def tap(client, mac="device-aaaa-1111", x=0.5, y=0.5, tap_id=None):
     return client.post("/tap", json=payload)
 
 
+class FakeClock:
+    def __init__(self, start=1_000.0):
+        self.now = start
+
+    def __call__(self):
+        return self.now
+
+
 def test_stone_starts_empty():
     client = TestClient(app)
     with client:
@@ -451,3 +459,122 @@ def test_homepage_links_favicon():
         assert response.status_code == 200
         assert '<link rel="icon"' in response.text
         assert "/favicon.svg" in response.text
+
+
+def test_expired_entries_are_reclaimed_when_cap_reached(monkeypatch):
+    clock = FakeClock()
+    monkeypatch.setattr(main.time, "monotonic", clock)
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 3)
+    try:
+        keys = [f"expired-mac-{i:04d}" for i in range(3)]
+        assert all(main.allow(key, 5) for key in keys)
+        assert len(main._rate) == 3
+        clock.now += 2.0
+        assert main.allow("expired-mac-new", 5) is True
+        assert list(main._rate) == ["expired-mac-new"]
+    finally:
+        main._rate.clear()
+
+
+def test_live_entries_are_never_evicted_for_new_identities(monkeypatch):
+    clock = FakeClock()
+    monkeypatch.setattr(main.time, "monotonic", clock)
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 4)
+    try:
+        keys = [f"live-mac-{i:04d}" for i in range(4)]
+        assert all(main.allow(key, 12) for key in keys)
+        clock.now += 0.1
+        assert main.allow("fresh-mac-new", 12) is False
+        assert set(main._rate) == set(keys)
+        assert main.allow("live-mac-0000", 12) is True
+    finally:
+        main._rate.clear()
+
+
+def test_existing_identity_limited_while_cap_full(monkeypatch):
+    clock = FakeClock()
+    monkeypatch.setattr(main.time, "monotonic", clock)
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 4)
+    try:
+        for i in range(3):
+            assert main.allow(f"full-cap-mac-{i:04d}", 12)
+        key = "full-cap-mac-0003"
+        assert all(main.allow(key, 3) for _ in range(3))
+        clock.now += 0.1
+        assert main.allow("full-cap-mac-9999", 3) is False
+        assert main.allow(key, 3) is False
+        assert len(main._rate) == 4
+    finally:
+        main._rate.clear()
+
+
+def test_cleanup_scan_is_bounded_per_request(monkeypatch):
+    clock = FakeClock()
+    monkeypatch.setattr(main.time, "monotonic", clock)
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 5)
+    monkeypatch.setattr(main, "_RATE_CLEANUP_BATCH", 2)
+    try:
+        for i in range(5):
+            assert main.allow(f"bounded-mac-{i:04d}", 5)
+        clock.now += 2.0
+        assert main.allow("bounded-mac-new", 5) is True
+        assert len(main._rate) == 4
+    finally:
+        main._rate.clear()
+
+
+def test_new_identity_gets_429_when_cap_full_and_all_entries_live(monkeypatch):
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 2)
+    client = TestClient(app)
+    with client:
+        codes = [tap(client, mac=f"cap-mac-{i:04d}").status_code for i in range(3)]
+        assert codes[0] == 200
+        assert set(codes[1:]) == {429}
+        assert codes[2] == 429
+        response = tap(client, mac="cap-mac-9999")
+        assert response.status_code == 429
+        assert response.json()["detail"] == "Slow down. The stone is patient."
+        assert len(main._rate) <= 2
+
+
+def test_concurrent_requests_do_not_exceed_cap(monkeypatch):
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 8)
+    results = []
+    results_lock = threading.Lock()
+
+    def run(index):
+        outcome = main.allow(f"thread-mac-{index % 32:04d}", 10_000)
+        with results_lock:
+            results.append(outcome)
+
+    threads = [threading.Thread(target=run, args=(i,)) for i in range(64)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+    assert len(main._rate) <= 8
+    assert all(isinstance(outcome, bool) for outcome in results)
+
+
+def test_high_cardinality_traffic_cannot_grow_dictionary(monkeypatch):
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 50)
+    client = TestClient(app)
+    with client:
+        codes = [tap(client, mac=f"flood-mac-{i:06d}").status_code for i in range(300)]
+    assert set(codes) <= {200, 429}
+    assert len(main._rate) <= 50
+
+
+def test_duplicate_tap_still_replays_with_full_limiter(monkeypatch):
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 2)
+    tap_id = "66666666-6666-6666-6666-666666666666"
+    client = TestClient(app)
+    with client:
+        accepted = tap(client, mac="dup-cap-mac-001", tap_id=tap_id)
+        assert accepted.status_code == 200
+        assert tap(client, mac="cap-filler-0001").status_code == 429
+        assert tap(client, mac="cap-filler-0002").status_code == 429
+        replay = tap(client, mac="dup-cap-mac-001", tap_id=tap_id)
+        assert replay.status_code == 200
+        assert replay.json()["dent"]["id"] == tap_id
+        assert replay.json()["total"] == 1
