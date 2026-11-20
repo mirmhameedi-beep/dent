@@ -139,14 +139,19 @@ def tap(payload: Tap, request: Request) -> dict:
             total = conn.execute("SELECT total FROM counters WHERE id = 1").fetchone()["total"]
             dent = dent_payload(stored)
         else:
+            row = conn.execute(
+                "UPDATE counters SET total = total + 1 "
+                "WHERE id = 1 AND total < ? RETURNING total",
+                (TARGET,),
+            ).fetchone()
+            if row is None:
+                raise HTTPException(status_code=410, detail="The stone is complete.")
             conn.execute(
                 "INSERT INTO tappers (mac, taps, first_seen, last_seen) VALUES (?, 1, ?, ?) "
                 "ON CONFLICT(mac) DO UPDATE SET taps = taps + 1, last_seen = ?",
                 (payload.mac, now, now, now),
             )
-            total = conn.execute(
-                "UPDATE counters SET total = total + 1 WHERE id = 1 RETURNING total"
-            ).fetchone()["total"]
+            total = row["total"]
             dent = {"id": tap_id, "x": payload.x, "y": payload.y, "mac": payload.mac, "at": now}
     return {"total": total, "at": dent["at"], "dent": dent}
 
