@@ -121,14 +121,14 @@
     const x2 = x1 * Math.cos(yaw) + z1 * Math.sin(yaw);
     const z2 = -x1 * Math.sin(yaw) + z1 * Math.cos(yaw);
     const y3 = y1 * Math.cos(pitch) - z2 * Math.sin(pitch);
-    const z3 = y1 * Math.sin(pitch) + z2 * Math.sin(pitch);
+    const z3 = y1 * Math.sin(pitch) + z2 * Math.cos(pitch);
     return [x2, y3, z3];
   }
 
   function unrotate(p, yaw, pitch) {
     const [x1, y1, z1] = p;
     const y2 = y1 * Math.cos(pitch) + z1 * Math.sin(pitch);
-    const z2 = -y1 * Math.sin(pitch) + z2 * Math.sin(pitch);
+    const z2 = -y1 * Math.sin(pitch) + z1 * Math.cos(pitch);
     const x3 = x1 * Math.cos(yaw) - z2 * Math.sin(yaw);
     const z3 = x1 * Math.sin(yaw) + z2 * Math.cos(yaw);
     return [x3, y2, z3];
