@@ -433,3 +433,21 @@ def test_rejected_request_rolls_back_completely():
                 assert conn.execute("SELECT 1 FROM dents WHERE id = ?", (tap_id,)).fetchone() is None
             assert conn.execute("SELECT COUNT(*) FROM tappers WHERE mac = 'rollback-mac-0001'").fetchone()[0] == 0
     assert db_state() == state_before
+
+
+def test_favicon_served():
+    client = TestClient(app)
+    with client:
+        response = client.get("/favicon.svg")
+        assert response.status_code == 200
+        assert response.headers["content-type"].startswith("image/svg+xml")
+        assert response.text.startswith("<svg")
+
+
+def test_homepage_links_favicon():
+    client = TestClient(app)
+    with client:
+        response = client.get("/")
+        assert response.status_code == 200
+        assert '<link rel="icon"' in response.text
+        assert "/favicon.svg" in response.text
