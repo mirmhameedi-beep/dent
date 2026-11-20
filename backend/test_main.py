@@ -578,3 +578,106 @@ def test_duplicate_tap_still_replays_with_full_limiter(monkeypatch):
         assert replay.status_code == 200
         assert replay.json()["dent"]["id"] == tap_id
         assert replay.json()["total"] == 1
+
+
+def test_thousands_of_distinct_identities_respect_cap(monkeypatch):
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 500)
+    main._rate.clear()
+    try:
+        outcomes = [main.allow(f"mass-mac-{i:06d}", 12) for i in range(2000)]
+        assert len(main._rate) <= 500
+        assert all(isinstance(outcome, bool) for outcome in outcomes)
+    finally:
+        main._rate.clear()
+
+
+def test_full_table_preserves_live_identity_history(monkeypatch):
+    clock = FakeClock()
+    monkeypatch.setattr(main.time, "monotonic", clock)
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 6)
+    try:
+        clock.now = 1_000.0
+        for i in range(5):
+            assert main.allow(f"resident-mac-{i:04d}", 12)
+        key = "resident-mac-0005"
+        for _ in range(3):
+            assert main.allow(key, 8)
+        clock.now += 0.1
+        assert main.allow("newcomer-mac-0001", 8) is False
+        for _ in range(4):
+            assert main.allow(key, 8)
+        assert main.allow(key, 8) is True
+        assert main.allow(key, 8) is False
+        assert len(main._rate) == 6
+        assert len(main._rate[key]) == 8
+    finally:
+        main._rate.clear()
+
+
+def test_concurrent_admission_cannot_evict_live_entries(monkeypatch):
+    clock = FakeClock()
+    monkeypatch.setattr(main.time, "monotonic", clock)
+    cap = 16
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", cap)
+    try:
+        clock.now = 1_000.0
+        existing = [f"holder-mac-{i:04d}" for i in range(cap)]
+        for key in existing:
+            for _ in range(3):
+                assert main.allow(key, 12)
+        clock.now += 0.5
+        barrier = threading.Barrier(48)
+
+        def newcomer(index):
+            barrier.wait()
+            return main.allow(f"newcomer-mac-{index:04d}", 12)
+
+        def toucher(index):
+            barrier.wait()
+            for _ in range(5):
+                main.allow(existing[index % cap], 12)
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=24) as newcomers, \
+                concurrent.futures.ThreadPoolExecutor(max_workers=24) as touchers:
+            pending = [newcomers.submit(newcomer, i) for i in range(24)]
+            touchers.map(toucher, range(24))
+            outcomes = [future.result() for future in pending]
+        assert all(outcome is False for outcome in outcomes)
+        clock.now += 0.5
+        assert len(main._rate) == cap
+        for key in existing:
+            assert key in main._rate
+            assert len(main._rate[key]) >= 3
+    finally:
+        main._rate.clear()
+
+
+def test_concurrent_admission_cleanup_scan_stays_bounded(monkeypatch):
+    clock = FakeClock()
+    monkeypatch.setattr(main.time, "monotonic", clock)
+    monkeypatch.setattr(main, "_MAX_RATE_KEYS", 10)
+    monkeypatch.setattr(main, "_RATE_CLEANUP_BATCH", 3)
+    try:
+        clock.now = 1_000.0
+        for i in range(10):
+            assert main.allow(f"seeding-mac-{i:04d}", 12)
+        clock.now += 2.0
+        results = []
+        results_lock = threading.Lock()
+
+        def run(index):
+            outcome = main.allow(f"drain-mac-{index:04d}", 12)
+            with results_lock:
+                results.append(outcome)
+
+        threads = [threading.Thread(target=run, args=(i,)) for i in range(40)]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        assert len(main._rate) <= 10
+        assert sum(1 for outcome in results if outcome) >= 1
+        for window in main._rate.values():
+            assert len(window) <= 12
+    finally:
+        main._rate.clear()
