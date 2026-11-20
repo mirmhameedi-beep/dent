@@ -25,10 +25,26 @@ struct StoneView: View {
                             .font(.caption)
                             .foregroundColor(.gray)
 
-                        if !store.reachable {
+                        if store.stoneComplete {
+                            Text("The stone is complete. Every dent is in place.")
+                                .font(.caption2)
+                                .foregroundColor(.white.opacity(0.7))
+                        } else if !store.reachable {
                             Text("Offline - dents queue up and send later")
                                 .font(.caption2)
                                 .foregroundColor(.orange.opacity(0.8))
+                        } else if store.queueIsFull {
+                            Text("Too many queued dents - you can dent again once the queue clears")
+                                .font(.caption2)
+                                .foregroundColor(.orange.opacity(0.8))
+                        } else if let rejection = store.rejection {
+                            Text(rejection)
+                                .font(.caption2)
+                                .foregroundColor(.orange.opacity(0.8))
+                        } else if store.coolingDown {
+                            Text("Server is busy - queued dents retry shortly")
+                                .font(.caption2)
+                                .foregroundColor(.gray)
                         } else if store.pendingCount > 0 {
                             Text("\(store.pendingCount) queued dents sending...")
                                 .font(.caption2)
@@ -54,25 +70,25 @@ struct ProgressHeader: View {
 
     var body: some View {
         VStack(spacing: 6) {
-            Text(human(store.totalTaps))
+            Text(human(store.displayTotal))
                 .font(.system(size: 34, weight: .bold, design: .monospaced))
                 .contentTransition(.numericText())
-                .animation(.easeOut(duration: 0.25), value: store.totalTaps)
-                .accessibilityLabel("Global dent count: \(human(store.totalTaps)) of \(human(DentStore.target))")
+                .animation(.easeOut(duration: 0.25), value: store.displayTotal)
+                .accessibilityLabel("Global dent count: \(human(store.displayTotal)) of \(human(DentStore.target))")
 
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     Capsule().fill(Color(white: 0.18))
                     Capsule()
                         .fill(LinearGradient(colors: [.white.opacity(0.9), .gray], startPoint: .leading, endPoint: .trailing))
-                        .frame(width: max(6, geo.size.width * CGFloat(store.totalTaps) / CGFloat(DentStore.target)))
+                        .frame(width: max(6, geo.size.width * CGFloat(store.displayTotal) / CGFloat(DentStore.target)))
                 }
             }
             .frame(height: 6)
             .padding(.horizontal, 40)
             .accessibilityHidden(true)
 
-            Text("\(human(DentStore.target - store.totalTaps)) taps remain")
+            Text("\(human(max(0, DentStore.target - store.displayTotal))) taps remain")
                 .font(.caption)
                 .foregroundColor(.gray)
         }
