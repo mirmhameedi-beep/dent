@@ -16,6 +16,15 @@ jobs:
       - run: pip install -r backend/requirements.txt httpx==0.28.1 pytest==8.3.4
       - run: pytest backend -v
 
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --test backend/tests/web/*.test.mjs
+
   app:
     runs-on: macos-15
     steps:
