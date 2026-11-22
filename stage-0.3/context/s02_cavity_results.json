@@ -1,0 +1,55 @@
+{
+ "accepted_setup": 1200,
+ "mouth_ray_search": {
+  "candidates": 56,
+  "found": true,
+  "vd": [
+   0.5117419495304342,
+   -0.1967766715602654,
+   0.8363008541311279
+  ]
+ },
+ "hit_on_cavity_wall": [
+  19927,
+  18799,
+  -10275
+ ],
+ "wall_cell": [
+  46,
+  45,
+  30
+ ],
+ "hit_pristine_same_ray": [
+  38013,
+  11845,
+  19281
+ ],
+ "recessed_cells": 18.489,
+ "wall_density_before": 50,
+ "wall_density_after": null,
+ "hammer_progress": [
+  {
+   "taps": 100,
+   "wall_cell_now": null,
+   "density_at_first_wall_cell": null
+  },
+  {
+   "taps": 200,
+   "wall_cell_now": null,
+   "density_at_first_wall_cell": null
+  },
+  {
+   "taps": 300,
+   "wall_cell_now": null,
+   "density_at_first_wall_cell": null
+  },
+  {
+   "taps": 400,
+   "wall_cell_now": null,
+   "density_at_first_wall_cell": null
+  }
+ ],
+ "low_density_within_3_of_wall": 26,
+ "cells_gone_within_2_of_wall": 12,
+ "interior_damage_confirmed": true
+}

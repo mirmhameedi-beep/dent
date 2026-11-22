@@ -1,0 +1,66 @@
+{
+ "V1_concentrated": {
+  "accepted": 10000,
+  "cells": 151058
+ },
+ "V1_concentrated_render": {
+  "verts": 69010,
+  "tris": 118218
+ },
+ "V1_distributed": {
+  "accepted": 10000,
+  "cells": 151550
+ },
+ "V1_distributed_render": {
+  "verts": 66967,
+  "tris": 114342
+ },
+ "V3_cavity": {
+  "accepted_setup": 1200,
+  "cells": 151490
+ },
+ "V3_cavity_render": {
+  "verts": 66862,
+  "tris": 114218
+ },
+ "VS_destroy_10pct": {
+  "accepted": 247165,
+  "cells": 136397,
+  "depletion": 0.1,
+  "minutes": 1.5
+ },
+ "VS_destroy_10pct_render": {
+  "verts": 84286,
+  "tris": 155694
+ },
+ "VS_destroy_25pct": {
+  "accepted": 531721,
+  "cells": 113664,
+  "depletion": 0.25,
+  "minutes": 3.8
+ },
+ "VS_destroy_25pct_render": {
+  "verts": 81810,
+  "tris": 152182
+ },
+ "VS_destroy_50pct": {
+  "accepted": 984356,
+  "cells": 75776,
+  "depletion": 0.5,
+  "minutes": 7.4
+ },
+ "VS_destroy_50pct_render": {
+  "verts": 82710,
+  "tris": 155058
+ },
+ "VS_destroy_75pct": {
+  "accepted": 1444585,
+  "cells": 37888,
+  "depletion": 0.75,
+  "minutes": 11.5
+ },
+ "VS_destroy_75pct_render": {
+  "verts": 80553,
+  "tris": 152150
+ }
+}

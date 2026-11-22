@@ -1,0 +1,16 @@
+F: 1,000,000 dents+events inserted in 19.4s (51639 rows/s; 2 rows per tap -> 103278 rows/s bulk)
+F: db size after 1M taps: 176324608 bytes (168.2 MiB) -> 176 B/tap (page 4096B, 43048 pages)
+F: +2M more inserts in 39.2s; db 506.4 MiB; marginal 177.3 B/tap (linearity check)
+F: pages for dents: 193404928 bytes (47218)
+F: pages for damage_events: 107040768 bytes (26133)
+F: pages for idx_dents_mac: 58540032 bytes (14292)
+F: pages for sqlite_autoindex_damage_events_1: 85995520 bytes (20995)
+F derived @10000000 taps: 1,769,977,173 bytes = 1688.0 MiB = 1.65 GiB (at measured 177.0 B/tap)
+F derived @100000000 taps: 17,699,771,733 bytes = 16879.8 MiB = 16.48 GiB (at measured 177.0 B/tap)
+F derived @1000000000 taps: 176,997,717,333 bytes = 168798.2 MiB = 164.84 GiB (at measured 177.0 B/tap)
+F: event payload = 16B uuid blob + 3x int + seq int; dents row adds mac + timestamp text
+F option A_exact_128bit_binary: {'bytes_per_entry': 16, 'total_GiB': 14.9, 'duplicate_acceptance_possible': False, 'dents_payload_GiB': 42.84, 'note': 'exact permanent storage; measured full-row scaling implies ~164.8 GiB incl. indexes and tap rows'}
+F option B_fingerprint_64bit: {'bytes_per_entry': 8, 'total_GiB': 7.45, 'collision_prob_at_1e9': 2.67, 'duplicate_acceptance_possible': True, 'note': 'birthday ~2.67% -> not an authority'}
+F option C_fingerprint_128bit: {'bytes_per_entry': 16, 'total_GiB': 14.9, 'collision_prob_at_1e9': '<1e-20', 'duplicate_acceptance_possible': False, 'note': 'same size as exact uuid; no gain'}
+F option D_bloom_1pct: {'GB': 1.2, 'dup_acceptance_possible': True, 'note': 'false-POSITIVE rejects legitimate NEW taps at 1%: fails as authority'}
+experiment F complete

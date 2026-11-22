@@ -1,0 +1,45 @@
+{
+ "C": {
+  "S5_probe": {
+   "main_ray": {
+    "hit": true,
+    "voxel": [
+     50,
+     61,
+     63
+    ],
+    "voxel_surface_z_world": 0.35
+   },
+   "interior_faces": 0,
+   "total_faces": 81972
+  },
+  "S9_fragments": {
+   "count": 0,
+   "cells": []
+  },
+  "S9_components": [
+   339113,
+   1
+  ],
+  "S10_fragments": {
+   "count": 0,
+   "cells": []
+  },
+  "S10_interior_faces": 0,
+  "summary": {
+   "taps_accepted": 736474,
+   "taps_rejected": 2577,
+   "material_voxels": 337385,
+   "damage_cells": 47989,
+   "exposed_interior_faces": 0,
+   "fragments": 0,
+   "mass_applied": 220942200,
+   "mass_retained": 93019824,
+   "mass_removed": 100728622,
+   "mass_unretained": 27193754,
+   "time_carve_s": 14.3428,
+   "time_extract_s": 1.2439,
+   "time_ray_s": 5.1941
+  }
+ }
+}

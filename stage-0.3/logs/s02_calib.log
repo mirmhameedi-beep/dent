@@ -1,0 +1,3 @@
+C1 done {'cells0': 151553, 'cells_left': 151553, 'accepted': 59078, 'slope': None, 'seconds': 24.8, 'zero_depletion': True}
+C2 done {'cells0': 151553, 'cells_left': 151553, 'accepted': 295464, 'slope_full': None, 'slope_late': None, 'derived_depletion': None, 'target': 1000000000, 'hits_target': False, 'seconds': 108.0}
+calib done

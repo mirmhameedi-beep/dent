@@ -1,0 +1,18 @@
+pristine rendered
+A_10000 {'verts': 12600, 'tris': 129220}
+A_100000 {'verts': 12600, 'tris': 129220}
+A_1000000 {'verts': 12608, 'tris': 129368}
+B_10000 {'verts': 12600, 'tris': 129220}
+B_100000 {'verts': 12600, 'tris': 129220}
+B_1000000 {'verts': 12603, 'tris': 129220}
+C_10000 {'verts': 12600, 'tris': 129220}
+C_100000 {'verts': 12600, 'tris': 129220}
+C_1000000 {'verts': 12602, 'tris': 129232}
+D_10000 {'verts': 12600, 'tris': 129220}
+D_100000 {'verts': 12600, 'tris': 129220}
+D_1000000 {'verts': 12603, 'tris': 129220}
+E_10000 {'verts': 12600, 'tris': 129220}
+E_100000 {'verts': 12600, 'tris': 129220}
+E_1000000 {'verts': 12603, 'tris': 129220}
+terminal pair done 0 True
+renders done

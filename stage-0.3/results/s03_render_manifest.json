@@ -1,0 +1,87 @@
+[
+ {
+  "name": "B_30000000",
+  "milestone": 30000000,
+  "hist": "B_distributed",
+  "verts": 12954,
+  "tris": 128912
+ },
+ {
+  "name": "C_30000000",
+  "milestone": 30000000,
+  "hist": "C_clustered",
+  "verts": 13139,
+  "tris": 131576
+ },
+ {
+  "name": "D_30000000",
+  "milestone": 30000000,
+  "hist": "D_edge",
+  "verts": 13151,
+  "tris": 129220
+ },
+ {
+  "name": "E_30000000",
+  "milestone": 30000000,
+  "hist": "E_adaptive",
+  "verts": 12951,
+  "tris": 128918
+ },
+ {
+  "name": "TERMINAL_before",
+  "verts": 14366,
+  "tris": 131012
+ },
+ {
+  "name": "TERMINAL_after",
+  "cells_before": 45158,
+  "cells_after": 0,
+  "completed": true,
+  "manifest": {
+   "event": "terminal_disintegration",
+   "billionth_uuid": "final-7",
+   "pre_completion_hash": "61e05ca7e64226f553dbe32e",
+   "accepted": 20000,
+   "component_count": 34450,
+   "component_sizes": [
+    5623,
+    2229,
+    764,
+    506,
+    471,
+    412,
+    240,
+    95,
+    48,
+    36,
+    33,
+    27,
+    26,
+    25,
+    19,
+    17,
+    16,
+    16,
+    10,
+    10,
+    10,
+    8,
+    8,
+    7,
+    6,
+    6,
+    6,
+    6,
+    5,
+    5,
+    5,
+    4
+   ],
+   "density_sum_before": 612256195045,
+   "seed": 6255145634197,
+   "version": "s03_complete_v1"
+  },
+  "verts": 0,
+  "tris": 0
+ }
+]

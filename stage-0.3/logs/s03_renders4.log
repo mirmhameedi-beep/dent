@@ -1,0 +1,29 @@
+skip existing A_10000
+skip existing A_100000
+skip existing A_1000000
+skip existing B_10000
+skip existing B_100000
+skip existing B_1000000
+skip existing B_10000000
+skip existing B_20000000
+B_30000000 {'verts': 12954, 'tris': 128912}
+skip existing C_10000
+skip existing C_100000
+skip existing C_1000000
+skip existing C_10000000
+skip existing C_20000000
+C_30000000 {'verts': 13139, 'tris': 131576}
+skip existing D_10000
+skip existing D_100000
+skip existing D_1000000
+skip existing D_10000000
+skip existing D_20000000
+D_30000000 {'verts': 13151, 'tris': 129220}
+skip existing E_10000
+skip existing E_100000
+skip existing E_1000000
+skip existing E_10000000
+skip existing E_20000000
+E_30000000 {'verts': 12951, 'tris': 128918}
+terminal pair done 0 True
+renders done

@@ -1,0 +1,4 @@
+[A_concentrated] fresh start; calib={'cells0': 151553, 'dens_sum0': 34816588.0, 'd0mean': 229.732, 'cap_mass': 0.030269998, 'alpha': 0.00197456}
+[A_concentrated] milestone 10000: acc=10000 cells=151553 removed=0 sev=6 frag=0 rej=0 rss=61.6MB t=4.7s
+[A_concentrated] milestone 100000: acc=100000 cells=151551 removed=2 sev=50 frag=0 rej=0 rss=61.6MB t=47.8s
+[A_concentrated] milestone 1000000: acc=1000000 cells=151494 removed=59 sev=428 frag=3 rej=0 rss=61.6MB t=973.2s

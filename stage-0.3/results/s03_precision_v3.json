@@ -1,0 +1,18 @@
+{
+ "cell": [
+  3,
+  29,
+  28
+ ],
+ "d_before": 214.0,
+ "taps_attempted": 100000,
+ "accepted": 100000,
+ "rejected": 0,
+ "dens_sum_loss_total": 3232.761505126953,
+ "analytic_budget_total": 3026.9998,
+ "cells_left_in_region_lost": null,
+ "per_tap_measured": 0.032327615051269534,
+ "cap": 0.030269998,
+ "seconds": 67.5,
+ "note": "measured total loss over accepted taps; slotted regional removal expected once floors crumble (region keeps taking taps on cells below)"
+}

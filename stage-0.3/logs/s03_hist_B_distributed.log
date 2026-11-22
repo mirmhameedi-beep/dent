@@ -1,0 +1,8 @@
+[B_distributed] fresh start; calib={'cells0': 151553, 'dens_sum0': 34816588.0, 'd0mean': 229.732, 'cap_mass': 0.030269998, 'alpha': 0.00197456}
+[B_distributed] milestone 10000: acc=10000 cells=151553 removed=0 sev=0 frag=0 rej=153 rss=70.2MB t=6.5s
+[B_distributed] milestone 100000: acc=100000 cells=151553 removed=0 sev=0 frag=0 rej=1545 rss=70.2MB t=59.9s
+[B_distributed] milestone 1000000: acc=1000000 cells=151553 removed=0 sev=0 frag=0 rej=15053 rss=70.2MB t=639.4s
+[B_distributed] milestone 10000000: acc=10000000 cells=151553 removed=0 sev=5277 frag=0 rej=152454 rss=73.1MB t=8117.0s
+[B_distributed] milestone 20000000: acc=20000000 cells=151553 removed=0 sev=9467 frag=1 rej=304374 rss=74.5MB t=13884.9s
+[B_distributed] milestone 30000000: acc=30000000 cells=150949 removed=604 sev=12161 frag=8 rej=457126 rss=74.5MB t=18597.5s
+[B_distributed] done acc=30000000 launched=30457126 cells=150949 sec=18598

@@ -1,0 +1,9 @@
+C1 shallow: depth 1264 (should be well below FAIL_AT 6400); open 0; removed 0
+C2 deep: depth 12000; open 79; removed 5494400
+C3 overlap: 5x3000; cells 375 open 239; removed 2548000 (craters merge into a shared basin: single connected open region check below)
+C3 open-cell connected components: [239] (1 comp = fully merged basin)
+C4 edge chip: open 63; silhouette px 69016 -> 68994 (bite 22 px = image-space material loss)
+C5: 96x96 SDF built against 256-gon in 0.8s
+C6: three overlapping carves; cells changed 1285; NEWLY EXPOSED INTERIOR wall cells 122 (void cells adjacent to remaining interior stone)
+C7: limb section removal; material cells lost 157 (mass is genuinely gone: area 0.1152 world^2 of cross-section)
+experiment C complete

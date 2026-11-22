@@ -1,0 +1,9 @@
+{
+ "recognition_rate_s": 1572627.5,
+ "recognition_cursor": 20000,
+ "sponsorship_status": "failed_at_~5000",
+ "sponsorship_cursor": 4500,
+ "sponsorship_resume_from": 4501,
+ "accept_rate_s": 1735.9,
+ "checkpoint_txn": "cursor update is its own transaction; crash between events and cursor re-delivers from cursor+1"
+}

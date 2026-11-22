@@ -1,0 +1,37 @@
+{
+ "config": {
+  "L": 72,
+  "seed": 4242,
+  "n_taps": 50000
+ },
+ "_d0": 34816588.0,
+ "V1_cap": {
+  "n_accepted": 43571,
+  "cap_mass_per_tap": 0.030269998,
+  "max_observed_sum_take": 0.030269998000000003,
+  "violations": 0,
+  "seconds": 50.1
+ },
+ "V2_conservation": {
+  "initial_dens_sum_legacy": 34816588.0,
+  "final_dens_sum_legacy": 34815317.99694824,
+  "sum_carve_takes_applied": 1270.1625750161227,
+  "carve_calls": 43571,
+  "cells_removed": 0,
+  "identity": "initial - final == sum_applied_takes (+/- per-cell int rounding)"
+ },
+ "V3_precision": {
+  "cell": [
+   3,
+   29,
+   28
+  ],
+  "d_before": 214.0,
+  "d_after_100k": 214.0,
+  "analytic_budget_per_tap": 0.030269998,
+  "analytic_loss": 3026.9998,
+  "measured_loss": 0.0,
+  "note": "d0-d1 >= analytic cap sum means NO rounding-away of small taps; crumble tail can add strictly more loss, never zero",
+  "granularity_units": 1.52587890625e-05
+ }
+}

@@ -1,0 +1,22 @@
+all edge ray: (1.0099999999999998, 0.15)
+all main ray: (0.05, 0.3)
+C == start == ModelC material=357115
+C S1_first_tap acc=1 rej=0 0.8s geom_ms/tap~842.16 
+C S1_first_tap render front 0.9s
+C S2_shallow_indent acc=250 rej=0 0.8s geom_ms/tap~3.29 
+C S3_crater_deepens acc=800 rej=0 0.8s geom_ms/tap~1.02 
+C S3_crater_deepens render front 0.8s
+C S4_material_breaks acc=3000 rej=0 0.9s geom_ms/tap~0.29 
+C S5_interior_exposed render front 0.9s
+C S5_interior_exposed render cutaway 210.4s
+C S6_damage_interior acc=1500 rej=0 0.9s geom_ms/tap~0.58 
+C S7_craters_merge acc=2000 rej=0 0.9s geom_ms/tap~0.43 
+C S7_craters_merge render front 0.8s
+C S8_edge_removed acc=1223 rej=1777 0.9s geom_ms/tap~0.29 REJ:[('z', 1.0099999999999998, 0.15), ('z', 1.0099999999999998, 0.15), ('z', 1.0099999999999998, 0.15)]
+C S8_edge_removed render front 0.8s
+C S9_separation acc=76350 rej=0 2.7s geom_ms/tap~0.04 
+C S9_separation render front 0.9s
+C S10_final acc=51400 rej=800 2.1s geom_ms/tap~0.04 REJ:[('z', 1.0099999999999998, 0.15), ('z', 1.0099999999999998, 0.15), ('z', 1.0099999999999998, 0.15)]
+C S10_final render front 0.9s
+C S10_final render cutaway 197.5s
+C SUMMARY {"taps_accepted": 136524, "taps_rejected": 2577, "material_voxels": 354919, "damage_cells": 11116, "exposed_interior_faces": 0, "fragments": 0, "mass_applied": 40957200, "mass_retained": 18151489, "mass_removed": 11214689, "mass_unretained": 11591022, "time_carve_s": 2.5551, "time_extract_s": 1.0359, "time_ray_s": 0.7214}

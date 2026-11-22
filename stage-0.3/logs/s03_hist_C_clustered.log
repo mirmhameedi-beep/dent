@@ -1,0 +1,8 @@
+[C_clustered] fresh start; calib={'cells0': 151553, 'dens_sum0': 34816588.0, 'd0mean': 229.732, 'cap_mass': 0.030269998, 'alpha': 0.00197456}
+[C_clustered] milestone 10000: acc=10000 cells=151553 removed=0 sev=0 frag=0 rej=644 rss=67.6MB t=5.9s
+[C_clustered] milestone 100000: acc=100000 cells=151553 removed=0 sev=10 frag=0 rej=6364 rss=67.6MB t=58.0s
+[C_clustered] milestone 1000000: acc=1000000 cells=151545 removed=8 sev=132 frag=1 rej=64777 rss=67.6MB t=586.1s
+[C_clustered] milestone 10000000: acc=10000000 cells=151296 removed=257 sev=4235 frag=12 rej=1088674 rss=67.6MB t=7013.0s
+[C_clustered] milestone 20000000: acc=20000000 cells=150957 removed=596 sev=8232 frag=29 rej=2831212 rss=67.6MB t=13357.9s
+[C_clustered] milestone 30000000: acc=30000000 cells=150251 removed=1302 sev=11464 frag=43 rej=5105487 rss=71.9MB t=18340.1s
+[C_clustered] done acc=30000000 launched=35105487 cells=150251 sec=18341

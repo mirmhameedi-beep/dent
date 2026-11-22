@@ -1,0 +1,41 @@
+{
+ "base_state": "out/s03_hist/B_distributed/state_20000000.pkl",
+ "base_accepted": 20000000,
+ "derived": {
+  "mass_now": 34235984.4065094,
+  "cells": 151553,
+  "depletable_now": 29689394.4065094,
+  "cap": 0.030269998,
+  "remaining_taps": 979999999,
+  "derived_mass_at_999999999": 4546590.0,
+  "note": "Scenario-B uniform: all cells reach the 30.0 floor together at exactly 1e9 accepted; concentrated histories retain far more mass (cap bound)"
+ },
+ "pre_state_cells": 151553,
+ "pre_state_mass": 4698143.0,
+ "seek_audit": "accepted counter set to N-1 by bookkeeping (equivalence-by-construction)",
+ "terminal": {
+  "submitted_ok": true,
+  "processed": true,
+  "completed": true,
+  "accepted": 1000000000,
+  "accepted_exactly_1e9": true,
+  "manifest_present": true
+ },
+ "manifest_head": {
+  "event": "terminal_disintegration",
+  "billionth_uuid": "the-billionth-uuid",
+  "accepted": 1000000000,
+  "component_count": 2,
+  "pre_completion_hash": "5d4181a51ffedc462f990e54",
+  "seed": 187731099661122
+ },
+ "duplicate_of_billionth": {
+  "ok": false,
+  "reason": "completed"
+ },
+ "post_completion": {
+  "ok": false,
+  "reason": "completed"
+ },
+ "recovery_replay_ok": true
+}

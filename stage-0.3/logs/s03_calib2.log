@@ -1,0 +1,6 @@
+A {"accepted": 1000000, "cells_lost": 59, "per_tap_budget": 0.031469, "sev_total": 428, "first_removal_tap": 77236, "max_solid_run_cells": 4, "seconds": 831.1}
+B {"accepted": 1000000, "cells_lost": 76, "per_tap_budget": 0.032446, "sev_total": 502, "first_removal_tap": 53718, "max_solid_run_cells": 4, "seconds": 1069.1}
+B2 {"accepted": 1000000, "cells_lost": 84, "per_tap_budget": 0.032741, "sev_total": 519, "first_removal_tap": 46141, "max_solid_run_cells": 4, "seconds": 840.3}
+C {"accepted": 1000000, "cells_lost": 63, "per_tap_budget": 0.031908, "sev_total": 440, "first_removal_tap": 70697, "max_solid_run_cells": 4, "seconds": 1085.6}
+D {"accepted": 1000000, "cells_lost": 59, "per_tap_budget": 0.031469, "sev_total": 428, "first_removal_tap": 77236, "max_solid_run_cells": 4, "seconds": 801.3}
+calib2 done

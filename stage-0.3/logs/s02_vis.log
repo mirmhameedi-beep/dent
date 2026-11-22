@@ -1,0 +1,7 @@
+V1 done {"accepted": 10000, "cells": 151058} {"accepted": 10000, "cells": 151550}
+V3 done {"accepted_setup": 1200, "cells": 151490}
+VS_destroy_10pct accepted 247165 cells 136397
+VS_destroy_25pct accepted 531721 cells 113664
+VS_destroy_50pct accepted 984356 cells 75776
+VS_destroy_75pct accepted 1444585 cells 37888
+vis done

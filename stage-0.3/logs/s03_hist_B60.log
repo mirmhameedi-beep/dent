@@ -1,0 +1,5 @@
+[B_distributed] resuming at accepted=30000000, target=60000000
+[B_distributed] milestone 40000000: acc=40000000 cells=149575 removed=1978 sev=15070 frag=12 rej=619064 rss=74.9MB t=4089.9s
+[B_distributed] milestone 50000000: acc=50000000 cells=148313 removed=3240 sev=18061 frag=17 rej=797406 rss=75.9MB t=8224.0s
+[B_distributed] milestone 60000000: acc=60000000 cells=146963 removed=4590 sev=20983 frag=20 rej=993819 rss=76.6MB t=12364.6s
+[B_distributed] done acc=60000000 launched=30536693 cells=146963 sec=12365

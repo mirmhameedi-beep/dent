@@ -1,0 +1,11 @@
+S1_rotated_view -> null
+rotate_views -> {"front": {"hit": [26214, 16384, 17037], "cell": [49, 44, 44]}, "side": {"hit": [59569, 21388, 0], "cell": [66, 47, 36]}, "rear": {"hit": [49615, -1167, -46801]
+tap_new_side -> {"ok": true, "hit": [-10523, 30386, 59182]}
+tap_crater -> {"hit1": null, "hit2": null, "deepening": null}
+tap_cavity_mouth -> {"ok": true, "hit": [57358, 13106, 6556], "cell": [65, 42, 39]}
+tap_near_edge -> {"ok": true, "hit": [57374, -27435, 18248]}
+tap_fragment -> {"nfrag": 226, "frag_cells": 1, "hit": true, "hit_lands_on_fragment": false}
+stale_client -> {"stale_cell": [55, 42, 45], "cell_still_solid": false, "cell_damaged": false, "policy": "server re-resolves from the client RAY; stale material coordinates are
+miss_rejected -> {"ok": true, "reason": null, "state_unchanged": false}
+two_versions -> {"v0_ok": false, "v2_ok": false, "both_land_current_surface": false}
+done
