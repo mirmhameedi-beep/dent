@@ -1,0 +1,27 @@
+[
+ {
+  "err_cells": 6.083078466779018,
+  "t_ref_0_05": 4.177210502279353,
+  "t_engine": 3.9997873803316315,
+  "t_ref_0_002": 3.9997873803314365,
+  "fine_verdict": "hit",
+  "t_rough_0_05": 4.177210502279353,
+  "iso_runs_between": [
+   [
+    "enter",
+    4.178502
+   ],
+   [
+    "exit",
+    4.653603
+   ]
+  ],
+  "field_max": 232.075,
+  "field_min": 0.0,
+  "engine_is_right_if_fine_disagrees_with_rough": null,
+  "verdict": {
+   "err_engine_vs_fine": 6.684177021400371e-12,
+   "err_rough_vs_fine": 6.083078466785702
+  }
+ }
+]

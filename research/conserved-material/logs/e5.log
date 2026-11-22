@@ -1,0 +1,61 @@
+[8088.8] T1 start
+[8094.9] T1 done
+[8094.9] T2 build
+[8106.0] T2 built
+[8107.1] T3 conserved rays
+[8109.2] T3 conserved done
+[8119.6] T3 modelA rays
+[8121.4] T3 modelA done
+[8121.4] T4 build
+[8134.1] T4 done
+[8134.2] T5 done
+{
+ "T1_pristine_modelA": {
+  "n": 300,
+  "ok_rate": 0.92,
+  "max_err_cells": 3.957,
+  "miss_rate": 0.01
+ },
+ "T2_empty_bore": {
+  "repeated_rays": 50,
+  "rejects": 39,
+  "state_unchanged_on_reject": true,
+  "residual_tap_ok": false,
+  "hash_unchanged_after_burst": true
+ },
+ "T3_damaged_conserved": {
+  "n": 1500,
+  "accepted": 1422,
+  "rejected": 78,
+  "resolution_agreement": 0.9513,
+  "hit_ok_rate": 0.2504,
+  "max_err_cells": 26.311
+ },
+ "T3_damaged_modelA": {
+  "n": 1500,
+  "accepted": 1468,
+  "rejected": 32,
+  "resolution_agreement": 0.9793,
+  "hit_ok_rate": 0.2384,
+  "max_err_cells": 22.929
+ },
+ "T4_fragments": {
+  "fragments": 77153,
+  "exposed_cells_tested": 36,
+  "frag_cell_hits": 36,
+  "rays_accepted": 36,
+  "note": "hit_cell must belong to a fragment (rays traverse empty space to reach it)"
+ },
+ "T5_hostile_rays_modelA": {
+  "kinds": {
+   "axis": 20,
+   "grazing": 20,
+   "oblique": 20
+  },
+  "failures": {
+   "axis": 2,
+   "grazing": 9,
+   "oblique": 0
+  }
+ }
+}

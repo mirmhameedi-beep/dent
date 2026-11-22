@@ -1,0 +1,19 @@
+{
+ "source_ckpt": "/tmp/dent-stage03/stage-0.3/histories/B_distributed/state_10000.pkl",
+ "occ_occupied": 151553,
+ "occ_len": 373248,
+ "boundary_init": 12293,
+ "reconstructed_cells_raw": 151553,
+ "reconstructed_dens_sum_raw": 34919050.0,
+ "reconstructed_cells": 151553,
+ "reconstructed_dens_sum_int": 34816588,
+ "reconstructed_dens_sum_frac": 0.0,
+ "__target_cells0": 151553,
+ "__target_dens_sum0": 34816588,
+ "cells_match": true,
+ "dens_sum_match": true,
+ "cells_equal_ckpt": 133642,
+ "cells_diff_ckpt": 17911,
+ "cells_only_in_ckpt": 0,
+ "pristine_state_sha256": "21b942883d67134fb799a279c93209f20b0d145f83df87c66a50cedb2a9a9f69"
+}

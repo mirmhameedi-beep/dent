@@ -1,0 +1,4 @@
+hits 393 misses 7 agree 364
+max perp dist from ray: 1.2e-05
+max |dens(hit)-ISO|: 62.16
+t diff (cells): mean -0.0465 max 0.003 min -1.365

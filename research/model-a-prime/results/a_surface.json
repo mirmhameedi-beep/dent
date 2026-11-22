@@ -1,0 +1,412 @@
+{
+ "meta": {
+  "purpose": "PART A ray resolution battery",
+  "field_equiv_max_diff": 0.0,
+  "note": "reference = independent 0.05-cell fine-step scanner on ref_trilerp (separate impl)",
+  "started": "2026-11-22 14:23:43"
+ },
+ "families": {
+  "F1_pristine_surface": {
+   "n": 300,
+   "accepted_new": 300,
+   "rejected_new": 0,
+   "accepted_old": 211,
+   "accepted_ref": 300,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 89,
+   "old_sub_iso_ratio": 0.4218,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 300,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 211,
+    "median": 0.000121,
+    "p95": 0.000355,
+    "p99": 0.136624,
+    "max": 0.167326,
+    "within": 98.578
+   }
+  },
+  "D2_fragments_F2_floor": {
+   "n": 300,
+   "accepted_new": 300,
+   "rejected_new": 0,
+   "accepted_old": 262,
+   "accepted_ref": 300,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 38,
+   "old_sub_iso_ratio": 0.9046,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 300,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 6.083078,
+    "within": 99.0
+   },
+   "err_old_cells": {
+    "n": 262,
+    "median": 0.550246,
+    "p95": 6.824503,
+    "p99": 18.237021,
+    "max": 22.394044,
+    "within": 27.863
+   }
+  },
+  "D2_fragments_F3_boreaxis": {
+   "n": 500,
+   "accepted_new": 410,
+   "rejected_new": 90,
+   "accepted_old": 130,
+   "accepted_ref": 410,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 5,
+   "false_misses_old": 285,
+   "old_sub_iso_ratio": 0.9,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 410,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 125,
+    "median": 0.614049,
+    "p95": 19.373051,
+    "p99": 23.181218,
+    "max": 33.918878,
+    "within": 22.4
+   }
+  },
+  "D2_fragments_F4_exposed": {
+   "n": 250,
+   "accepted_new": 212,
+   "rejected_new": 38,
+   "accepted_old": 213,
+   "accepted_ref": 212,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 31,
+   "false_misses_old": 30,
+   "old_sub_iso_ratio": 0.831,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 212,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 182,
+    "median": 0.5238,
+    "p95": 7.379435,
+    "p99": 16.208327,
+    "max": 20.742395,
+    "within": 42.308
+   }
+  },
+  "D2_fragments_F5_grazing_oblique": {
+   "n": 300,
+   "accepted_new": 300,
+   "rejected_new": 0,
+   "accepted_old": 295,
+   "accepted_ref": 300,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 5,
+   "old_sub_iso_ratio": 0.6847,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 300,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 295,
+    "median": 0.000307,
+    "p95": 5.513026,
+    "p99": 13.345822,
+    "max": 27.32778,
+    "within": 59.661
+   }
+  },
+  "D3_hostile_F2_floor": {
+   "n": 300,
+   "accepted_new": 300,
+   "rejected_new": 0,
+   "accepted_old": 243,
+   "accepted_ref": 300,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 57,
+   "old_sub_iso_ratio": 0.9671,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 300,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 243,
+    "median": 0.82781,
+    "p95": 4.065105,
+    "p99": 6.942843,
+    "max": 7.726261,
+    "within": 14.815
+   }
+  },
+  "D3_hostile_F3_boreaxis": {
+   "n": 500,
+   "accepted_new": 500,
+   "rejected_new": 0,
+   "accepted_old": 250,
+   "accepted_ref": 500,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 250,
+   "old_sub_iso_ratio": 0.904,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 500,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 250,
+    "median": 0.456907,
+    "p95": 2.677373,
+    "p99": 4.671924,
+    "max": 10.136469,
+    "within": 23.6
+   }
+  },
+  "D3_hostile_F4_exposed": {
+   "n": 250,
+   "accepted_new": 236,
+   "rejected_new": 14,
+   "accepted_old": 217,
+   "accepted_ref": 236,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 12,
+   "false_misses_old": 31,
+   "old_sub_iso_ratio": 0.8065,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 236,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 3.541509,
+    "within": 99.153
+   },
+   "err_old_cells": {
+    "n": 205,
+    "median": 0.450049,
+    "p95": 9.662049,
+    "p99": 16.836739,
+    "max": 28.508996,
+    "within": 44.39
+   }
+  },
+  "D3_hostile_F5_grazing_oblique": {
+   "n": 300,
+   "accepted_new": 300,
+   "rejected_new": 0,
+   "accepted_old": 291,
+   "accepted_ref": 300,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 9,
+   "old_sub_iso_ratio": 0.6495,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 300,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 291,
+    "median": 0.000214,
+    "p95": 2.44247,
+    "p99": 5.626331,
+    "max": 15.450287,
+    "within": 67.01
+   }
+  },
+  "D1b_deep_bores_F2_floor": {
+   "n": 300,
+   "accepted_new": 300,
+   "rejected_new": 0,
+   "accepted_old": 242,
+   "accepted_ref": 300,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 58,
+   "old_sub_iso_ratio": 0.9504,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 300,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 2.951412,
+    "within": 99.667
+   },
+   "err_old_cells": {
+    "n": 242,
+    "median": 0.776885,
+    "p95": 8.267037,
+    "p99": 15.847441,
+    "max": 17.871033,
+    "within": 16.529
+   }
+  },
+  "D1b_deep_bores_F3_boreaxis": {
+   "n": 6,
+   "accepted_new": 6,
+   "rejected_new": 0,
+   "accepted_old": 0,
+   "accepted_ref": 6,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 6,
+   "old_sub_iso_ratio": 0.0,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 6,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 0
+   }
+  },
+  "D1b_deep_bores_F4_exposed": {
+   "n": 250,
+   "accepted_new": 223,
+   "rejected_new": 27,
+   "accepted_old": 215,
+   "accepted_ref": 223,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 21,
+   "false_misses_old": 29,
+   "old_sub_iso_ratio": 0.814,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 223,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 194,
+    "median": 0.420572,
+    "p95": 13.547528,
+    "p99": 24.735601,
+    "max": 38.100031,
+    "within": 42.784
+   }
+  },
+  "D1b_deep_bores_F5_grazing_oblique": {
+   "n": 300,
+   "accepted_new": 300,
+   "rejected_new": 0,
+   "accepted_old": 295,
+   "accepted_ref": 300,
+   "false_hits_new": 0,
+   "false_misses_new": 0,
+   "false_hits_old": 0,
+   "false_misses_old": 5,
+   "old_sub_iso_ratio": 0.7254,
+   "new_sub_iso_hits": 0,
+   "err_new_cells": {
+    "n": 300,
+    "median": 0.0,
+    "p95": 0.0,
+    "p99": 0.0,
+    "max": 0.0,
+    "within": 100.0
+   },
+   "err_old_cells": {
+    "n": 295,
+    "median": 0.06822,
+    "p95": 3.558048,
+    "p99": 9.202067,
+    "max": 12.600516,
+    "within": 54.915
+   }
+  }
+ },
+ "overall": {
+  "n": 3856,
+  "accepted_new": 3687,
+  "rejected_new": 169,
+  "accepted_old": 2864,
+  "accepted_ref": 3687,
+  "false_hits_new": 0,
+  "false_misses_new": 0,
+  "false_hits_old": 69,
+  "false_misses_old": 892,
+  "old_sub_iso_ratio": 0.7912,
+  "new_sub_iso_hits": 0,
+  "err_new_cells": {
+   "n": 3687,
+   "median": 0.0,
+   "p95": 0.0,
+   "p99": 0.0,
+   "max": 6.083078,
+   "within": 99.837
+  },
+  "err_old_cells": {
+   "n": 2795,
+   "median": 0.300906,
+   "p95": 6.672337,
+   "p99": 17.871033,
+   "max": 38.100031,
+   "within": 43.936
+  }
+ },
+ "wall_s": 65.1
+}

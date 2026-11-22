@@ -1,0 +1,17 @@
+{
+ "cells": 151553,
+ "cells_ok": true,
+ "dens_sum_legacy": 34816588.0,
+ "dens_sum_ok": true,
+ "M0": 2281739911168,
+ "Mr": 297965322241,
+ "q_tap": 99188729,
+ "q_legacy": 1513.4998931884766,
+ "trilerp_ref_max_absdiff": 0.0,
+ "rays": 126,
+ "verdict_or_pos_agree": 126,
+ "disagree": [],
+ "hit_dt_cells_max": 1.354497466568968e-10,
+ "hit_dt_cells_mean": 3.2971599751295046e-11,
+ "bench_s_per_ray": 0.0033523311031453816
+}

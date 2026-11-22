@@ -1,0 +1,48 @@
+field equivalence max diff: 0.0
+building damaged states...
+  built D1_bores accepted 5000 launched 5129 crumbles 24461
+  built D2_fragments accepted 6000 launched 9148 crumbles 28424
+  built D3_hostile accepted 2000 launched 2000 crumbles 8449
+  deepened bores; crumbles now 24501
+F1 done
+D2_fragments F2 done 300
+D2_fragments F3 done
+D2_fragments F4 done
+D2_fragments F5 done
+D3_hostile F2 done 300
+D3_hostile F3 done
+D3_hostile F4 done
+D3_hostile F5 done
+D1b_deep_bores F2 done 300
+D1b_deep_bores F3 done
+D1b_deep_bores F4 done
+D1b_deep_bores F5 done
+{
+ "n": 3856,
+ "accepted_new": 3687,
+ "rejected_new": 169,
+ "accepted_old": 2864,
+ "accepted_ref": 3687,
+ "false_hits_new": 0,
+ "false_misses_new": 0,
+ "false_hits_old": 69,
+ "false_misses_old": 892,
+ "old_sub_iso_ratio": 0.7912,
+ "new_sub_iso_hits": 0,
+ "err_new_cells": {
+  "n": 3687,
+  "median": 0.0,
+  "p95": 0.0,
+  "p99": 0.0,
+  "max": 6.083078,
+  "within": 99.837
+ },
+ "err_old_cells": {
+  "n": 2795,
+  "median": 0.300906,
+  "p95": 6.672337,
+  "p99": 17.871033,
+  "max": 38.100031,
+  "within": 43.936
+ }
+}

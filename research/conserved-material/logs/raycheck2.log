@@ -1,0 +1,25 @@
+bad rays found: 2
+ray 15 {'engine': 'hit', 'independent': 'hit', 't_hit': 3.6483449981579446, 't_ind': 3.8583738390104196, 'err_cells': 7.201, 'ok': False}
+  contact cell: (27, 44, 58) t_hit: 3.6483 t_ind: 3.8584
+   t=  3.6834 dens=  42.45
+   t=  3.7417 dens=   0.00
+   t=  3.8000 dens=   0.20
+   t=  3.8584 dens= 120.00
+   t=  3.5900 dens=   2.45
+   t=  3.6192 dens=   0.00
+   t=  3.6483 dens=  53.14
+   t=  3.6775 dens=  49.36
+   t=  3.7067 dens=   9.28
+   t=  3.7358 dens=   0.00
+ray 36 {'engine': 'hit', 'independent': 'hit', 't_hit': 3.309839342219435, 't_ind': 3.5154726334149133, 'err_cells': 7.05, 'ok': False}
+  contact cell: (54, 39, 46) t_hit: 3.3098 t_ind: 3.5155
+   t=  3.3405 dens=   3.46
+   t=  3.3988 dens=  50.15
+   t=  3.4571 dens= 111.75
+   t=  3.5155 dens= 120.00
+   t=  3.2515 dens=   0.00
+   t=  3.2807 dens=   0.10
+   t=  3.3098 dens=  15.46
+   t=  3.3390 dens=   2.28
+   t=  3.3682 dens=   0.15
+   t=  3.3973 dens=  47.36

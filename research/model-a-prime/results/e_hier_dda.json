@@ -1,0 +1,12 @@
+{
+ "note": "exp6-style hierarchical DDA on authentic rock, A_rot 4000-tap compressed damaged state",
+ "hier_dda": {
+  "rays": 600,
+  "empty_blocks": 76,
+  "total_blocks": 979,
+  "contact_cell_mismatches": 0,
+  "plain_ms_per_ray": 0.0699,
+  "fast_ms_per_ray": 0.0901,
+  "speedup": 0.775
+ }
+}

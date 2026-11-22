@@ -1,0 +1,376 @@
+{
+ "meta": {
+  "purpose": "PART D durable completion + crash recovery",
+  "db_engine": "sqlite3 WAL, synchronous=FULL, busy_timeout=30000",
+  "time": "2026-11-22 14:30:00"
+ },
+ "tests": [
+  {
+   "name": "crash_before_txn",
+   "setup": "N=10; worker killed (exit 137) before any tap transaction",
+   "expected": "no partial tap rows; restart accepts taps normally",
+   "actual": {
+    "exit": 137,
+    "consistency": {
+     "ok": true,
+     "state": {
+      "rows": 0,
+      "max_n": 0,
+      "completed": false,
+      "N": 10,
+      "events": 0,
+      "terminal_events": 0,
+      "unpublished": 0
+     },
+     "problems": []
+    },
+    "after_restart": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 0,
+     "terminal_events": 0,
+     "unpublished": 0
+    }
+   },
+   "evidence": "db/d1_crash_before.db",
+   "ok": true
+  },
+  {
+   "name": "crash_in_txn_pre_commit",
+   "setup": "N=10; worker inserts a tap row, dies (exit 137) BEFORE commit",
+   "expected": "insert rolled back; no partial row; restarted worker fills 1..10",
+   "actual": {
+    "exit": 137,
+    "consistency": {
+     "ok": true,
+     "state": {
+      "rows": 0,
+      "max_n": 0,
+      "completed": false,
+      "N": 10,
+      "events": 0,
+      "terminal_events": 0,
+      "unpublished": 0
+     },
+     "problems": []
+    },
+    "after_restart": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 0,
+     "terminal_events": 0,
+     "unpublished": 0
+    }
+   },
+   "evidence": "db/d2_crash_precommit.db",
+   "ok": true
+  },
+  {
+   "name": "crash_after_commit",
+   "setup": "N=10; worker dies right after its 5th COMMIT; then restart",
+   "expected": "committed rows persist; restart continues to N; replaying a committed uuid returns the same n without a new row",
+   "actual": {
+    "exit": 137,
+    "consistency": {
+     "ok": true,
+     "state": {
+      "rows": 1,
+      "max_n": 1,
+      "completed": false,
+      "N": 10,
+      "events": 0,
+      "terminal_events": 0,
+      "unpublished": 0
+     },
+     "problems": []
+    },
+    "after_restart": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 0,
+     "terminal_events": 0,
+     "unpublished": 0
+    },
+    "duplicate_replay": {
+     "ok": true,
+     "n": 1,
+     "duplicate": true,
+     "verdict": "accepted",
+     "completed": true
+    }
+   },
+   "evidence": "db/d3_crash_postcommit.db",
+   "ok": true
+  },
+  {
+   "name": "crash_during_terminal",
+   "setup": "N=10; 10th tap commits completed=1, worker dies before terminal event row; then recovery worker also dies mid-recovery",
+   "expected": "completed stays 1; post-completion tap rejected; recovery (rerun) creates exactly ONE terminal event; taps stay at 10",
+   "actual": {
+    "exit": 137,
+    "state_after": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 0,
+     "terminal_events": 0,
+     "unpublished": 0
+    },
+    "post_completion": {
+     "ok": false,
+     "reason": "completed",
+     "completed": true
+    },
+    "post_completion_replay": {
+     "ok": false,
+     "reason": "completed",
+     "completed": true
+    },
+    "recovery_1_exit": 137,
+    "state_final": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 1,
+     "terminal_events": 1,
+     "unpublished": 0
+    },
+    "terminal_event_rows": 1
+   },
+   "evidence": "db/d4_crash_terminal.db",
+   "ok": true
+  },
+  {
+   "name": "crash_before_publication",
+   "setup": "N=10; tap 10 commits, terminal event row written, worker dies before setting published flags",
+   "expected": "recovery sets published=1 exactly once; event payload intact; no duplicate event",
+   "actual": {
+    "exit": 137,
+    "state_after": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 1,
+     "terminal_events": 1,
+     "unpublished": 1
+    },
+    "after_recovery": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 1,
+     "terminal_events": 1,
+     "unpublished": 0
+    },
+    "terminal_event_rows": [
+     [
+      "{\"action\":\"disintegrate_all\"}",
+      1
+     ]
+    ]
+   },
+   "evidence": "db/d5_crash_before_pub.db",
+   "ok": true
+  },
+  {
+   "name": "crash_during_recovery",
+   "setup": "N=10 completed, terminal event unpublished; recovery worker SIGKILLed via os._exit mid-recovery, then rerun",
+   "expected": "intermediate crash leaves consistent state; rerun finishes publication; exactly one terminal event",
+   "actual": {
+    "exit": 137,
+    "mid_state": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 1,
+     "terminal_events": 1,
+     "unpublished": 0
+    },
+    "final": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 1,
+     "terminal_events": 1,
+     "unpublished": 0
+    }
+   },
+   "evidence": "db/d6_crash_during_recovery.db",
+   "ok": true
+  },
+  {
+   "name": "real_sigkill_mid_transaction",
+   "setup": "worker runs 30 tap attempts (N=10 reached), parent sends real SIGKILL at 120ms (inside some tap transaction)",
+   "expected": "no partial commit; counter contiguous; completion correct",
+   "actual": {
+    "sig": 0,
+    "consistency": {
+     "ok": true,
+     "state": {
+      "rows": 10,
+      "max_n": 10,
+      "completed": true,
+      "N": 10,
+      "events": 0,
+      "terminal_events": 0,
+      "unpublished": 0
+     },
+     "problems": []
+    },
+    "final": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 1,
+     "terminal_events": 1,
+     "unpublished": 1
+    }
+   },
+   "evidence": "db/d7_sigkill_mid_txn.db",
+   "ok": true
+  },
+  {
+   "name": "concurrent_final_tap_race",
+   "setup": "N=10, 9/10 accepted; four processes race for tap 10 with distinct uuids (busy_timeout 30s)",
+   "expected": "exactly one winner; n sequence contiguous; completed=1",
+   "actual": {
+    "state": {
+     "ok": true,
+     "state": {
+      "rows": 10,
+      "max_n": 10,
+      "completed": true,
+      "N": 10,
+      "events": 1,
+      "terminal_events": 1,
+      "unpublished": 0
+     },
+     "problems": []
+    },
+    "winner": [
+     [
+      "race0-k0"
+     ]
+    ],
+    "rc": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "evidence": "db/d8_concurrent_final.db",
+   "ok": true
+  },
+  {
+   "name": "no_caller_supplied_counter",
+   "setup": "get_tap API inspected; attacker calls claim_tap(n=10) at 9/10",
+   "expected": "no caller-controllable counter parameter exists (TypeError); normal claim gets n=10; counter stays authoritative",
+   "actual": {
+    "signature": "(con, uuid, state_hash=None, verdict='accepted')",
+    "injected_attempt": "claim_tap() got an unexpected keyword argument 'n'",
+    "normal_claim": {
+     "ok": true,
+     "n": 10,
+     "duplicate": false,
+     "verdict": "accepted",
+     "completed": true
+    },
+    "state": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 0,
+     "terminal_events": 0,
+     "unpublished": 0
+    }
+   },
+   "evidence": "db/d9_no_bypass.db",
+   "ok": true
+  },
+  {
+   "name": "terminal_idempotency_and_restart",
+   "setup": "duplicate uuid thrice; completion at N=10; ensure_terminal_event twice; worker restarted and taps after completion",
+   "expected": "one row; counter unchanged; one terminal event; taps after completion rejected; state unambiguous",
+   "actual": {
+    "three_claims": [
+     {
+      "ok": true,
+      "n": 1,
+      "duplicate": false,
+      "verdict": "accepted",
+      "completed": false
+     },
+     {
+      "ok": true,
+      "n": 1,
+      "duplicate": true,
+      "verdict": "accepted"
+     },
+     {
+      "ok": true,
+      "n": 1,
+      "duplicate": true,
+      "verdict": "accepted"
+     }
+    ],
+    "consistency": {
+     "ok": true,
+     "state": {
+      "rows": 1,
+      "max_n": 1,
+      "completed": false,
+      "N": 10,
+      "events": 0,
+      "terminal_events": 0,
+      "unpublished": 0
+     },
+     "problems": []
+    },
+    "terminal": [
+     {
+      "ok": true,
+      "reason": "terminal_event_ensured"
+     },
+     {
+      "ok": true,
+      "reason": "terminal_event_ensured"
+     }
+    ],
+    "state_after_restart": {
+     "rows": 10,
+     "max_n": 10,
+     "completed": true,
+     "N": 10,
+     "events": 1,
+     "terminal_events": 1,
+     "unpublished": 0
+    },
+    "claim_after_terminal": {
+     "ok": false,
+     "reason": "completed",
+     "completed": true
+    },
+    "rows_after_n_gt_10": 0
+   },
+   "evidence": "db/d10_idempotent.db + db/d11_terminal_restart.db",
+   "ok": true
+  }
+ ],
+ "passed": 10,
+ "failed": 0
+}

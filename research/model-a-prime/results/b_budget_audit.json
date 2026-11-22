@@ -1,0 +1,297 @@
+{
+ "meta": {
+  "purpose": "PART B per-tap budget audit",
+  "rock_sha_note": "see results/f_initial_rock.json",
+  "stream": "B_distributed recipe, random.Random(1) per side",
+  "time": "2026-11-22 14:12:34"
+ },
+ "b1_original": {
+  "engine": "cm_rock.ConservedRock (original, unchanged code)",
+  "rock": "authentic recovered pristine (Part F)",
+  "N": 20000,
+  "q_tap_dfix": 99188729,
+  "q_tap_legacy": 1513.4998931884766,
+  "alpha": 98.72797737693911,
+  "accepted": 6000,
+  "launched": 6245,
+  "wall_s": 6.7,
+  "n_over_taps": 459,
+  "over_examples": [
+   {
+    "tap": 853,
+    "spend": 101387570,
+    "q_tap": 99188729,
+    "ratio": 1.0221682546209458
+   },
+   {
+    "tap": 878,
+    "spend": 99677329,
+    "q_tap": 99188729,
+    "ratio": 1.0049259629085479
+   },
+   {
+    "tap": 1008,
+    "spend": 101349697,
+    "q_tap": 99188729,
+    "ratio": 1.0217864269638943
+   },
+   {
+    "tap": 1108,
+    "spend": 102256835,
+    "q_tap": 99188729,
+    "ratio": 1.0309320023649058
+   },
+   {
+    "tap": 1143,
+    "spend": 104180422,
+    "q_tap": 99188729,
+    "ratio": 1.0503252037839905
+   },
+   {
+    "tap": 1291,
+    "spend": 101954877,
+    "q_tap": 99188729,
+    "ratio": 1.0278877250256933
+   },
+   {
+    "tap": 1305,
+    "spend": 100301071,
+    "q_tap": 99188729,
+    "ratio": 1.0112143991682765
+   },
+   {
+    "tap": 1306,
+    "spend": 103808939,
+    "q_tap": 99188729,
+    "ratio": 1.0465799899502695
+   },
+   {
+    "tap": 1440,
+    "spend": 107095395,
+    "q_tap": 99188729,
+    "ratio": 1.0797133513022432
+   },
+   {
+    "tap": 1483,
+    "spend": 102503726,
+    "q_tap": 99188729,
+    "ratio": 1.0334211057387377
+   },
+   {
+    "tap": 1513,
+    "spend": 99525455,
+    "q_tap": 99188729,
+    "ratio": 1.0033948010363154
+   },
+   {
+    "tap": 1549,
+    "spend": 106173752,
+    "q_tap": 99188729,
+    "ratio": 1.0704215395279437
+   }
+  ],
+  "max_spend": 120025679,
+  "max_spend_over_q": 1.2100737675547792,
+  "mean_spend": 55884271.832666665,
+  "total_consumed": 335305630996,
+  "nq_line_n": 6000,
+  "nq_line": 595132374000,
+  "consumed_over_nq": false,
+  "violations_allowance": 0,
+  "violations_allowance_examples": [],
+  "violations_reserve": 0,
+  "violations_ledger": 0,
+  "crumbles": 29872,
+  "debris_total": 89818645383,
+  "fines_total": 81829034320,
+  "recent_shed_events": [
+   [
+    5965,
+    95931343
+   ],
+   [
+    5975,
+    100986294
+   ],
+   [
+    5976,
+    92945609
+   ],
+   [
+    5978,
+    91598934
+   ],
+   [
+    5979,
+    60320490
+   ],
+   [
+    5986,
+    106692678
+   ],
+   [
+    5987,
+    93364199
+   ],
+   [
+    5991,
+    90264789
+   ],
+   [
+    5993,
+    93892349
+   ],
+   [
+    5994,
+    106051183
+   ],
+   [
+    5999,
+    91315547
+   ],
+   [
+    6000,
+    103064208
+   ]
+  ],
+  "n_shed_events": 1878
+ },
+ "b3_corrected": {
+  "engine": "maprim_rock.MaprimRock (corrected single budget)",
+  "N": 20000,
+  "q_tap_dfix": 99188729,
+  "q_tap_legacy": 1513.4998931884766,
+  "alpha": 98.72797737693911,
+  "accepted": 6000,
+  "launched": 6234,
+  "wall_s": 16.9,
+  "n_over_taps": 0,
+  "over_examples": [],
+  "max_spend": 99188729,
+  "max_spend_over_q": 1.0,
+  "mean_spend": 55286266.069,
+  "total_consumed": 331717596414,
+  "nq_line": 595132374000,
+  "consumed_over_nq": false,
+  "rolled_back": 0,
+  "rolled_examples": [],
+  "crumbles": 29788,
+  "debris_total": 90904627258,
+  "fines_total": 84528864282,
+  "n_shed_events": 1862
+ },
+ "b4_rollback": {
+  "warmup": {
+   "clean_accepted": 50,
+   "misses_rejected": 1
+  },
+  "fault1": {
+   "pre": {
+    "hash": "bd0dec21a2a51ab308628a85",
+    "consumed": 2369743342,
+    "burned": 0,
+    "main_mass": 2277031953955,
+    "debris_total": 2322448667,
+    "fines_total": 15765204,
+    "severed": 247100,
+    "cells": 151530,
+    "taps": 50
+   },
+   "fault_result": {
+    "ok": false,
+    "reason": "invariant_violation_rolled_back",
+    "violations": [
+     {
+      "kind": "ledger_identity",
+      "drift": 3769171702
+     }
+    ]
+   },
+   "post": {
+    "hash": "bd0dec21a2a51ab308628a85",
+    "consumed": 2369743342,
+    "burned": 0,
+    "main_mass": 2277031953955,
+    "debris_total": 2322448667,
+    "fines_total": 15765204,
+    "severed": 247100,
+    "cells": 151530,
+    "taps": 50
+   },
+   "state_identical": true,
+   "misses_skipped": 0
+  },
+  "fault2": {
+   "pre": {
+    "hash": "bd0dec21a2a51ab308628a85",
+    "consumed": 2369743342,
+    "burned": 0,
+    "main_mass": 2277031953955,
+    "debris_total": 2322448667,
+    "fines_total": 15765204,
+    "severed": 247100,
+    "cells": 151530,
+    "taps": 50
+   },
+   "result": {
+    "ok": false,
+    "reason": "invariant_violation_rolled_back",
+    "violations": [
+     {
+      "kind": "per_tap_budget",
+      "spent": 6794396721,
+      "budget": 99188729
+     }
+    ]
+   },
+   "post": {
+    "hash": "bd0dec21a2a51ab308628a85",
+    "consumed": 2369743342,
+    "burned": 0,
+    "main_mass": 2277031953955,
+    "debris_total": 2322448667,
+    "fines_total": 15765204,
+    "severed": 247100,
+    "cells": 151530,
+    "taps": 50
+   },
+   "state_identical": true,
+   "misses_skipped": 0
+  },
+  "clean_tap_after": {
+   "ok": true,
+   "reason": null
+  }
+ },
+ "b5_writer_audit": {
+  "cm_rock.py": [
+   "cm_rock.py:11: M0 == density_sum(field: main+fragments) + debris + fines + consumed + burned",
+   "cm_rock.py:14: * clipped carve take  -> consumed (bounded by per-tap allowance q) + debris[block]",
+   "cm_rock.py:51: self.kappa = kappa        # fraction of clipped carve take -> consumed",
+   "cm_rock.py:57: self.consumed = 0       # irreversible (dfix)",
+   "cm_rock.py:86: consumed (never exceeding the budget), remainder -> debris transfer.\"\"\"",
+   "cm_rock.py:92: self.consumed += use",
+   "cm_rock.py:100: else (self.M0 - self.Mr - self.consumed)",
+   "cm_rock.py:174: self.consumed += use",
+   "cm_rock.py:189: if physical != self.M0 - self.consumed - self.burned:",
+   "cm_rock.py:193: consumed=self.consumed, burned=self.burned, M0=self.M0))",
+   "cm_rock.py:194: if self.consumed > n * self.q_tap + self.burned:",
+   "cm_rock.py:197: dict(tap=n, consumed=self.consumed, n=n, q=self.q_tap))",
+   "cm_rock.py:208: ident = ds + debris_total + self.consumed + self.burned - self.M0",
+   "cm_rock.py:215: debris_total=debris_total, consumed=self.consumed,",
+   "cm_rock.py:360: and post[\"debris_total\"] == 0 and self.burned == self.M0 - self.consumed"
+  ],
+  "maprim_rock.py": [
+   "maprim_rock.py:479: self.consumed = 0",
+   "maprim_rock.py:509: return self.M0 - self.Mr - self.consumed - self.burned",
+   "maprim_rock.py:513: \"\"\"Route an integer residual out of the field: kappa-share consumed",
+   "maprim_rock.py:524: self.consumed += use",
+   "maprim_rock.py:607: self.consumed += use",
+   "maprim_rock.py:617: self.consumed, self.burned, self.main_mass,",
+   "maprim_rock.py:630: self.consumed = c",
+   "maprim_rock.py:667: - (self.M0 - self.consumed - self.burned)",
+   "maprim_rock.py:741: A_total_inventory  : M0 - consumed - burned (ledger) [- physical present]",
+   "maprim_rock.py:797: A_total_inventory=(ledger.M0 - ledger.consumed - ledger.burned)"
+  ]
+ }
+}

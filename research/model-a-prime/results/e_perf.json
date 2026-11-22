@@ -1,0 +1,173 @@
+{
+ "meta": {
+  "purpose": "PART E reconciled performance",
+  "regime": "BILLION-ALPHA SHORT RUN: 5000 accepted taps at alpha = q_tap/15.33 - measures per-tap COST, NOT lifetime evolution; do not read as billion-scale throughput forecasts",
+  "time": "2026-11-22 14:39:25",
+  "e6_inconsistency": {
+   "e6_conserved_constructor": "ConservedRock(N=20000) -> q_tap=1477.02 legacy/tap (stub rock)",
+   "e6_reported_allowance": 0.029540415,
+   "e6_reported_alpha": 0.00197456,
+   "e6_alpha_origin": "original-rock cap 0.030269998 / 15.33",
+   "resolution": "Model A ran cap=0.029540415, conserved ran cap=1477.02 (~50,000x larger); alpha=0.00197456 matches the ORIGINAL rock cap 0.030269998/15.33 not the stub cap; at billion-alpha demand the caps rarely/never bound, so CPU numbers were not invalidated by the cap mismatch, but the documented configuration was inconsistent"
+  },
+  "this_run": {
+   "N": 1000000000,
+   "M0_legacy": 34816588.0,
+   "Mr_legacy": 4546590.000015259,
+   "cells0": 151553,
+   "q_tap_dfix": 1983,
+   "q_tap_legacy": 0.0302581787109375,
+   "alpha": 0.0019737885656188844,
+   "cap_all_sides_legacy": 0.0302581787109375
+  }
+ },
+ "sides": {
+  "modelA_A_concentrated": {
+   "hist": "A_concentrated",
+   "accepted": 5000,
+   "launched": 5000,
+   "wall_s": 1.745,
+   "ms_per_accepted_tap": 0.349,
+   "accepted_per_s": 2865.3,
+   "ms_per_tap_ray": 0.07,
+   "impact_ms_per_tap": 0.272,
+   "txn_wall_ms_per_tap": null,
+   "rss_mb": 74.4,
+   "cells": 151553,
+   "severances": 4,
+   "crumbles": 0,
+   "consumed_legacy": null,
+   "modified_cells_per_tap": 33.57
+  },
+  "modelA_B_distributed": {
+   "hist": "B_distributed",
+   "accepted": 5000,
+   "launched": 5077,
+   "wall_s": 2.493,
+   "ms_per_accepted_tap": 0.499,
+   "accepted_per_s": 2005.5,
+   "ms_per_tap_ray": 0.14,
+   "impact_ms_per_tap": 0.692,
+   "txn_wall_ms_per_tap": null,
+   "rss_mb": 80.5,
+   "cells": 151553,
+   "severances": 4,
+   "crumbles": 0,
+   "consumed_legacy": null,
+   "modified_cells_per_tap": 33.15
+  },
+  "maprim_ledger_A_concentrated": {
+   "hist": "A_concentrated",
+   "accepted": 5000,
+   "launched": 5000,
+   "wall_s": 2.268,
+   "ms_per_accepted_tap": 0.454,
+   "accepted_per_s": 2204.6,
+   "ms_per_tap_ray": 0.076,
+   "impact_ms_per_tap": 0.365,
+   "txn_wall_ms_per_tap": 0.4488,
+   "rss_mb": 80.5,
+   "cells": 151553,
+   "severances": 4,
+   "crumbles": 0,
+   "consumed_legacy": 71.142,
+   "modified_cells_per_tap": 33.57
+  },
+  "maprim_ledger_B_distributed": {
+   "hist": "B_distributed",
+   "accepted": 5000,
+   "launched": 5077,
+   "wall_s": 3.28,
+   "ms_per_accepted_tap": 0.656,
+   "accepted_per_s": 1524.4,
+   "ms_per_tap_ray": 0.157,
+   "impact_ms_per_tap": 0.917,
+   "txn_wall_ms_per_tap": 0.6498,
+   "rss_mb": 80.5,
+   "cells": 151553,
+   "severances": 4,
+   "crumbles": 0,
+   "consumed_legacy": 141.082,
+   "modified_cells_per_tap": 33.15
+  },
+  "maprim_iso_A_concentrated": {
+   "hist": "A_concentrated",
+   "accepted": 5000,
+   "launched": 5000,
+   "wall_s": 3.283,
+   "ms_per_accepted_tap": 0.657,
+   "accepted_per_s": 1522.8,
+   "ms_per_tap_ray": 0.237,
+   "impact_ms_per_tap": 0.403,
+   "txn_wall_ms_per_tap": 0.6519,
+   "rss_mb": 80.5,
+   "cells": 151553,
+   "severances": 4,
+   "crumbles": 0,
+   "consumed_legacy": 74.908,
+   "modified_cells_per_tap": 36.42
+  },
+  "maprim_iso_B_distributed": {
+   "hist": "B_distributed",
+   "accepted": 5000,
+   "launched": 5004,
+   "wall_s": 4.066,
+   "ms_per_accepted_tap": 0.813,
+   "accepted_per_s": 1229.8,
+   "ms_per_tap_ray": 0.451,
+   "impact_ms_per_tap": 0.973,
+   "txn_wall_ms_per_tap": 0.8067,
+   "rss_mb": 80.5,
+   "cells": 151553,
+   "severances": 4,
+   "crumbles": 0,
+   "consumed_legacy": 145.838,
+   "modified_cells_per_tap": 33.68
+  },
+  "maprim_ledger_fullrecount_A_concentrated": {
+   "hist": "A_concentrated",
+   "accepted": 5000,
+   "launched": 5000,
+   "wall_s": 6.402,
+   "ms_per_accepted_tap": 1.28,
+   "accepted_per_s": 781.1,
+   "ms_per_tap_ray": 0.102,
+   "impact_ms_per_tap": 0.456,
+   "txn_wall_ms_per_tap": 1.2649,
+   "rss_mb": 80.5,
+   "cells": 151553,
+   "severances": 4,
+   "crumbles": 0,
+   "consumed_legacy": 71.142,
+   "modified_cells_per_tap": 33.57
+  }
+ },
+ "ledger_overhead": {
+  "A_concentrated": {
+   "modelA_ms": 0.349,
+   "maprim_ledger_ms": 0.454,
+   "delta_ms": 0.105,
+   "overhead_pct": 30.09
+  },
+  "B_distributed": {
+   "modelA_ms": 0.499,
+   "maprim_ledger_ms": 0.656,
+   "delta_ms": 0.157,
+   "overhead_pct": 31.46
+  }
+ },
+ "iso_overhead": {
+  "A_concentrated": {
+   "maprim_ledger_ms": 0.454,
+   "maprim_iso_ms": 0.657,
+   "delta_ms": 0.203,
+   "overhead_pct": 44.71
+  },
+  "B_distributed": {
+   "maprim_ledger_ms": 0.656,
+   "maprim_iso_ms": 0.813,
+   "delta_ms": 0.157,
+   "overhead_pct": 23.93
+  }
+ }
+}

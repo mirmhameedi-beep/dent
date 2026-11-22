@@ -1,0 +1,69 @@
+{
+ "note": "bond-graph vs visual partition on identical states",
+ "D1_bores": {
+  "bond": {
+   "state": "D1_bores/bond",
+   "n_components": 80303,
+   "largest_cells": 46284,
+   "largest_mass_legacy": 10784313.335113525,
+   "largest_has_iso_visible": true,
+   "visible_fragment_count": 76794,
+   "visible_fragment_mass_legacy": 17250695.403915405,
+   "largest_share_of_field": 0.3643
+  },
+  "visual": {
+   "state": "D1_bores/visual",
+   "n_components": 20,
+   "largest_cells": 127028,
+   "largest_mass_legacy": 28304018.006973267,
+   "largest_has_iso_visible": true,
+   "visible_fragment_count": 0,
+   "visible_fragment_mass_legacy": 0.0,
+   "largest_share_of_field": 0.9998
+  }
+ },
+ "D2_fragments": {
+  "bond": {
+   "state": "D2_fragments/bond",
+   "n_components": 78093,
+   "largest_cells": 44297,
+   "largest_mass_legacy": 10319975.62159729,
+   "largest_has_iso_visible": true,
+   "visible_fragment_count": 74098,
+   "visible_fragment_mass_legacy": 16659404.579849243,
+   "largest_share_of_field": 0.3598
+  },
+  "visual": {
+   "state": "D2_fragments/visual",
+   "n_components": 14,
+   "largest_cells": 123106,
+   "largest_mass_legacy": 27285182.38269043,
+   "largest_has_iso_visible": true,
+   "visible_fragment_count": 0,
+   "visible_fragment_mass_legacy": 0.0,
+   "largest_share_of_field": 0.9998
+  }
+ },
+ "D3_hostile": {
+  "bond": {
+   "state": "D3_hostile/bond",
+   "n_components": 89492,
+   "largest_cells": 53104,
+   "largest_mass_legacy": 12381812.800292969,
+   "largest_has_iso_visible": true,
+   "visible_fragment_count": 86625,
+   "visible_fragment_mass_legacy": 19553221.848327637,
+   "largest_share_of_field": 0.3711
+  },
+  "visual": {
+   "state": "D3_hostile/visual",
+   "n_components": 18,
+   "largest_cells": 143079,
+   "largest_mass_legacy": 32151604.78262329,
+   "largest_has_iso_visible": true,
+   "visible_fragment_count": 0,
+   "visible_fragment_mass_legacy": 0.0,
+   "largest_share_of_field": 0.9998
+  }
+ }
+}

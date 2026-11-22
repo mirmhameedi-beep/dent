@@ -1,0 +1,35 @@
+  milestone 1000 B_render 33249204 D_main 13162791
+  milestone 2000 B_render 31907636 D_main 12488562
+  milestone 4000 B_render 29325150 D_main 11373038
+  milestone 6000 B_render 26786399 D_main 10267638
+  milestone 8000 B_render 24278722 D_main 9075229
+A_rot done
+  milestone 1000 B_render 33251601 D_main 12823044
+  milestone 2000 B_render 31919776 D_main 12222701
+  milestone 4000 B_render 29371591 D_main 11078274
+  milestone 6000 B_render 26821063 D_main 9999368
+  milestone 8000 B_render 24314455 D_main 9019624
+B_distributed done
+adversarial fragment kill...
+{
+ "victim_cells": 1,
+ "victim_mass_legacy": 214.0,
+ "taps_to_kill": 1,
+ "dead": true,
+ "before": {
+  "A_total": 31051533.723724365,
+  "B_renderable": 26979380.201446533,
+  "D_frag_count": 74098,
+  "D_frag_mass": 16659404.579849243
+ },
+ "after": {
+  "A_total": 31050897.956451416,
+  "B_renderable": 26977794.03303528,
+  "D_frag_count": 74093,
+  "D_frag_mass": 16657820.080657959,
+  "Mr": 4546590.000015259,
+  "A_total_above_Mr": true,
+  "visible_component_count": 74094
+ }
+}
+wrote results/c_geometry.json

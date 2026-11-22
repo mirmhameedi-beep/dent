@@ -1,0 +1,69 @@
+{
+ "config": {
+  "N": 20000,
+  "stream": "B_distributed",
+  "note": "every crumbled cell residual routed through ledger"
+ },
+ "hold": {
+  "policy": "hold",
+  "wall_s": 16.3,
+  "accepted": 20000,
+  "launched": 30999,
+  "crumbles": 104495,
+  "crumble_residual_routed": true,
+  "audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "fines_total": 0,
+   "density_sum": 8976372.273330688,
+   "main_mass": 588275533305,
+   "debris_total": 12500644.315368652,
+   "consumed": 12500638.41130066,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 32936,
+   "fragment_cells": 37870,
+   "largest_fragment": 5543
+  },
+  "blocks_with_debris": 837,
+  "blocks_with_fines": 0,
+  "shed_events": 0,
+  "violations": 0,
+  "bands": {
+   "b30": 1195,
+   "b60_120": 2655,
+   "b120": 39563
+  }
+ },
+ "shed": {
+  "policy": "shed",
+  "wall_s": 16.5,
+  "accepted": 20000,
+  "launched": 30999,
+  "crumbles": 104495,
+  "crumble_residual_routed": true,
+  "audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "fines_total": 306251034398,
+   "density_sum": 8976372.273330688,
+   "main_mass": 588275533305,
+   "debris_total": 7827624.430236816,
+   "consumed": 17173658.296432495,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 32936,
+   "fragment_cells": 37870,
+   "largest_fragment": 5543
+  },
+  "blocks_with_debris": 837,
+  "blocks_with_fines": 688,
+  "shed_events": 6409,
+  "violations": 0,
+  "bands": {
+   "b30": 1195,
+   "b60_120": 2655,
+   "b120": 39563
+  }
+ }
+}

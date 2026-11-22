@@ -1,0 +1,16 @@
+built D1
+built D2
+built D3
+built D1b deep bores
+outlier {"state": "D2", "fam": "F2", "err_coarse": 6.083078466779018, "t_engine": 3.9997873803316315, "t_coarse": 4.177210502279353, "t_fine": 3.9997873803314365, "fine_verdict": "hit", "err_engine_vs_fine": 6.684177021400371e-12, "err_coarse_vs_fine": 6.083078466785702, "adjudicated": "engine_correct_coarse_ref_skipped_feature"}
+outlier {"state": "D2", "fam": "F2", "err_coarse": 0.5695649795625408, "t_engine": 3.368311066922903, "t_coarse": 3.3849233788268105, "t_fine": 3.3683110669287393, "fine_verdict": "hit", "err_engine_vs_fine": 2.0009898500055508e-10, "err_coarse_vs_fine": 0.5695649793624418, "adjudicated": "engine_correct_coarse_ref_skipped_feature"}
+outlier {"state": "D2", "fam": "F2", "err_coarse": 3.464072593293029, "t_engine": 3.99949807210026, "t_coarse": 4.100533522737973, "t_fine": 3.9994980720358373, "fine_verdict": "hit", "err_engine_vs_fine": 2.2087779224680813e-09, "err_coarse_vs_fine": 3.4640725955018072, "adjudicated": "engine_correct_coarse_ref_skipped_feature"}
+outlier {"state": "D3", "fam": "F4", "err_coarse": 3.5415086886582867, "t_engine": 3.9995759398727104, "t_coarse": 4.1028699432919105, "t_fine": 3.9995759398731923, "fine_verdict": "hit", "err_engine_vs_fine": 1.652011860642233e-11, "err_coarse_vs_fine": 3.5415086886417666, "adjudicated": "engine_correct_coarse_ref_skipped_feature"}
+outlier {"state": "D3", "fam": "F4", "err_coarse": 1.446295082838022, "t_engine": 3.999838583273319, "t_coarse": 4.042022189856095, "t_fine": 3.999838583273524, "fine_verdict": "hit", "err_engine_vs_fine": 7.034373084024992e-12, "err_coarse_vs_fine": 1.4462950828309877, "adjudicated": "engine_correct_coarse_ref_skipped_feature"}
+outlier {"state": "D1b", "fam": "F2", "err_coarse": 2.95141154762152, "t_engine": 3.9999273133109723, "t_coarse": 4.0860101501166, "t_fine": 3.9999273133057325, "fine_verdict": "hit", "err_engine_vs_fine": 1.7965058012643047e-10, "err_coarse_vs_fine": 2.951411547801171, "adjudicated": "engine_correct_coarse_ref_skipped_feature"}
+{
+ "hit_rays_compared": 1571,
+ "within_0p05_cells": 1571,
+ "pct_within_after_adjudication": 100.0,
+ "n_readjudicated": 6
+}

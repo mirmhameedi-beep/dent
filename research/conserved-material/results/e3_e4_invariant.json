@@ -1,0 +1,504 @@
+{
+ "config": {
+  "N": 20000,
+  "milestones": [
+   1000,
+   5000,
+   10000,
+   20000
+  ],
+  "note": "invariant checked after every accepted tap"
+ },
+ "A_concentrated": {
+  "wall_s": 36.4,
+  "accepted": 38,
+  "launched": 800000,
+  "calib": {
+   "cells0": 147908,
+   "dens_sum0": 33977655.0,
+   "Mr": 290798960641,
+   "Mr_frac": 0.13059288523634896,
+   "q_tap_dfix": 96798031,
+   "q_legacy": 1477.020736694336,
+   "mode": "per_tap",
+   "reserve_frac": 0.02,
+   "debris_policy": "hold",
+   "N": 20000,
+   "kappa": 0.5
+  },
+  "milestones": {},
+  "violations_ledger": 0,
+  "violations_allowance": 0,
+  "violations_reserve": 0,
+  "q_tap_legacy": 1477.020736694336,
+  "pre_terminal_audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "density_sum": 33922674.823287964,
+   "main_mass": 2223156417219,
+   "debris_total": 27490.09750366211,
+   "consumed": 27490.079208374023,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 32626,
+   "fragment_cells": 32664,
+   "largest_fragment": 115111
+  }
+ },
+ "A_rot": {
+  "wall_s": 16.8,
+  "accepted": 20000,
+  "launched": 31509,
+  "calib": {
+   "cells0": 147908,
+   "dens_sum0": 33977655.0,
+   "Mr": 290798960641,
+   "Mr_frac": 0.13059288523634896,
+   "q_tap_dfix": 96798031,
+   "q_legacy": 1477.020736694336,
+   "mode": "per_tap",
+   "reserve_frac": 0.02,
+   "debris_policy": "hold",
+   "N": 20000,
+   "kappa": 0.5
+  },
+  "milestones": {
+   "1000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 32632761.669769287,
+    "debris_total": 672446.8142089844,
+    "consumed": 672446.5160217285,
+    "fragment_components": 88974,
+    "fragment_cells": 89283
+   },
+   "5000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 27606416.929382324,
+    "debris_total": 3185619.775024414,
+    "consumed": 3185618.2955932617,
+    "fragment_components": 79127,
+    "fragment_cells": 79654
+   },
+   "10000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 21429102.398971558,
+    "debris_total": 6274277.77645874,
+    "consumed": 6274274.824569702,
+    "fragment_components": 63567,
+    "fragment_cells": 63800
+   },
+   "20000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 8918594.980819702,
+    "debris_total": 12529532.982879639,
+    "consumed": 12529527.03630066,
+    "fragment_components": 33015,
+    "fragment_cells": 36815
+   }
+  },
+  "violations_ledger": 0,
+  "violations_allowance": 0,
+  "violations_reserve": 0,
+  "q_tap_legacy": 1477.020736694336,
+  "pre_terminal_audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "density_sum": 8918594.980819702,
+   "main_mass": 584489040663,
+   "debris_total": 12529532.982879639,
+   "consumed": 12529527.03630066,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 33015,
+   "fragment_cells": 36815,
+   "largest_fragment": 6761
+  }
+ },
+ "B_distributed": {
+  "wall_s": 16.9,
+  "accepted": 20000,
+  "launched": 30999,
+  "calib": {
+   "cells0": 147908,
+   "dens_sum0": 33977655.0,
+   "Mr": 290798960641,
+   "Mr_frac": 0.13059288523634896,
+   "q_tap_dfix": 96798031,
+   "q_legacy": 1477.020736694336,
+   "mode": "per_tap",
+   "reserve_frac": 0.02,
+   "debris_policy": "hold",
+   "N": 20000,
+   "kappa": 0.5
+  },
+  "milestones": {
+   "1000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 32631343.591796875,
+    "debris_total": 673155.8513031006,
+    "consumed": 673155.5569000244,
+    "fragment_components": 89862,
+    "fragment_cells": 90368
+   },
+   "5000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 27627250.036224365,
+    "debris_total": 3175203.219268799,
+    "consumed": 3175201.744506836,
+    "fragment_components": 79046,
+    "fragment_cells": 79571
+   },
+   "10000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 21421856.876342773,
+    "debris_total": 6277900.5411987305,
+    "consumed": 6277897.582458496,
+    "fragment_components": 64051,
+    "fragment_cells": 64489
+   },
+   "20000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 8976372.273330688,
+    "debris_total": 12500644.315368652,
+    "consumed": 12500638.41130066,
+    "fragment_components": 32936,
+    "fragment_cells": 37870
+   }
+  },
+  "violations_ledger": 0,
+  "violations_allowance": 0,
+  "violations_reserve": 0,
+  "q_tap_legacy": 1477.020736694336,
+  "pre_terminal_audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "density_sum": 8976372.273330688,
+   "main_mass": 588275533305,
+   "debris_total": 12500644.315368652,
+   "consumed": 12500638.41130066,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 32936,
+   "fragment_cells": 37870,
+   "largest_fragment": 5543
+  }
+ },
+ "C_clustered": {
+  "wall_s": 50.6,
+  "accepted": 16573,
+  "launched": 800000,
+  "calib": {
+   "cells0": 147908,
+   "dens_sum0": 33977655.0,
+   "Mr": 290798960641,
+   "Mr_frac": 0.13059288523634896,
+   "q_tap_dfix": 96798031,
+   "q_legacy": 1477.020736694336,
+   "mode": "per_tap",
+   "reserve_frac": 0.02,
+   "debris_policy": "hold",
+   "N": 20000,
+   "kappa": 0.5
+  },
+  "milestones": {
+   "1000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 32637824.869750977,
+    "debris_total": 669915.2171936035,
+    "consumed": 669914.9130554199,
+    "fragment_components": 90407,
+    "fragment_cells": 90715
+   },
+   "5000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 27709693.569641113,
+    "debris_total": 3133981.4530181885,
+    "consumed": 3133979.9773406982,
+    "fragment_components": 80448,
+    "fragment_cells": 80812
+   },
+   "10000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 21860073.573120117,
+    "debris_total": 6058792.14024353,
+    "consumed": 6058789.286636353,
+    "fragment_components": 66904,
+    "fragment_cells": 67699
+   }
+  },
+  "violations_ledger": 0,
+  "violations_allowance": 0,
+  "violations_reserve": 0,
+  "q_tap_legacy": 1477.020736694336,
+  "pre_terminal_audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "density_sum": 15115982.922576904,
+   "main_mass": 990641056814,
+   "debris_total": 9430838.233093262,
+   "consumed": 9430833.844329834,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 47651,
+   "fragment_cells": 48185,
+   "largest_fragment": 20870
+  }
+ },
+ "D_edge": {
+  "wall_s": 20.9,
+  "accepted": 20000,
+  "launched": 131885,
+  "calib": {
+   "cells0": 147908,
+   "dens_sum0": 33977655.0,
+   "Mr": 290798960641,
+   "Mr_frac": 0.13059288523634896,
+   "q_tap_dfix": 96798031,
+   "q_legacy": 1477.020736694336,
+   "mode": "per_tap",
+   "reserve_frac": 0.02,
+   "debris_policy": "hold",
+   "N": 20000,
+   "kappa": 0.5
+  },
+  "milestones": {
+   "1000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 32725518.08883667,
+    "debris_total": 626068.5883636475,
+    "consumed": 626068.3227996826,
+    "fragment_components": 88517,
+    "fragment_cells": 88952
+   },
+   "5000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 27931071.814315796,
+    "debris_total": 3023292.2704315186,
+    "consumed": 3023290.9152526855,
+    "fragment_components": 79820,
+    "fragment_cells": 80203
+   },
+   "10000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 21977994.625579834,
+    "debris_total": 5999831.545288086,
+    "consumed": 5999828.82913208,
+    "fragment_components": 64213,
+    "fragment_cells": 64788
+   },
+   "20000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 10309822.152618408,
+    "debris_total": 11833919.10345459,
+    "consumed": 11833913.743927002,
+    "fragment_components": 30292,
+    "fragment_cells": 30391
+   }
+  },
+  "violations_ledger": 0,
+  "violations_allowance": 0,
+  "violations_reserve": 0,
+  "q_tap_legacy": 1477.020736694336,
+  "pre_terminal_audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "density_sum": 10309822.152618408,
+   "main_mass": 675664504594,
+   "debris_total": 11833919.10345459,
+   "consumed": 11833913.743927002,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 30292,
+   "fragment_cells": 30391,
+   "largest_fragment": 16599
+  }
+ },
+ "E_adaptive": {
+  "wall_s": 19.6,
+  "accepted": 20000,
+  "launched": 76753,
+  "calib": {
+   "cells0": 147908,
+   "dens_sum0": 33977655.0,
+   "Mr": 290798960641,
+   "Mr_frac": 0.13059288523634896,
+   "q_tap_dfix": 96798031,
+   "q_legacy": 1477.020736694336,
+   "mode": "per_tap",
+   "reserve_frac": 0.02,
+   "debris_policy": "hold",
+   "N": 20000,
+   "kappa": 0.5
+  },
+  "milestones": {
+   "1000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 32630539.28994751,
+    "debris_total": 673558.0025177002,
+    "consumed": 673557.70753479,
+    "fragment_components": 87625,
+    "fragment_cells": 88084
+   },
+   "5000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 27634044.726593018,
+    "debris_total": 3171805.871688843,
+    "consumed": 3171804.4017181396,
+    "fragment_components": 77926,
+    "fragment_cells": 78387
+   },
+   "10000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 21413943.505569458,
+    "debris_total": 6281857.220321655,
+    "consumed": 6281854.274108887,
+    "fragment_components": 64225,
+    "fragment_cells": 64463
+   },
+   "20000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 8924312.863616943,
+    "debris_total": 12526674.019897461,
+    "consumed": 12526668.116485596,
+    "fragment_components": 33106,
+    "fragment_cells": 35588
+   }
+  },
+  "violations_ledger": 0,
+  "violations_allowance": 0,
+  "violations_reserve": 0,
+  "q_tap_legacy": 1477.020736694336,
+  "pre_terminal_audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "density_sum": 8924312.863616943,
+   "main_mass": 584863767830,
+   "debris_total": 12526674.019897461,
+   "consumed": 12526668.116485596,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 33106,
+   "fragment_cells": 35588,
+   "largest_fragment": 7629
+  }
+ },
+ "HOSTILE": {
+  "wall_s": 51.4,
+  "accepted": 15376,
+  "launched": 800000,
+  "calib": {
+   "cells0": 147908,
+   "dens_sum0": 33977655.0,
+   "Mr": 290798960641,
+   "Mr_frac": 0.13059288523634896,
+   "q_tap_dfix": 96798031,
+   "q_legacy": 1477.020736694336,
+   "mode": "per_tap",
+   "reserve_frac": 0.02,
+   "debris_policy": "hold",
+   "N": 20000,
+   "kappa": 0.5
+  },
+  "milestones": {
+   "1000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 32635114.177749634,
+    "debris_total": 671270.5579071045,
+    "consumed": 671270.2643432617,
+    "fragment_components": 89507,
+    "fragment_cells": 90010
+   },
+   "5000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 27708908.981933594,
+    "debris_total": 3134373.74848938,
+    "consumed": 3134372.2695770264,
+    "fragment_components": 78282,
+    "fragment_cells": 78914
+   },
+   "10000": {
+    "balance_residual": 0,
+    "tracker_drift": 0,
+    "density_sum": 22007665.563049316,
+    "debris_total": 5984996.126678467,
+    "consumed": 5984993.310272217,
+    "fragment_components": 62751,
+    "fragment_cells": 63361
+   }
+  },
+  "violations_ledger": 0,
+  "violations_allowance": 0,
+  "violations_reserve": 0,
+  "q_tap_legacy": 1477.020736694336,
+  "pre_terminal_audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "density_sum": 16847484.955825806,
+   "main_mass": 1104116774065,
+   "debris_total": 8565087.01689148,
+   "consumed": 8565083.027282715,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 48647,
+   "fragment_cells": 49036,
+   "largest_fragment": 26251
+  }
+ },
+ "A_concentrated_cumulative": {
+  "wall_s": 36.0,
+  "accepted": 38,
+  "launched": 800000,
+  "calib": {
+   "cells0": 147908,
+   "dens_sum0": 33977655.0,
+   "Mr": 290798960641,
+   "Mr_frac": 0.13059288523634896,
+   "q_tap_dfix": 96798031,
+   "q_legacy": 1477.020736694336,
+   "mode": "cumulative",
+   "reserve_frac": 0.02,
+   "debris_policy": "hold",
+   "N": 20000,
+   "kappa": 0.5
+  },
+  "milestones": {},
+  "violations_ledger": 0,
+  "violations_allowance": 0,
+  "violations_reserve": 0,
+  "q_tap_legacy": 1477.020736694336,
+  "pre_terminal_audit": {
+   "balance_residual": 0,
+   "tracker_drift": 0,
+   "density_sum": 33922674.823287964,
+   "main_mass": 2223156417219,
+   "debris_total": 27490.09750366211,
+   "consumed": 27490.079208374023,
+   "burned": 0,
+   "M0": 2226759598080,
+   "fragment_components": 32626,
+   "fragment_cells": 32664,
+   "largest_fragment": 115111
+  }
+ }
+}

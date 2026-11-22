@@ -1,0 +1,10 @@
+{
+ "runs": 2,
+ "taps": 1500,
+ "stream": "hostile seed 4242",
+ "hashes": [
+  "354bdb0bdd08be11c72775fc",
+  "354bdb0bdd08be11c72775fc"
+ ],
+ "identical": true
+}

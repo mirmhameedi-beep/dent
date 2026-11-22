@@ -1,0 +1,86 @@
+A_concentrated done
+B_distributed done
+{
+ "config": {
+  "n_taps": 5000,
+  "alpha": 0.00197456,
+  "lattice": 72,
+  "note": "billion calibration; Model A with per-tap cap enabled",
+  "cap_mass": 0.029540415,
+  "cells0_poc": 147908,
+  "dens_sum0_poc": 33977655.0
+ },
+ "modelA_A_concentrated": {
+  "hist": "A_concentrated",
+  "accepted": 5000,
+  "launched": 5000,
+  "wall_s": 1.75,
+  "ms_per_tap": 0.35,
+  "ray_time_share": 0.2,
+  "impact_ms_per_tap": 0.275,
+  "ms_per_tap_ray": 0.069,
+  "rss_mb": 60.4,
+  "cells": 147908,
+  "severances": 3,
+  "crumbles": 0,
+  "modified_cells_per_tap": 33.73
+ },
+ "conserved_A_concentrated": {
+  "hist": "A_concentrated",
+  "accepted": 5000,
+  "launched": 5000,
+  "wall_s": 1.89,
+  "ms_per_tap": 0.379,
+  "ray_time_share": 0.19,
+  "impact_ms_per_tap": 0.301,
+  "ms_per_tap_ray": 0.071,
+  "rss_mb": 61.0,
+  "cells": 147908,
+  "severances": 3,
+  "crumbles": 0,
+  "modified_cells_per_tap": 33.94,
+  "ledger_audit_ms": 292.7,
+  "debris_blocks": 2
+ },
+ "modelA_B_distributed": {
+  "hist": "B_distributed",
+  "accepted": 5000,
+  "launched": 5085,
+  "wall_s": 2.51,
+  "ms_per_tap": 0.501,
+  "ray_time_share": 0.154,
+  "impact_ms_per_tap": 0.416,
+  "ms_per_tap_ray": 0.076,
+  "rss_mb": 89.9,
+  "cells": 147908,
+  "severances": 0,
+  "crumbles": 0,
+  "modified_cells_per_tap": 33.12
+ },
+ "conserved_B_distributed": {
+  "hist": "B_distributed",
+  "accepted": 5000,
+  "launched": 5085,
+  "wall_s": 2.72,
+  "ms_per_tap": 0.544,
+  "ray_time_share": 0.139,
+  "impact_ms_per_tap": 0.46,
+  "ms_per_tap_ray": 0.074,
+  "rss_mb": 89.9,
+  "cells": 147908,
+  "severances": 0,
+  "crumbles": 0,
+  "modified_cells_per_tap": 33.22,
+  "ledger_audit_ms": 284.5,
+  "debris_blocks": 368
+ },
+ "hier_dda": {
+  "rays": 600,
+  "empty_blocks": 74,
+  "total_blocks": 965,
+  "contact_cell_mismatches": 0,
+  "plain_ms_per_ray": 0.0692,
+  "fast_ms_per_ray": 0.0879,
+  "speedup": 0.79
+ }
+}

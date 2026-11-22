@@ -1,0 +1,23 @@
+{
+ "axis": {
+  "agree": 120,
+  "engine_hit_ind_miss": 0,
+  "engine_miss_ind_hit": 0,
+  "max_err": 19.493,
+  "err>5cells": 1
+ },
+ "grazing": {
+  "agree": 119,
+  "engine_hit_ind_miss": 1,
+  "engine_miss_ind_hit": 0,
+  "max_err": 10.969,
+  "err>5cells": 3
+ },
+ "oblique": {
+  "agree": 118,
+  "engine_hit_ind_miss": 0,
+  "engine_miss_ind_hit": 2,
+  "max_err": 6.699,
+  "err>5cells": 1
+ }
+}

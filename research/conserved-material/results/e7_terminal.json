@@ -1,0 +1,43 @@
+{
+ "config": {
+  "N": 5000,
+  "note": "compressed terminal demo; not a 1e9 physical run"
+ },
+ "refusal_at_N_minus_1": {
+  "authorised": false,
+  "reason": "accepted_counter_mismatch"
+ },
+ "final_tap_attempts": 4,
+ "manifest": {
+  "event": "terminal_disintegration",
+  "accepted": 5000,
+  "N_target": 5000,
+  "pre_hash": "0a4adcab062df2c06e508673",
+  "physical_before": 1624552574144,
+  "burned": 1624552574144,
+  "reserve": 290798960641,
+  "version": "cm_poc_v1",
+  "post_audit_ok": true,
+  "post_hash": "e3b0c44298fc1c149afbf4c8"
+ },
+ "identity_after_terminal": {
+  "burned": 1624552574144,
+  "consumed": 602207023936,
+  "burned_plus_consumed_eq_M0": true,
+  "density_empty": true,
+  "debris_empty": true,
+  "fines_empty": true,
+  "severed_empty": true,
+  "post_hash": "e3b0c44298fc1c149afbf4c8"
+ },
+ "idempotent_replay": {
+  "same_manifest": true,
+  "burned_unchanged": true
+ },
+ "post_terminal_tap": {
+  "ok": false,
+  "reason": "miss_rejected"
+ },
+ "reserve_ok_all_taps": true,
+ "ledger_ok_all_taps": true
+}
