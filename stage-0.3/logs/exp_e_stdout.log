@@ -1,0 +1,25 @@
+== baseline: 200 clean accepts + processing ==
+baseline: accept 170/s; processed 200; total 200 dents 200; field==reference: True
+== S1: kill -9 after SQL executed, BEFORE tap tx commit ==
+S1: dents 0, counter 0 (must be 0/0); PASS=True
+== S2: kill -9 right after tap tx commit (before any processing) ==
+S2: dents 50 counter 50 (50/50); field==reference True; PASS=True
+== S3: kill -9 after reading damage events ==
+S3: restarted recovery field==reference True; PASS=True
+== S4: kill -9 mid damage-calculation ==
+S4: dents 4000 counter 4000 (4000/4000); field==reference True; PASS=True
+== S5: tx failure after staging modified (staging-copy semantics) ==
+S5: staged(sub committed) hash a8d7c52a905c vs committed e396e78ab0ac; committed unaffected: True
+== S6: kill -9 during field persistence tx ==
+S6: field==reference True; dents 4000; PASS=True
+== S7: kill during snapshot write (no file) ==
+== S8: kill after snapshot fully written+fsynced, BEFORE registration ==
+S7/S8: unregistered/corrupt snapshots ignored; recovered from events instead; consistent=True
+   snapshot files on disk: 1; registered rows: 2
+== S9: fresh-process restart reconstructs exact committed state ==
+S9: dents 4000 total 4000; consistent=True; PASS=True
+== S10: duplicate UUID submitted 5 times ==
+S10: results ['dup', 'dup', 'dup', 'dup', 'dup']; counter 4000 -> 4000 (must +0); events for uuid: 1 (must be 1); PASS=True
+== perf: accept throughput, processor throughput, backlog, snapshot, WAL ==
+perf: accepts 160/s (31.17s for 5000); processor 42792 events/s; backlog after burst 5000; recovery 0.01s; snapshot 0.008s (762 bytes); db 606208 bytes wal 0 bytes
+experiment E complete: ALL SCENARIOS PASSED

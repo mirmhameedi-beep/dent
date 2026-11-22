@@ -1,0 +1,3 @@
+C miss-reject: {"prep_taps_accepted": 1223, "prep_column_exhausted": true, "relaunched_ray_hit": false, "relaunched_ray_reason": "miss_rejected", "state_hash_before": "249508d6f0ee96d1", "state_hash_after": "249508d6f0ee96d1", "state_unchanged": true}
+S9 rim chord: 51 shafts at x=0.9205, y[-0.6,0.5] pitch=0.022 cap=4000
+client snapshot at S7_craters_merge epoch 0 tris 27456

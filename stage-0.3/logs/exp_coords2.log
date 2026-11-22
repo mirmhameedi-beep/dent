@@ -1,0 +1,4 @@
+C miss-reject: {"prep_taps_accepted": 1223, "prep_column_exhausted": true, "relaunched_ray_hit": false, "relaunched_ray_reason": "miss_rejected", "state_hash_before": "249508d6f0ee96d1", "state_hash_after": "249508d6f0ee96d1", "state_unchanged": true}
+client snapshot at S7_craters_merge epoch 0 tris 27456
+B stale-client (real): {"client_epoch": 0, "server_epoch_after_fragments": 2, "epoch_bumped": true, "client_tris": 27456, "current_tris": 25537, "fragment_events": 3, "client_stored_tri": 10807, "client_stored_tri_removed_by_fragment": false, "re_ray_hit_z": null, "recovery": "server rejects a material coordinate whose epoch or tri is no longer valid; client re-raycasts the same screen anchor against the authoritative geometry snapshot"}
+WROTE exp_coords2_results.json

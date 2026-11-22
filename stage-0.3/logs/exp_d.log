@@ -1,0 +1,9 @@
+D0 sequential 100k (same exact point): 2.0s; cells 33 open 33; ret 211200 rem 29788800 unret 0; hash f2df432d72f18514
+D0 batched state(K) result: hash e3b0c44298fc1c14; byte-equal to sequential: False
+D0 NOTE: closed-form batching NOT equal -> sequential folding in accepted order is REQUIRED (spill routing is order-dependent). The outbox processor must never batch across sequence. This is the safe architectural conclusion recorded in exp_d_results.json.
+D1 100k @1 pt: 2.0s; cells 33 open 33; maxdepth 8000 (SAT 8000); ret 211200 rem 29788800 unret 0
+D1 1M @1 pt: 19.9s; cells 33 open 33; maxdepth 8000; rem 329788800 unret 0
+D1 10M batched-only: state frozen at saturation: closed-form True; verified by 2000 real sequential replays: True
+D2 int16: all depths within int16 range: True; max depth 8000 == SAT 8000
+D4 fully-saturated region: 2000 further taps -> mass_unretained delta 0, mass_removed delta 600000 (excess routes as REMOVED into open cells already at SAT; unretained only if no open cell remains); work bounded; field state unchanged
+experiment D complete

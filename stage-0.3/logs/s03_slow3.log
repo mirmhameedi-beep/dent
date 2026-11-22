@@ -1,0 +1,23 @@
+{'launched_bucket': 100000, 'accepted_bucket': 100000, 'total_taps': 1100000, 'total_rej': 0, 'taps_per_s': 759.9, 'removed': 65, 'sev': 471}
+{'launched_bucket': 200000, 'accepted_bucket': 99376, 'total_taps': 1199376, 'total_rej': 624, 'taps_per_s': 769.1, 'removed': 73, 'sev': 513}
+{'launched_bucket': 300000, 'accepted_bucket': 88196, 'total_taps': 1287572, 'total_rej': 12428, 'taps_per_s': 842.5, 'removed': 78, 'sev': 540}
+{'launched_bucket': 400000, 'accepted_bucket': 62631, 'total_taps': 1350203, 'total_rej': 49797, 'taps_per_s': 1095.6, 'removed': 84, 'sev': 569}
+{'launched_bucket': 500000, 'accepted_bucket': 42276, 'total_taps': 1392479, 'total_rej': 107521, 'taps_per_s': 1534.0, 'removed': 88, 'sev': 583}
+{'launched_bucket': 600000, 'accepted_bucket': 32041, 'total_taps': 1424520, 'total_rej': 175480, 'taps_per_s': 1892.2, 'removed': 89, 'sev': 593}
+{'launched_bucket': 700000, 'accepted_bucket': 20000, 'total_taps': 1444520, 'total_rej': 255480, 'taps_per_s': 2632.0, 'removed': 90, 'sev': 599}
+{'launched_bucket': 800000, 'accepted_bucket': 20000, 'total_taps': 1464520, 'total_rej': 335480, 'taps_per_s': 2620.9, 'removed': 90, 'sev': 607}
+{'launched_bucket': 900000, 'accepted_bucket': 17382, 'total_taps': 1481902, 'total_rej': 418098, 'taps_per_s': 2932.9, 'removed': 92, 'sev': 612}
+{'launched_bucket': 1000000, 'accepted_bucket': 12027, 'total_taps': 1493929, 'total_rej': 506071, 'taps_per_s': 3607.5, 'removed': 94, 'sev': 620}
+{'launched_bucket': 1100000, 'accepted_bucket': 7558, 'total_taps': 1501487, 'total_rej': 598513, 'taps_per_s': 4504.7, 'removed': 95, 'sev': 621}
+{'launched_bucket': 1200000, 'accepted_bucket': 5000, 'total_taps': 1506487, 'total_rej': 693513, 'taps_per_s': 5308.3, 'removed': 95, 'sev': 625}
+{'launched_bucket': 1300000, 'accepted_bucket': 5000, 'total_taps': 1511487, 'total_rej': 788513, 'taps_per_s': 5276.6, 'removed': 95, 'sev': 625}
+{'launched_bucket': 1400000, 'accepted_bucket': 5000, 'total_taps': 1516487, 'total_rej': 883513, 'taps_per_s': 5266.5, 'removed': 96, 'sev': 626}
+{'launched_bucket': 1500000, 'accepted_bucket': 5000, 'total_taps': 1521487, 'total_rej': 978513, 'taps_per_s': 5247.4, 'removed': 96, 'sev': 627}
+{'launched_bucket': 1600000, 'accepted_bucket': 5000, 'total_taps': 1526487, 'total_rej': 1073513, 'taps_per_s': 5358.1, 'removed': 96, 'sev': 631}
+{'launched_bucket': 1700000, 'accepted_bucket': 5000, 'total_taps': 1531487, 'total_rej': 1168513, 'taps_per_s': 5344.3, 'removed': 96, 'sev': 634}
+{'launched_bucket': 1800000, 'accepted_bucket': 5000, 'total_taps': 1536487, 'total_rej': 1263513, 'taps_per_s': 5432.5, 'removed': 97, 'sev': 635}
+{'launched_bucket': 1900000, 'accepted_bucket': 5000, 'total_taps': 1541487, 'total_rej': 1358513, 'taps_per_s': 5366.4, 'removed': 97, 'sev': 637}
+{'launched_bucket': 2000000, 'accepted_bucket': 5000, 'total_taps': 1546487, 'total_rej': 1453513, 'taps_per_s': 5271.9, 'removed': 97, 'sev': 637}
+{'launched_bucket': 2100000, 'accepted_bucket': 2756, 'total_taps': 1549243, 'total_rej': 1550757, 'taps_per_s': 6415.6, 'removed': 98, 'sev': 638}
+{'launched_bucket': 2200000, 'accepted_bucket': 0, 'total_taps': 1549243, 'total_rej': 1650757, 'taps_per_s': 8263.6, 'removed': 98, 'sev': 638}
+continuation done; final accepted: 1549243

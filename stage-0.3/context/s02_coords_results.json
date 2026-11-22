@@ -1,0 +1,169 @@
+{
+ "S1_pristine_hit_before_crater": {
+  "hit": [
+   37619,
+   11822,
+   19391
+  ],
+  "cell": [
+   55,
+   42,
+   45
+  ]
+ },
+ "S1b_crater_floor_depth_cells": {
+  "1": 0.0,
+  "100": 1.543,
+  "300": 4.226,
+  "600": 8.997,
+  "1000": 15.407,
+  "1285": "miss_rejected (bore-through)",
+  "3000": "miss_rejected (bore-through)"
+ },
+ "rotate_views": {
+  "front": {
+   "hit": [
+    26214,
+    16384,
+    17037
+   ],
+   "cell": [
+    49,
+    44,
+    44
+   ]
+  },
+  "side": {
+   "hit": [
+    59569,
+    21388,
+    0
+   ],
+   "cell": [
+    66,
+    47,
+    36
+   ]
+  },
+  "rear": {
+   "hit": [
+    49615,
+    -1167,
+    -46801
+   ],
+   "cell": [
+    61,
+    35,
+    11
+   ]
+  },
+  "top": {
+   "hit": [
+    40308,
+    -50556,
+    17616
+   ],
+   "cell": [
+    56,
+    9,
+    45
+   ]
+  },
+  "other_side": {
+   "hit": [
+    -61503,
+    26132,
+    9748
+   ],
+   "cell": [
+    4,
+    49,
+    41
+   ]
+  },
+  "three_quarter": {
+   "hit": [
+    35715,
+    25885,
+    13303
+   ],
+   "cell": [
+    54,
+    49,
+    42
+   ]
+  }
+ },
+ "tap_new_side": {
+  "ok": true,
+  "hit": [
+   -10523,
+   30386,
+   59182
+  ]
+ },
+ "tap_crater": {
+  "rays_300_ok": 0,
+  "floor_progress": null,
+  "bore_through_after": 1285,
+  "bore_through_result": "rejected:miss_rejected"
+ },
+ "tap_cavity_mouth": {
+  "ok": true,
+  "hit": [
+   57358,
+   13106,
+   6556
+  ],
+  "cell": [
+   65,
+   42,
+   39
+  ]
+ },
+ "tap_near_edge": {
+  "ok": true,
+  "hit": [
+   57374,
+   -27435,
+   18248
+  ]
+ },
+ "tap_fragment": {
+  "nfrag": 226,
+  "frag_cells": 1,
+  "hit": true,
+  "hit_lands_on_fragment": false
+ },
+ "stale_client": {
+  "stale_cell": [
+   55,
+   42,
+   45
+  ],
+  "cell_still_solid": false,
+  "cell_damaged": false,
+  "policy": "server re-resolves from the client RAY; stale material coordinates are advisory only; a stale cell that no longer faces a valid current surface resolves to the CURRENT surface or is rejected; the server never substitutes its last accepted point"
+ },
+ "miss_rejected": {
+  "ok": false,
+  "reason": "miss_rejected",
+  "state_unchanged": true,
+  "rejected_by_design": true
+ },
+ "two_versions": {
+  "v0_ok": true,
+  "v2_ok": true,
+  "hitA": [
+   -10529,
+   30382,
+   59172
+  ],
+  "hitB": [
+   -10536,
+   30378,
+   59161
+  ],
+  "both_land_current_surface": true
+ }
+}

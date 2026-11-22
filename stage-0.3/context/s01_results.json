@@ -1,0 +1,137 @@
+{
+ "A": {
+  "S5_probe": {
+   "main_ray": {
+    "tri": 3218,
+    "hit_z_fixed": 56823,
+    "cell_depth": 12000,
+    "note": "A: hit lands on the displaced shell above failed cells (a plug cap). No interior surface exists in A.",
+    "interior_tris": 0
+   }
+  },
+  "S9_fragments": {
+   "count": 0,
+   "note": "A cannot fragment: no real material removal"
+  },
+  "S10_fragments": {
+   "count": 0,
+   "note": "A cannot fragment: no real material removal"
+  },
+  "summary": {
+   "taps_accepted": 195659,
+   "taps_rejected": 1590,
+   "excavations": 0,
+   "shears": 0,
+   "interior_tris": 0,
+   "fragments": 0,
+   "mass_applied": 58697700,
+   "mass_retained": 23054264,
+   "mass_removed": 35643436,
+   "mass_unretained": 0,
+   "occupied_cells": 11661,
+   "open_cells": 1049,
+   "verts": 13826,
+   "tris": 27648,
+   "time_fold_s": 5.4655,
+   "time_geom_s": 6.237,
+   "time_ray_s": 363.373
+  }
+ },
+ "B": {
+  "S5_probe": {
+   "main_ray": {
+    "tri": 16755,
+    "hit_z_fixed": -63666,
+    "hit_on_interior_surface": false,
+    "interior_tris": 0
+   }
+  },
+  "S9_fragments": {
+   "count": 0,
+   "tris": []
+  },
+  "S10_fragments": {
+   "count": 3,
+   "tris": [
+    4,
+    2,
+    9
+   ]
+  },
+  "summary": {
+   "taps_accepted": 74379,
+   "taps_rejected": 3722,
+   "verts": 13917,
+   "tris": 25537,
+   "interior_tris": 778,
+   "excavations": 91,
+   "shears": 8,
+   "components": 1,
+   "fragments": 3,
+   "mass_applied": 22313700,
+   "mass_retained": 10416715,
+   "mass_removed": 11896985,
+   "mass_unretained": 0,
+   "time_fold_s": 4.1407,
+   "time_remesh_s": 4.0827,
+   "time_ray_s": 153.4126
+  }
+ },
+ "C": {
+  "S5_probe": {
+   "main_ray": {
+    "hit": true,
+    "voxel": [
+     50,
+     61,
+     63
+    ],
+    "voxel_surface_z_world": 0.35
+   },
+   "interior_faces": 129,
+   "total_faces": 81972
+  },
+  "S9_fragments": {
+   "count": 1,
+   "cells": [
+    1138
+   ]
+  },
+  "S9_components": [
+   353299,
+   4,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "S10_fragments": {
+   "count": 1,
+   "cells": [
+    1138
+   ]
+  },
+  "S10_interior_faces": 2103,
+  "summary": {
+   "taps_accepted": 133633,
+   "taps_rejected": 2628,
+   "material_voxels": 352990,
+   "damage_cells": 10340,
+   "exposed_interior_faces": 2103,
+   "fragments": 1,
+   "mass_applied": 40089900,
+   "mass_retained": 13124757,
+   "mass_removed": 15252638,
+   "mass_unretained": 11712505,
+   "time_carve_s": 2.5642,
+   "time_extract_s": 1.049,
+   "time_ray_s": 1.4741
+  }
+ }
+}

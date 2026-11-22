@@ -1,0 +1,12 @@
+{
+ "method": "pure-Python PNG decode + exact RGB byte comparison vs ALPHA_pristine_front.png (420x420x3=529,200 bytes); measured",
+ "pairs": {
+  "A_1000000_front": 0.003,
+  "B_10000000_front": 0.001,
+  "C_10000000_front": 0.159,
+  "B_20000000_front": 0.122,
+  "E_20000000_front": 0.132,
+  "C_20000000_front": 0.704
+ },
+ "note": "differing-byte fraction; large-scale views legitimately near-pristine at these milestones under Model A calibration (per-tap mass cap 0.03027/tap); clustering (C) leads visible change; growth super-roughly linear-to-slightly-accelerating in this window (measured points only, no extrapolation past 20M)"
+}

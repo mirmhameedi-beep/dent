@@ -1,0 +1,8 @@
+[D_edge] fresh start; calib={'cells0': 151553, 'dens_sum0': 34816588.0, 'd0mean': 229.732, 'cap_mass': 0.030269998, 'alpha': 0.00197456}
+[D_edge] milestone 10000: acc=10000 cells=151553 removed=0 sev=0 frag=0 rej=982 rss=74.0MB t=6.3s
+[D_edge] milestone 100000: acc=100000 cells=151553 removed=0 sev=0 frag=0 rej=9949 rss=74.0MB t=60.0s
+[D_edge] milestone 1000000: acc=1000000 cells=151553 removed=0 sev=0 frag=0 rej=98136 rss=74.0MB t=927.8s
+[D_edge] milestone 10000000: acc=10000000 cells=151553 removed=0 sev=3027 frag=1 rej=980793 rss=74.6MB t=8649.7s
+[D_edge] milestone 20000000: acc=20000000 cells=151553 removed=0 sev=8411 frag=9 rej=1958222 rss=77.0MB t=14566.1s
+[D_edge] milestone 30000000: acc=30000000 cells=151544 removed=9 sev=12338 frag=31 rej=2936080 rss=77.3MB t=19231.0s
+[D_edge] done acc=30000000 launched=32936080 cells=151544 sec=19232

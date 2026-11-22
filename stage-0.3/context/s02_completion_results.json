@@ -1,0 +1,228 @@
+{
+ "depletion_distributed": {
+  "launched": 300000,
+  "accepted": 291953,
+  "cells_left": 132869,
+  "seconds": 106.9,
+  "curve": [
+   {
+    "q": 7500,
+    "accepted": 7382,
+    "cells": 151553
+   },
+   {
+    "q": 15000,
+    "accepted": 14765,
+    "cells": 151553
+   },
+   {
+    "q": 22500,
+    "accepted": 22132,
+    "cells": 151553
+   },
+   {
+    "q": 30000,
+    "accepted": 29528,
+    "cells": 151553
+   },
+   {
+    "q": 37500,
+    "accepted": 36924,
+    "cells": 151532
+   },
+   {
+    "q": 45000,
+    "accepted": 44319,
+    "cells": 151363
+   },
+   {
+    "q": 52500,
+    "accepted": 51709,
+    "cells": 151014
+   },
+   {
+    "q": 60000,
+    "accepted": 59072,
+    "cells": 150606
+   },
+   {
+    "q": 67500,
+    "accepted": 66458,
+    "cells": 150052
+   },
+   {
+    "q": 75000,
+    "accepted": 73816,
+    "cells": 149488
+   },
+   {
+    "q": 82500,
+    "accepted": 81198,
+    "cells": 148995
+   },
+   {
+    "q": 90000,
+    "accepted": 88567,
+    "cells": 148487
+   },
+   {
+    "q": 97500,
+    "accepted": 95932,
+    "cells": 147964
+   },
+   {
+    "q": 105000,
+    "accepted": 103308,
+    "cells": 147424
+   },
+   {
+    "q": 112500,
+    "accepted": 110663,
+    "cells": 146884
+   },
+   {
+    "q": 120000,
+    "accepted": 118013,
+    "cells": 146367
+   },
+   {
+    "q": 127500,
+    "accepted": 125338,
+    "cells": 145827
+   },
+   {
+    "q": 135000,
+    "accepted": 132675,
+    "cells": 145264
+   },
+   {
+    "q": 142500,
+    "accepted": 139998,
+    "cells": 144721
+   },
+   {
+    "q": 150000,
+    "accepted": 147306,
+    "cells": 144157
+   },
+   {
+    "q": 157500,
+    "accepted": 154605,
+    "cells": 143587
+   },
+   {
+    "q": 165000,
+    "accepted": 161918,
+    "cells": 143008
+   },
+   {
+    "q": 172500,
+    "accepted": 169227,
+    "cells": 142457
+   },
+   {
+    "q": 180000,
+    "accepted": 176508,
+    "cells": 141921
+   },
+   {
+    "q": 187500,
+    "accepted": 183776,
+    "cells": 141353
+   },
+   {
+    "q": 195000,
+    "accepted": 191047,
+    "cells": 140769
+   },
+   {
+    "q": 202500,
+    "accepted": 198325,
+    "cells": 140191
+   },
+   {
+    "q": 210000,
+    "accepted": 205601,
+    "cells": 139670
+   },
+   {
+    "q": 217500,
+    "accepted": 212855,
+    "cells": 139109
+   },
+   {
+    "q": 225000,
+    "accepted": 220071,
+    "cells": 138560
+   },
+   {
+    "q": 232500,
+    "accepted": 227300,
+    "cells": 137955
+   },
+   {
+    "q": 240000,
+    "accepted": 234534,
+    "cells": 137409
+   },
+   {
+    "q": 247500,
+    "accepted": 241732,
+    "cells": 136863
+   },
+   {
+    "q": 255000,
+    "accepted": 248940,
+    "cells": 136264
+   },
+   {
+    "q": 262500,
+    "accepted": 256119,
+    "cells": 135704
+   },
+   {
+    "q": 270000,
+    "accepted": 263317,
+    "cells": 135134
+   },
+   {
+    "q": 277500,
+    "accepted": 270493,
+    "cells": 134572
+   },
+   {
+    "q": 285000,
+    "accepted": 277672,
+    "cells": 134003
+   },
+   {
+    "q": 292500,
+    "accepted": 284833,
+    "cells": 133435
+   },
+   {
+    "q": 300000,
+    "accepted": 291953,
+    "cells": 132869
+   }
+  ],
+  "hash": "8ce998bafbe3ef3a809a61f1",
+  "cells0": 151553
+ },
+ "calibration": {
+  "alpha": 0.002308263,
+  "per_tap_density_units": 0.006001,
+  "note": "alpha scales all damage constants; each cell then needs ~1e9/cells taps to crumble",
+  "scaled_window_slope_taps_per_cell": null,
+  "predicted_slope": 6598.34,
+  "linear_hypothesis_holds": false
+ },
+ "pathological_single_ray": {
+  "accepted": 1393,
+  "rejected": 198607,
+  "cells_left": 151485,
+  "note": "concentration self-limits: after bore-through the ray is rejected forever; the rock is not consumed"
+ },
+ "derived_taps_per_cell_lost": 15.2307,
+ "derived_full_depletion_taps": 2308263
+}

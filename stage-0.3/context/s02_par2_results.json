@@ -1,0 +1,110 @@
+[
+ {
+  "n": 5,
+  "sep": 0,
+  "AB": "a5086d3ec3c0c28b7c9be87b",
+  "BA": "dc90145f61bd39551316ad8f",
+  "SIM": "0e51ffb1abf3e408166a7d9e",
+  "ab_eq_ba": false,
+  "all_eq": false
+ },
+ {
+  "n": 5,
+  "sep": 1,
+  "AB": "26215ce627f2cd4b8c796951",
+  "BA": "e03e82e6c1068bb2ce4ddd6e",
+  "SIM": "e03e82e6c1068bb2ce4ddd6e",
+  "ab_eq_ba": false,
+  "all_eq": false
+ },
+ {
+  "n": 5,
+  "sep": 3,
+  "AB": "3c2a1214e9234bf389cd8ad8",
+  "BA": "3c2a1214e9234bf389cd8ad8",
+  "SIM": "6ce8f6643aef310e6c53e1bb",
+  "ab_eq_ba": true,
+  "all_eq": false
+ },
+ {
+  "n": 5,
+  "sep": 6,
+  "AB": "a26c6111dc0f425a2e3268d3",
+  "BA": "a26c6111dc0f425a2e3268d3",
+  "SIM": "7ae5508a482a7f1c2f4a502c",
+  "ab_eq_ba": true,
+  "all_eq": false
+ },
+ {
+  "n": 25,
+  "sep": 0,
+  "AB": "a9473dbb7a25b175dc97aaf8",
+  "BA": "bc1e0b651441b484cf394cce",
+  "SIM": "a321b1285050dcf230d682da",
+  "ab_eq_ba": false,
+  "all_eq": false
+ },
+ {
+  "n": 25,
+  "sep": 1,
+  "AB": "7a03ca3b8f71e9ffa00f015c",
+  "BA": "c1b7a64dc730da8579adb8e6",
+  "SIM": "93b97ceb6e3260ba47f12a63",
+  "ab_eq_ba": false,
+  "all_eq": false
+ },
+ {
+  "n": 25,
+  "sep": 3,
+  "AB": "dec124757f9c4c625408bac0",
+  "BA": "dec124757f9c4c625408bac0",
+  "SIM": "0589a4fe03fbc5c61e297952",
+  "ab_eq_ba": true,
+  "all_eq": false
+ },
+ {
+  "n": 25,
+  "sep": 6,
+  "AB": "b880af25159ffb334daa4948",
+  "BA": "b880af25159ffb334daa4948",
+  "SIM": "13f9f74146caafb256dfb63c",
+  "ab_eq_ba": true,
+  "all_eq": false
+ },
+ {
+  "n": 100,
+  "sep": 0,
+  "AB": "08d011d6052fdc6e0ad19beb",
+  "BA": "1b23ba84dd491f24bbcff13c",
+  "SIM": "2dd8365c8a6a545fc204902d",
+  "ab_eq_ba": false,
+  "all_eq": false
+ },
+ {
+  "n": 100,
+  "sep": 1,
+  "AB": "ac22f93c9830ce62f11d8178",
+  "BA": "7d9cc34246661cf1d5e75888",
+  "SIM": "512ccb9a7482d0f4a925c5db",
+  "ab_eq_ba": false,
+  "all_eq": false
+ },
+ {
+  "n": 100,
+  "sep": 3,
+  "AB": "bf119e1d338658a7e4d696ce",
+  "BA": "bf119e1d338658a7e4d696ce",
+  "SIM": "a82f76c050d10b1e349c2f64",
+  "ab_eq_ba": true,
+  "all_eq": false
+ },
+ {
+  "n": 100,
+  "sep": 6,
+  "AB": "5202f107022a4ad4383e1d2e",
+  "BA": "5202f107022a4ad4383e1d2e",
+  "SIM": "eff47bbb33c384b1f6691229",
+  "ab_eq_ba": true,
+  "all_eq": false
+ }
+]

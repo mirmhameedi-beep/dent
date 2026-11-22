@@ -1,0 +1,12 @@
+sep 0 commutes True
+sep 1 commutes True
+sep 2 commutes True
+sep 4 commutes True
+sep 8 commutes True
+sep 16 commutes True
+sep 0 weakened commutes True
+sep 2 weakened commutes True
+sep 4 weakened commutes True
+local rebuild...
+{"L": 72, "dirty_cells": 2197, "full_blocky_s": 0.211, "local_blocky_s": 0.003, "full_tris": 46192, "local_tris": 370, "mt_full_s": 30.19, "mt_local_s": 0.83, "mt_local_tris": 10382, "mt_local_subset_of_full": false}
+par done

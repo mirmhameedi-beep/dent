@@ -1,0 +1,5 @@
+0.25 1500 comps 266 largest 151281 frags [1, 1, 1, 1, 1, 1]
+0.5 3000 comps 466 largest 151009 frags [1, 1, 1, 1, 1, 1]
+0.75 4500 comps 895 largest 150474 frags [14, 4, 2, 1, 1, 1]
+1.0 6000 comps 1026 largest 150256 frags [12, 4, 2, 2, 2, 1]
+fragvisual done; accepted: 6000

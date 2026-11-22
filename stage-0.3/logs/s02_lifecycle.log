@@ -1,0 +1,33 @@
+anchor: [0.451, 0.2278, 0.2626] cell: (68, 58, 59)
+stage 1: {'cells': 357115, 'low_density_cells': 0, 'crumbles': 0, 'severed': 0, 'taps': 1, 'rejected': 0, 'stage': 1, 'launched': 1, 'miss_after': 0, 'ms_per_tap': 1.426, 'depth_cells': 0.01, 'through': False, 'nfrag': 0, 'frag_top': []}
+stage 10: {'cells': 357115, 'low_density_cells': 0, 'crumbles': 0, 'severed': 0, 'taps': 10, 'rejected': 0, 'stage': 10, 'launched': 10, 'miss_after': 0, 'ms_per_tap': 0.404, 'depth_cells': 0.07, 'through': False, 'nfrag': 0, 'frag_top': []}
+stage 100: {'cells': 357113, 'low_density_cells': 4, 'crumbles': 2, 'severed': 66, 'taps': 100, 'rejected': 0, 'stage': 100, 'launched': 100, 'miss_after': 0, 'ms_per_tap': 0.358, 'depth_cells': 1.43, 'through': False, 'nfrag': 17, 'frag_top': [1, 1, 1, 1, 1, 1]}
+stage 1000: {'cells': 357060, 'low_density_cells': 74, 'crumbles': 55, 'severed': 2827, 'taps': 1000, 'rejected': 0, 'stage': 1000, 'launched': 1000, 'miss_after': 0, 'ms_per_tap': 0.516, 'depth_cells': 16.9, 'through': False, 'nfrag': 809, 'frag_top': [1, 1, 1, 1, 1, 1]}
+stage 10000: {'cells': 357034, 'low_density_cells': 133, 'crumbles': 81, 'severed': 9834, 'taps': 1699, 'rejected': 48301, 'stage': 10000, 'launched': 50000, 'miss_after': 48301, 'ms_per_tap': 0.059, 'depth_cells': None, 'through': True, 'nfrag': 2993, 'frag_top': [1, 1, 1, 1, 1, 1]}
+stage 30000: {'cells': 357034, 'low_density_cells': 133, 'crumbles': 81, 'severed': 9834, 'taps': 1699, 'rejected': 148301, 'stage': 30000, 'launched': 150000, 'miss_after': 100000, 'ms_per_tap': 0.051, 'depth_cells': None, 'through': True, 'nfrag': 2993, 'frag_top': [1, 1, 1, 1, 1, 1]}
+Traceback (most recent call last):
+  File "/tmp/dent-poc/s02_lifecycle.py", line 136, in <module>
+    main()
+  File "/tmp/dent-poc/s02_lifecycle.py", line 101, in main
+    rr = rock.tap_ray(orig2, d2)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/dent-poc/s02_rock.py", line 298, in tap_ray
+    (hx, hy, hz), cell = hit
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/dent-poc/s02_rock.py", line 365, in impact
+    if dmg >= BOND_STRENGTH * tough:
+        ^^^^^^^^^^^^^^^^^
+  File "/tmp/dent-poc/s02_rock.py", line 432, in _sever
+    c = vunkey(v, self.L)
+        ^^^^^^^^^^^^^^^^^^
+  File "/tmp/dent-poc/s02_rock.py", line 432, in _sever
+    c = vunkey(v, self.L)
+        ^^^^^^^^^^^^^^^^^^
+  File "/tmp/dent-poc/s02_rock.py", line 432, in _sever
+    c = vunkey(v, self.L)
+        ^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 992 more times]
+  File "/tmp/dent-poc/s02_rock.py", line 417, in _sever
+    self.s["sev_total"] += 1
+            ^^^^^^^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded

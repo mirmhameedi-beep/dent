@@ -1,0 +1,5 @@
+{"L": 72, "init_s": 21.67, "rss_mb_init": 62.0, "cells": 151553, "cs_world": 0.029167, "snapshot_bytes_pristine": 757777, "distributed_3000": {"accepted": 2980, "rejected": 20, "ms_per_tap": 0.388}, "rss_mb_after_distrib
+{"L": 96, "init_s": 42.13, "rss_mb_init": 145.7, "cells": 357115, "cs_world": 0.021875, "snapshot_bytes_pristine": 1785587, "distributed_3000": {"accepted": 2960, "rejected": 40, "ms_per_tap": 0.39}, "rss_mb_after_distri
+{"L": 128, "init_s": 94.85, "rss_mb_init": 307.8, "cells": 842296, "cs_world": 0.016406, "snapshot_bytes_pristine": 4211492, "distributed_3000": {"accepted": 2960, "rejected": 40, "ms_per_tap": 0.423}, "rss_mb_after_dist
+{"L": 176, "init_s": 237.37, "rss_mb_init": 428.3, "cells": 2181210, "cs_world": 0.011932, "snapshot_bytes_pristine": 10906062, "distributed_3000": {"accepted": 2950, "rejected": 50, "ms_per_tap": 0.497}, "rss_mb_after_d
+res done

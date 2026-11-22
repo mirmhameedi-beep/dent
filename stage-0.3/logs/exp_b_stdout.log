@@ -1,0 +1,10 @@
+B0 pristine hit: tri 2726, t 0.0002, u 0.0000 v 1.0000
+   material coordinate (canonical-mesh point): (-0.1701, +0.1967, +1.0415)
+B after      1 taps: resolved (-0.1701, +0.1967, +1.0415)  residual vs material ((+0.0000, +0.0000, +0.0000))  depth 25  open 0  vol 0.00000 world^3  max sink 0.0000
+B after     11 taps: resolved (-0.1701, +0.1967, +1.0407)  residual vs material ((+0.0000, +0.0000, -0.0008))  depth 275  open 0  vol 0.00000 world^3  max sink 0.0008
+B after    111 taps: resolved (-0.1701, +0.1967, +1.0331)  residual vs material ((+0.0000, +0.0000, -0.0084))  depth 2183  open 0  vol 0.00002 world^3  max sink 0.0084
+B after   1111 taps: resolved (-0.1701, +0.1967, +0.9833)  residual vs material ((+0.0000, +0.0000, -0.0582))  depth 12000  open 19  vol 0.00015 world^3  max sink 0.0663
+B after  11111 taps: resolved (-0.1701, +0.1967, +0.9833)  residual vs material ((+0.0000, +0.0000, -0.0582))  depth 12000  open 33  vol 0.00018 world^3  max sink 0.0663
+B conservation: applied 3333300 == ret 242656 + rem 3090644 + unret 0: OK
+B timings: raycasts (5x deformed + 1 pristine) 0.1s, displacements 0.0s, folds 11111 taps 0.2s
+experiment B complete; coordinate contract written

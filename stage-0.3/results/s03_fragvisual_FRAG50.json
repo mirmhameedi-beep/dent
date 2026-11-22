@@ -1,0 +1,16 @@
+{
+ "check": 0.5,
+ "accepted": 3000,
+ "components": 466,
+ "largest": 151009,
+ "frags_top": [
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "sev": 1848,
+ "crumbles": 79
+}

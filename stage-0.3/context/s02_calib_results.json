@@ -1,0 +1,21 @@
+{
+ "C1_integer_alpha": {
+  "cells0": 151553,
+  "cells_left": 151553,
+  "accepted": 59078,
+  "slope": null,
+  "seconds": 24.8,
+  "zero_depletion": true
+ },
+ "C2_fixedpoint": {
+  "cells0": 151553,
+  "cells_left": 151553,
+  "accepted": 295464,
+  "slope_full": null,
+  "slope_late": null,
+  "derived_depletion": null,
+  "target": 1000000000,
+  "hits_target": false,
+  "seconds": 108.0
+ }
+}

@@ -1,0 +1,72 @@
+[
+ {
+  "taps": 20000,
+  "accepted": 20000,
+  "taps_per_s": 1043.3,
+  "cells": 151553,
+  "sev": 0
+ },
+ {
+  "taps": 40000,
+  "accepted": 40000,
+  "taps_per_s": 972.6,
+  "cells": 151553,
+  "sev": 0
+ },
+ {
+  "taps": 60000,
+  "accepted": 60000,
+  "taps_per_s": 1082.4,
+  "cells": 151553,
+  "sev": 3
+ },
+ {
+  "taps": 80000,
+  "accepted": 80000,
+  "taps_per_s": 1038.7,
+  "cells": 151553,
+  "sev": 7
+ },
+ {
+  "taps": 100000,
+  "accepted": 100000,
+  "taps_per_s": 1137.2,
+  "cells": 151553,
+  "sev": 19
+ },
+ {
+  "taps": 120000,
+  "accepted": 120000,
+  "taps_per_s": 1123.7,
+  "cells": 151553,
+  "sev": 36
+ },
+ {
+  "taps": 140000,
+  "accepted": 140000,
+  "taps_per_s": 1131.1,
+  "cells": 151553,
+  "sev": 49
+ },
+ {
+  "taps": 160000,
+  "accepted": 160000,
+  "taps_per_s": 1139.7,
+  "cells": 151553,
+  "sev": 60
+ },
+ {
+  "taps": 180000,
+  "accepted": 180000,
+  "taps_per_s": 1136.0,
+  "cells": 151553,
+  "sev": 77
+ },
+ {
+  "taps": 200000,
+  "accepted": 200000,
+  "taps_per_s": 1138.2,
+  "cells": 151553,
+  "sev": 96
+ }
+]

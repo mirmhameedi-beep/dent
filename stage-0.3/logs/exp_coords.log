@@ -1,0 +1,14 @@
+A prep crater (1500, 0)
+A prep edge-chip (450, 0)
+A miss-reject {"hit_surface": true, "reason": null, "hash_before": "ef1689e16f7ebd9a", "hash_after": "222091259fcb35f7", "state_unchanged": false}
+A z-descent [56823, 56823, 56823, 56823, 56823, 56823, 56823, 56823]
+B prep crater (1500, 0)
+B prep edge-chip (127, 323)
+B miss-reject {"hit_surface": false, "reason": "miss_rejected", "hash_before": "dcd8af9c104fad49", "hash_after": "dcd8af9c104fad49", "state_unchanged": true}
+B z-descent [53532, 52763, 57081, 57119, 57119, 57119, 57119, 57119]
+B stale-client {"epoch_before": 0, "epoch_after": 0, "epoch_bumped": false, "client_stale_surface_z": 57119, "recovered_surface_z": 57119, "recovery_method": "client re-raycasts its screen anchor against the authoritative current geometry (epoch-tagged swap); the stale material coordinate is discarded"}
+C prep crater (1500, 0)
+C prep edge-chip (450, 0)
+C miss-reject {"hit_surface": true, "reason": null, "hash_before": "e8a61962ffe48287", "hash_after": "e8a61962ffe48287", "state_unchanged": true}
+C z-descent [{'voxel': (50, 61, 81)}, {'voxel': (50, 61, 78)}, {'voxel': (50, 61, 76)}, {'voxel': (50, 61, 74)}, {'voxel': (50, 61, 72)}, {'voxel': (50, 61, 70)}, {'voxel': (50, 61, 68)}, {'voxel': (50, 61, 66)}]
+WROTE /tmp/dent-poc/out/exp_coords_results.json

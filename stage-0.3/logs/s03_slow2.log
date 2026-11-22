@@ -1,0 +1,11 @@
+{'bucket': 20000, 'accepted_bucket': 20000, 'total_taps': 1020000, 'taps_per_s': 727.9, 'sev': 440, 'crumbles': 59, 'removed': 59, 'cells': 151494}
+{'bucket': 40000, 'accepted_bucket': 20000, 'total_taps': 1040000, 'taps_per_s': 737.7, 'sev': 445, 'crumbles': 61, 'removed': 61, 'cells': 151492}
+{'bucket': 60000, 'accepted_bucket': 20000, 'total_taps': 1060000, 'taps_per_s': 735.9, 'sev': 454, 'crumbles': 63, 'removed': 63, 'cells': 151490}
+{'bucket': 80000, 'accepted_bucket': 20000, 'total_taps': 1080000, 'taps_per_s': 729.1, 'sev': 462, 'crumbles': 64, 'removed': 64, 'cells': 151489}
+{'bucket': 100000, 'accepted_bucket': 20000, 'total_taps': 1100000, 'taps_per_s': 739.0, 'sev': 471, 'crumbles': 65, 'removed': 65, 'cells': 151488}
+{'bucket': 120000, 'accepted_bucket': 20000, 'total_taps': 1120000, 'taps_per_s': 748.5, 'sev': 477, 'crumbles': 67, 'removed': 67, 'cells': 151486}
+{'bucket': 140000, 'accepted_bucket': 20000, 'total_taps': 1140000, 'taps_per_s': 707.9, 'sev': 484, 'crumbles': 70, 'removed': 70, 'cells': 151483}
+{'bucket': 160000, 'accepted_bucket': 20000, 'total_taps': 1160000, 'taps_per_s': 717.4, 'sev': 494, 'crumbles': 71, 'removed': 71, 'cells': 151482}
+{'bucket': 180000, 'accepted_bucket': 19876, 'total_taps': 1179876, 'taps_per_s': 733.6, 'sev': 500, 'crumbles': 73, 'removed': 73, 'cells': 151480}
+{'bucket': 200000, 'accepted_bucket': 19500, 'total_taps': 1199376, 'taps_per_s': 737.3, 'sev': 513, 'crumbles': 73, 'removed': 73, 'cells': 151480}
+done

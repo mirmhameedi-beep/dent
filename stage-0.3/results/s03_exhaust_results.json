@@ -1,0 +1,129 @@
+{
+ "T1_single_ray_exhaustion": {
+  "accepted_until_first_reject": null,
+  "subsequent_rejected": 0,
+  "state_unchanged_after_exhausted_taps": false,
+  "depth_curve": [
+   [
+    5000,
+    0.0
+   ],
+   [
+    10000,
+    0.0
+   ],
+   [
+    15000,
+    0.0
+   ],
+   [
+    20000,
+    0.0
+   ],
+   [
+    25000,
+    0.0
+   ],
+   [
+    30000,
+    0.0
+   ],
+   [
+    35000,
+    0.0
+   ],
+   [
+    40000,
+    0.0
+   ],
+   [
+    45000,
+    0.0
+   ],
+   [
+    50000,
+    0.0
+   ],
+   [
+    55000,
+    0.0
+   ],
+   [
+    60000,
+    0.0
+   ]
+  ]
+ },
+ "T2_crater_wall": {
+  "offset": 0.05,
+  "accepted": 300,
+  "of": 300,
+  "wall_depth_cells": 1
+ },
+ "T3_through_hole_axis": {
+  "taps": 300,
+  "rejected": 0,
+  "state_unchanged": false
+ },
+ "T4_newly_exposed_surface": {
+  "accepted": 2000,
+  "of": 2000,
+  "depth_curve": [
+   [
+    400,
+    1
+   ],
+   [
+    800,
+    1
+   ],
+   [
+    1200,
+    1
+   ],
+   [
+    1600,
+    1
+   ],
+   [
+    2000,
+    1
+   ]
+  ]
+ },
+ "T5_far_side": {
+  "accepted": true,
+  "hit_ok": true
+ },
+ "T7_empty_space": {
+  "taps": 300,
+  "rejected": 300,
+  "state_unchanged": true
+ },
+ "T8_accounting": {
+  "accepted": 402901,
+  "rejected": 300,
+  "launched": 403201,
+  "accepted_plus_rejected_eq_launched": true
+ },
+ "T6_fragment": {
+  "fragments_present": 234,
+  "tested": true,
+  "result": {
+   "fragment_cells": 1,
+   "hit_cell": [
+    48,
+    43,
+    44
+   ],
+   "state_changed": true,
+   "direction": [
+    0,
+    1,
+    1
+   ],
+   "ray_calls": 2903
+  },
+  "note": "fragments live in the authoritative density field; a ray with line of sight resolves against the fragment and damages it. At alpha scale within 50k taps fragments are rare (matches Stage 0.2)."
+ }
+}

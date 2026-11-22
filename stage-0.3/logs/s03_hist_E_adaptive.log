@@ -1,0 +1,8 @@
+[E_adaptive] fresh start; calib={'cells0': 151553, 'dens_sum0': 34816588.0, 'd0mean': 229.732, 'cap_mass': 0.030269998, 'alpha': 0.00197456}
+[E_adaptive] milestone 10000: acc=10000 cells=151553 removed=0 sev=0 frag=0 rej=15167 rss=71.1MB t=7.6s
+[E_adaptive] milestone 100000: acc=100000 cells=151553 removed=0 sev=0 frag=0 rej=153548 rss=71.1MB t=72.6s
+[E_adaptive] milestone 1000000: acc=1000000 cells=151553 removed=0 sev=0 frag=0 rej=1538533 rss=71.1MB t=790.6s
+[E_adaptive] milestone 10000000: acc=10000000 cells=151553 removed=0 sev=5280 frag=0 rej=15380331 rss=72.5MB t=8378.7s
+[E_adaptive] milestone 20000000: acc=20000000 cells=151553 removed=0 sev=9450 frag=1 rej=30767348 rss=73.0MB t=15013.3s
+[E_adaptive] milestone 30000000: acc=30000000 cells=150951 removed=602 sev=12156 frag=8 rej=46145701 rss=73.7MB t=20403.2s
+[E_adaptive] done acc=30000000 launched=76145701 cells=150951 sec=20404

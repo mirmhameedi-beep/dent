@@ -1,0 +1,21 @@
+rock: 13826 verts, 27648 tris; lattice 128^3; cell 0.0156 world (0.781% D)
+crevice gap 0.0500 world (5.00% D) = 3.2 cells
+K_DISP=2: max sink 0.2441 world = 12.2% D
+A0 pristine render: 0.4s
+A1 shell: 10k concentrated folds in 0.2s; applied 3000000 ret 293600 rem 2706400 unret 0; cells 46 open 44; center depth 12000 (FAIL_AT 6400, SAT 8000)
+  render A1_concentrated.png in 0.4s (displaced geometry)
+A2 shell: 10k distributed in 0.2s; applied 3000000 ret 3000000 rem 0 unret 0; cells 142082 open 0
+  render A2_distributed.png in 0.5s (displaced geometry)
+A3 shell: 5x2000 clustered in 0.2s; applied 3000000 ret 2195338 rem 804662 unret 0; cells 895 open 175
+  render A3_clusters.png in 0.5s (displaced geometry)
+A4: same taps True; hash A 8b4c3a5537f6d23a vs B 7c430cdd173ff9b2; fields differ: True; cell delta 140203; open delta 44
+A5 topo: 1k taps at top vertex in 0.0s; retained 94800 removed 205200 unret 0; conserved=True; open 7
+A5: neighbours of impacted vertex max depth 8000 (>0 = damage crossed face boundaries)
+  render A5_topo_edge.png in 0.5s (displaced geometry)
+A6: plus-wall verts 9, minus-wall verts 7
+A6 shell (4k taps): own-side depth 12000; OPPOSITE wall depth 0 (gap 0.0 cells)
+A6 topo  (4k taps): own-side depth 8000; OPPOSITE wall depth 0
+A6 verdict: 3D-kernel cross-crevice bleed 0 [ok/negligible] vs topology-aware bleed 0
+  render A6_shell_crevice.png in 0.4s (displaced geometry)
+  render A6_topo_crevice.png in 0.5s (displaced geometry)
+experiment A complete

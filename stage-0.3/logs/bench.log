@@ -1,0 +1,12 @@
+mesh gen_rock2(48): 187.0 ms; 13826 verts / 27648 tris
+vertex normals (13.8k verts, 27.6k tris): 24 ms
+individual fold (post-200, open-crater regime): 0 us/tap -> 22550022 taps/s
+batch 100k distributed folds: 2.7s -> 37055 taps/s; cells 190455
+full displacement (13,826 verts): 9 ms
+raycast vs 27.6k tris (pure python): 17 ms; hit tri 2822
+snapshot encode (190455 cells): 157 ms; 3.0 MiB JSON
+snapshot decode: 35 ms
+software render 340px (27.6k tris): 0.5 s (PoC tooling; not product)
+field memory after 10000 distributed taps: 140784 cells, current 9.3 MiB, peak 10.2 MiB (69 B/cell)
+field memory after 100000 distributed taps: 190432 cells, current 16.8 MiB, peak 20.3 MiB (93 B/cell)
+bench complete

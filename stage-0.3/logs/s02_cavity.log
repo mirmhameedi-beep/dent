@@ -1,0 +1,2 @@
+{"accepted_setup": 1200, "hit_on_cavity_wall": [48876, -41885, 9712], "wall_cell": [61, 14, 41], "hit_pristine_same_ray": [48876, -41885, 9712], "recessed_cells": -0.0, "wall_density_before": 220, "wall_density_after": null, "hammer_progress": [{"taps": 100, "wall_cell_now": [61, 15, 40], "density_at_first_wall_cell": null}, {"taps": 200, "wall_cell_now": [60, 16, 40], "density_at_first_wall_cell"
+cav done
